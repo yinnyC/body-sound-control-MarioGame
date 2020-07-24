@@ -1,6 +1,6 @@
 // Name any p5.js functions we use in `global` so Glitch can recognize them.
 /* global
- *    SceneManager,loadImage,ESCAPE,textSize,image,VIDEO,createCapture,ml5,HSB, background, color, collideRectRect, colorMode, createCanvas, fill, frameRate, keyCode, height,
+ *    drawIntroScreen,SceneManager,loadImage,ESCAPE,textSize,image,VIDEO,createCapture,ml5,HSB, background, color, collideRectRect, colorMode, createCanvas, fill, frameRate, keyCode, height,
  *    loop, noFill, noLoop, noStroke, random, rect, round, stroke, sqrt, text, width
  *    UP_ARROW, DOWN_ARROW, LEFT_ARROW, RIGHT_ARROW
  */
@@ -27,9 +27,7 @@ function setup(){
   manager.wire();
   manager.showScene(Intro);
 }
-function draw(){
-  
-}
+
 function Intro(){
   let bgX = -450
   this.setup = function(){
@@ -39,17 +37,17 @@ function Intro(){
     image(title,70,100,350,200)
   }
   this.draw = function(){
-    bgX+=5
+    
   }
-  function keyPressed() {
+  this.keyPressed = function(){
   console.log("key pressed: ", keyCode)
   if (keyCode === UP_ARROW) {
   } else if (keyCode === DOWN_ARROW) {
     
   } else if (keyCode === RIGHT_ARROW) {
-    
+    bgX+=10
   } else if (keyCode === LEFT_ARROW) {
-    
+    bgX-=10
   }  else {
     console.log("wrong key")
   }
