@@ -35,7 +35,7 @@ function Intro(){
     image(foregroundImg,-450,225)
     image(backgroundImg,-450,255)
     image(groundImg,-450,540)
-    image(title,100,100,300,150)
+    image(title,100,100,500,200)
   }
   this.draw = function(){
     
