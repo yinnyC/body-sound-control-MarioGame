@@ -11,7 +11,7 @@ function preload(){
   foregroundImg = loadImage("https://cdn.glitch.com/075b311a-0371-463a-a6ba-c4f6c09e32cb%2Fsky_2.png?v=1595568118809");
   backgroundImg = loadImage("https://cdn.glitch.com/075b311a-0371-463a-a6ba-c4f6c09e32cb%2Fsky.png?v=1595568225904"); 
   groundImg = loadImage("https://cdn.glitch.com/075b311a-0371-463a-a6ba-c4f6c09e32cb%2Ftop_ground.png?v=1595568970498");
-  title = loadImage("https://cdn.glitch.com/075b311a-0371-463a-a6ba-c4f6c09e32cb%2FSuper.png?v=1595569720210");
+  title = loadImage("https://cdn.glitch.com/075b311a-0371-463a-a6ba-c4f6c09e32cb%2FSuper.png?v=1595626658046");
 }
 
 function setup(){
@@ -35,7 +35,8 @@ function Intro(){
     image(foregroundImg,-450,225)
     image(backgroundImg,-450,255)
     image(groundImg,-450,540)
-    image(title,100,100,500,200)
+    
+    image(title,70,100,350,200)
   }
   this.draw = function(){
     
