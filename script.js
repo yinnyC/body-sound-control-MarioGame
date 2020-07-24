@@ -31,14 +31,27 @@ function draw(){
   
 }
 function Intro(){
+  let bgX = -450
   this.setup = function(){
-    image(foregroundImg,-450,225)
-    image(backgroundImg,-450,255)
-    image(groundImg,-450,540)
-    
+    image(foregroundImg,bgX,225)
+    image(backgroundImg,bgX,255)
+    image(groundImg,bgX,540)
     image(title,70,100,350,200)
   }
   this.draw = function(){
-    
+    bgX+=5
   }
+  function keyPressed() {
+  console.log("key pressed: ", keyCode)
+  if (keyCode === UP_ARROW) {
+  } else if (keyCode === DOWN_ARROW) {
+    
+  } else if (keyCode === RIGHT_ARROW) {
+    
+  } else if (keyCode === LEFT_ARROW) {
+    
+  }  else {
+    console.log("wrong key")
+  }
+}
 }
