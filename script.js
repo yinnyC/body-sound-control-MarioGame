@@ -29,7 +29,7 @@ function setup(){
 }
 
 function Intro(){
-  let bgX = -450
+  let bgX = 0
   this.draw = function(){
     background(200,66,100)
     this.showBackground()
@@ -42,22 +42,9 @@ function Intro(){
     image(title,70,100,350,200)
   }
   this.moveBackground= function(){
-    bgX-=10
-    if(bgX<=-900){
-      bgX = -450
+    bgX-=5
+    if(bgX<=width-foregroundImg.width){
+      bgX = -5
     }
   }
-  this.keyPressed = function(){
-  console.log("key pressed: ", keyCode)
-  if (keyCode === UP_ARROW) {
-  } else if (keyCode === DOWN_ARROW) {
-    
-  } else if (keyCode === RIGHT_ARROW) {
-    bgX+=10
-  } else if (keyCode === LEFT_ARROW) {
-    bgX-=10
-  }  else {
-    console.log("wrong key")
-  }
-}
 }
