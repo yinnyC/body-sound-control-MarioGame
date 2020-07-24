@@ -30,14 +30,22 @@ function setup(){
 
 function Intro(){
   let bgX = -450
-  this.setup = function(){
+  this.draw = function(){
+    background(200,66,100)
+    this.showBackground()
+    this.moveBackground()
+  }
+  this.showBackground= function(){
     image(foregroundImg,bgX,225)
     image(backgroundImg,bgX,255)
     image(groundImg,bgX,540)
     image(title,70,100,350,200)
   }
-  this.draw = function(){
-    
+  this.moveBackground= function(){
+    bgX-=10
+    if(bgX<=-900){
+      bgX = -450
+    }
   }
   this.keyPressed = function(){
   console.log("key pressed: ", keyCode)
