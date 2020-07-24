@@ -5,6 +5,12 @@
  *    UP_ARROW, DOWN_ARROW, LEFT_ARROW, RIGHT_ARROW
  */
 
+let foregroundImg,backgroundImg;
+
+function preload(){
+  foregroundImg
+}
+
 function setup(){
   createCanvas(500,600)
   colorMode(HSB, 360, 100, 100)
