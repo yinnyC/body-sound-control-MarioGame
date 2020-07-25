@@ -2,12 +2,12 @@
 /* global
  *    Clickable,drawIntroScreen,SceneManager,loadImage,ESCAPE,textSize,image,VIDEO,createCapture,ml5,HSB, background, color, collideRectRect, colorMode, createCanvas, fill, frameRate, keyCode, height,
  *    loop, noFill, noLoop, noStroke, random, rect, round, stroke, sqrt, text, width
- *    UP_ARROW, DOWN_ARROW, LEFT_ARROW, RIGHT_ARROW
+ *    frameCount,UP_ARROW, DOWN_ARROW, LEFT_ARROW, RIGHT_ARROW
  */
 
 let foregroundImg, backgroundImg, groundImg, title;
 let soundMode, bodyMode;
-let bgX = 0;
+
 function preload() {
   // load background Images
   foregroundImg = loadImage("https://cdn.glitch.com/075b311a-0371-463a-a6ba-c4f6c09e32cb%2Fsky_2.png?v=1595568118809");
@@ -30,7 +30,7 @@ function setup() {
 }
 
 function Intro() {
-  
+  let bgX = 0;
   let choice  = ""
   this.setup = function() {
     // set up clickable - Button soundMode
@@ -81,16 +81,21 @@ function Intro() {
     image(this.sceneManager.bImage, bgX, 255);
     image(this.sceneManager.gImage, bgX, 540);
     image(this.sceneManager.title, 70, 100, 350, 200);
+    if ( Math.floor(frameCount / 30) % 2 == 0 ) 
+        {
+            text("Select mode to start game", width / 2-70, height -20);
+        }
   };
   this.moveBackground = function() {
-    bgX -= 5;
+    bgX -= 1;
     if (bgX <= width - foregroundImg.width) {
-      bgX = -5;
+      bgX = 0;
     }
   };
 }
 
 function Game() {
+  let bgX = 0;
   this.setup = function() {
   };
 
@@ -100,4 +105,5 @@ function Game() {
     image(this.sceneManager.bImage, bgX, 255);
     image(this.sceneManager.gImage, bgX, 540);
   };
+  
 }
