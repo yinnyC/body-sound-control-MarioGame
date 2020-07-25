@@ -7,7 +7,7 @@
 
 let foregroundImg, backgroundImg, groundImg, title;
 let soundMode, bodyMode;
-
+let bgX = 0;
 function preload() {
   // load background Images
   foregroundImg = loadImage("https://cdn.glitch.com/075b311a-0371-463a-a6ba-c4f6c09e32cb%2Fsky_2.png?v=1595568118809");
@@ -30,7 +30,8 @@ function setup() {
 }
 
 function Intro() {
-  let bgX = 0;
+  
+  let choice  = ""
   this.setup = function() {
     // set up clickable - Button soundMode
     soundMode = new Clickable();
@@ -43,7 +44,7 @@ function Intro() {
       this.color = "#FFFFFF";
     };
     soundMode.onPress = function() {
-      
+      choice="sound"
     };
     // set up clickable - Button bodyMode
     bodyMode = new Clickable();
@@ -57,7 +58,7 @@ function Intro() {
       this.color = "#FFFFFF";
     };
     bodyMode.onPress = function() {
-      
+      choice = "body"
     };
   };
   this.draw = function() {
@@ -67,8 +68,8 @@ function Intro() {
     soundMode.draw();
     bodyMode.draw();
   };
-  this.buttonCall = function(){
-    this.sceneManager.showScene(Game)
+  this.mousePressed = function(){
+    this.sceneManager.showScene(Game,choice)
   }
   this.keyPressed = function(){
     if(keyCode === UP_ARROW){
@@ -91,11 +92,12 @@ function Intro() {
 
 function Game() {
   this.setup = function() {
-    background(100, 66, 100);
   };
 
   this.draw = function() {
-    
-    image(this.sceneManager.title, 70, 100, 350, 200);
+    background(200, 66, 100);
+    image(this.sceneManager.fImage, bgX, 225);
+    image(this.sceneManager.bImage, bgX, 255);
+    image(this.sceneManager.gImage, bgX, 540);
   };
 }
