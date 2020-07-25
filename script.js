@@ -7,7 +7,7 @@
 
 let foregroundImg, backgroundImg, groundImg, title;
 let soundMode, bodyMode;
-
+let groundImageMid
 
 function preload() {
   // load background Images
@@ -15,7 +15,9 @@ function preload() {
   backgroundImg = loadImage("https://cdn.glitch.com/075b311a-0371-463a-a6ba-c4f6c09e32cb%2Fsky.png?v=1595568225904");
   groundImg = loadImage("https://cdn.glitch.com/075b311a-0371-463a-a6ba-c4f6c09e32cb%2Ftop_ground.png?v=1595568970498");
   title = loadImage("https://cdn.glitch.com/075b311a-0371-463a-a6ba-c4f6c09e32cb%2FSuper.png?v=1595626658046");
+  groundImageMid = loadImage("https://cdn.glitch.com/24333852-51cf-41c1-865b-5bd532cf3794%2Fground-top.gif?v=1595713905119")
 }
+
 
 function setup() {
   createCanvas(500, 600);
@@ -26,6 +28,7 @@ function setup() {
   mgr.bImage = backgroundImg;
   mgr.gImage = groundImg;
   mgr.title = title;
+  mgr.groundImageMid = groundImageMid;
   mgr.wire();
   mgr.showScene(Intro);
 }
@@ -105,8 +108,9 @@ function Game() {
 
   this.draw = function() {
     background(200, 66, 100);
-    image(this.sceneManager.fImage, bgX, 207);
-    image(this.sceneManager.bImage, bgX, 255);
+    //image(this.sceneManager.fImage, bgX, 207);
+    //image(this.sceneManager.bImage, bgX, 255);
+    image(groundImageMid,100,100)
     //image(this.sceneManager.gImage, bgX, 540);
     
     //text(this.sceneArgs+" Mode",210,300);
