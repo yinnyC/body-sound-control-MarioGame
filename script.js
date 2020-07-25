@@ -31,7 +31,7 @@ function setup() {
 
 function Intro() {
   let bgX = 0;
-  let choice  = ""
+  let choice  = "1"
   this.setup = function() {
     // set up clickable - Button soundMode
     soundMode = new Clickable();
@@ -104,6 +104,9 @@ function Game() {
     image(this.sceneManager.fImage, bgX, 225);
     image(this.sceneManager.bImage, bgX, 255);
     image(this.sceneManager.gImage, bgX, 540);
+      
+    text(this.sceneArgs,bgX,300)
+    
   };
   
 }
