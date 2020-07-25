@@ -20,13 +20,13 @@ function setup() {
   createCanvas(500, 600);
   colorMode(HSB, 360, 100, 100);
   // set up the screen manager
-  var manager = new SceneManager();
-  manager.fImage = foregroundImg;
-  manager.bImage = backgroundImg;
-  manager.gImage = groundImg;
-  manager.title = title;
-  manager.wire();
-  manager.showScene(Intro);
+  var mgr = new SceneManager();
+  mgr.fImage = foregroundImg;
+  mgr.bImage = backgroundImg;
+  mgr.gImage = groundImg;
+  mgr.title = title;
+  mgr.wire();
+  mgr.showScene(Intro);
 }
 
 function Intro() {
@@ -36,11 +36,6 @@ function Intro() {
     soundMode = new Clickable();
     soundMode.locate(width / 2 - 50, 350);
     soundMode.text = "Sound Mode";
-
-    // set up clickable - Button bodyMode
-    bodyMode = new Clickable();
-    bodyMode.locate(width / 2 - 50, 420);
-    bodyMode.text = "Body Mode";
     soundMode.onHover = function() {
       this.color = "#808080";
     };
@@ -50,6 +45,11 @@ function Intro() {
     soundMode.onPress = function() {
       this.sceneManager.showScene(Game);
     };
+    // set up clickable - Button bodyMode
+    bodyMode = new Clickable();
+    bodyMode.locate(width / 2 - 50, 420);
+    bodyMode.text = "Body Mode";
+   
     bodyMode.onHover = function() {
       this.color = "#808080";
     };
@@ -68,10 +68,10 @@ function Intro() {
     bodyMode.draw();
   };
   this.showBackground = function() {
-    image(foregroundImg, bgX, 225);
-    image(backgroundImg, bgX, 255);
-    image(groundImg, bgX, 540);
-    image(title, 70, 100, 350, 200);
+    image(this.sceneManager.fImage, bgX, 225);
+    image(this.sceneManager.bImage, bgX, 255);
+    image(this.sceneManager.gImage, bgX, 540);
+    image(this.sceneManager.title, 70, 100, 350, 200);
   };
   this.moveBackground = function() {
     bgX -= 5;
@@ -82,9 +82,12 @@ function Intro() {
 }
 
 function Game() {
-  this.setup = function() {};
+  this.setup = function() {
+    background(100, 66, 100);
+  };
 
   this.draw = function() {
-    background(100, 66, 100);
+    
+    image(this.sceneManager.title, 70, 100, 350, 200);
   };
 }
