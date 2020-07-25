@@ -7,7 +7,7 @@
 
 let foregroundImg, backgroundImg, groundImg, title;
 let soundMode, bodyMode;
-let groundImageMid,ground
+let groundImageMid,groundfill
 
 function preload() {
   // load background Images
@@ -16,6 +16,7 @@ function preload() {
   groundImg = loadImage("https://cdn.glitch.com/075b311a-0371-463a-a6ba-c4f6c09e32cb%2Ftop_ground.png?v=1595568970498");
   title = loadImage("https://cdn.glitch.com/075b311a-0371-463a-a6ba-c4f6c09e32cb%2FSuper.png?v=1595626658046");
   groundImageMid = loadImage("https://cdn.glitch.com/075b311a-0371-463a-a6ba-c4f6c09e32cb%2Fground-top.png?v=1595715460114")
+  groundfill = loadImage("https://cdn.glitch.com/075b311a-0371-463a-a6ba-c4f6c09e32cb%2Fground-filler.png?v=1595715814080")
   console.log(groundImageMid)
 }
 
@@ -30,8 +31,9 @@ function setup() {
   mgr.gImage = groundImg;
   mgr.title = title;
   mgr.groundImageMid = groundImageMid;
+  mgr.groundfill = groundfill;
   mgr.wire();
-  mgr.showScene(Intro);
+  mgr.showScene(Game);
 }
 
 function Intro() {
@@ -111,6 +113,9 @@ function Game() {
     image(this.sceneManager.bImage, bgX, 255);
     image(this.sceneManager.gImage, 16, 540);
     image(this.sceneManager.groundImageMid,0,540)
+    image(this.sceneManager.groundfill,0,556)
+    image(this.sceneManager.groundfill,0,572)
+    image(this.sceneManager.groundfill,0,588)
     text(this.sceneArgs+" Mode",210,300);
   };
     this.keyPressed = function(){
