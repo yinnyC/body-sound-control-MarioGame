@@ -43,7 +43,7 @@ function Intro() {
       this.color = "#FFFFFF";
     };
     soundMode.onPress = function() {
-      this.sceneManager.showScene(Game);
+      
     };
     // set up clickable - Button bodyMode
     bodyMode = new Clickable();
@@ -57,7 +57,7 @@ function Intro() {
       this.color = "#FFFFFF";
     };
     bodyMode.onPress = function() {
-      this.sceneManager.showScene(Game);
+      
     };
   };
   this.draw = function() {
@@ -67,6 +67,14 @@ function Intro() {
     soundMode.draw();
     bodyMode.draw();
   };
+  this.buttonCall = function(){
+    this.sceneManager.showScene(Game)
+  }
+  this.keyPressed = function(){
+    if(keyCode === UP_ARROW){
+      this.sceneManager.showScene(Game);
+    }
+  }
   this.showBackground = function() {
     image(this.sceneManager.fImage, bgX, 225);
     image(this.sceneManager.bImage, bgX, 255);
