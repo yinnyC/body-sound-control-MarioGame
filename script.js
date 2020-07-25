@@ -16,6 +16,7 @@ function preload() {
   groundImg = loadImage("https://cdn.glitch.com/075b311a-0371-463a-a6ba-c4f6c09e32cb%2Ftop_ground.png?v=1595568970498");
   title = loadImage("https://cdn.glitch.com/075b311a-0371-463a-a6ba-c4f6c09e32cb%2FSuper.png?v=1595626658046");
   groundImageMid = loadImage("https://cdn.glitch.com/24333852-51cf-41c1-865b-5bd532cf3794%2Fground-top.gif?v=1595713905119")
+  console.log(groundImageMid)
 }
 
 
@@ -30,7 +31,7 @@ function setup() {
   mgr.title = title;
   mgr.groundImageMid = groundImageMid;
   mgr.wire();
-  mgr.showScene(Intro);
+  mgr.showScene(Game);
 }
 
 function Intro() {
@@ -71,12 +72,10 @@ function Intro() {
     bodyMode.draw();
   };
   this.mousePressed = function(){
-    this.sceneManager.showScene(Game,choice)
-  }
-  this.keyPressed = function(){
-    if(keyCode === UP_ARROW){
-      this.sceneManager.showScene(Game);
+    if(choice!=""){
+      this.sceneManager.showScene(Game,choice)
     }
+    
   }
   this.showBackground = function() {
     image(this.sceneManager.fImage, bgX, 207);
@@ -110,10 +109,15 @@ function Game() {
     background(200, 66, 100);
     //image(this.sceneManager.fImage, bgX, 207);
     //image(this.sceneManager.bImage, bgX, 255);
-    image(groundImageMid,100,100)
+    image(this.sceneManager.groundImageMid,210,300)
     //image(this.sceneManager.gImage, bgX, 540);
     
-    //text(this.sceneArgs+" Mode",210,300);
+    text(this.sceneArgs+" Mode",210,300);
   };
+    this.keyPressed = function(){
+    if(keyCode === UP_ARROW){
+      
+    }
+  }
   
 }
