@@ -50,7 +50,7 @@ function setup(){
     this.color = "#FFFFFF";
   }
   bodyMode.onPress = function(){
-  console.log("I have been pressed!");
+    
 }
 }
 
@@ -78,7 +78,7 @@ function Intro(){
   
 }
 
-function bodyModeGame(){
+function game(){
   this.draw = function(){
     background(200,66,100)
   }
