@@ -27,7 +27,7 @@ function preload() {
 function setup() {
   createCanvas(500, 600);
   colorMode(HSB, 360, 100, 100);
-  
+
   // set up the screen manager
   var manager = new SceneManager();
   manager.fImage = foregroundImg;
@@ -36,20 +36,20 @@ function setup() {
   manager.title = title;
   manager.wire();
   manager.showScene(Intro);
-  // set up clickable - Button soundMode
-  soundMode = new Clickable();
-  soundMode.locate(width / 2 - 50, 350);
-  soundMode.text = "Sound Mode";
-
-  // set up clickable - Button bodyMode
-  bodyMode = new Clickable();
-  bodyMode.locate(width / 2 - 50, 420);
-  bodyMode.text = "Body Mode";
 }
 
 function Intro() {
   let bgX = 0;
   this.setup = function() {
+    // set up clickable - Button soundMode
+    soundMode = new Clickable();
+    soundMode.locate(width / 2 - 50, 350);
+    soundMode.text = "Sound Mode";
+
+    // set up clickable - Button bodyMode
+    bodyMode = new Clickable();
+    bodyMode.locate(width / 2 - 50, 420);
+    bodyMode.text = "Body Mode";
     soundMode.onHover = function() {
       this.color = "#808080";
     };
