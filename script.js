@@ -39,12 +39,11 @@ function Intro() {
     soundMode.text = "Sound Mode";
     soundMode.onHover = function() {
       this.color = "#808080";
+      choice="sound"
     };
     soundMode.onOutside = function() {
       this.color = "#FFFFFF";
-    };
-    soundMode.onPress = function() {
-      choice="sound"
+      choice=""
     };
     // set up clickable - Button bodyMode
     bodyMode = new Clickable();
@@ -53,12 +52,11 @@ function Intro() {
    
     bodyMode.onHover = function() {
       this.color = "#808080";
+      choice = "body"
     };
     bodyMode.onOutside = function() {
       this.color = "#FFFFFF";
-    };
-    bodyMode.onPress = function() {
-      choice = "body"
+      choice=""
     };
   };
   this.draw = function() {
@@ -105,7 +103,7 @@ function Game() {
     image(this.sceneManager.bImage, bgX, 255);
     image(this.sceneManager.gImage, bgX, 540);
       
-    text(this.sceneArgs,bgX,300)
+    text(this.sceneArgs+" Mode",220,300)
     
   };
   
