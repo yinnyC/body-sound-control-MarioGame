@@ -103,7 +103,7 @@ function Game() {
     image(this.sceneManager.bImage, bgX, 255);
     image(this.sceneManager.gImage, bgX, 540);
       
-    text(this.sceneArgs+" Mode",220,300)
+    text(this.sceneArgs+" Mode",210,300)
     
   };
   
