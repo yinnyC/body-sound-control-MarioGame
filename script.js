@@ -27,7 +27,6 @@ function preload() {
 function setup() {
   createCanvas(500, 600);
   colorMode(HSB, 360, 100, 100);
-
   // set up the screen manager
   var manager = new SceneManager();
   manager.fImage = foregroundImg;
