@@ -30,16 +30,25 @@ function setup(){
   manager.showScene(Intro);
   // set up clickable 
   soundMode = new Clickable();
+  soundMode.locate(width/2-50,350)
+  soundMode.text = "Sound Mode"
+  soundMode.onHover = function(){
+    this.color = "#AAAAFF";
+  }
   bodyMode = new Clickable();
+  bodyMode.locate(width/2-50,420)
+  bodyMode.text = "Body Mode"
+  
 }
 
 function Intro(){
   let bgX = 0
   this.draw = function(){
     background(200,66,100)
-    this.showBackground()
-    this.moveBackground()
-    
+    this.showBackground();
+    this.moveBackground();
+    soundMode.draw();
+    bodyMode.draw();
   }
   this.showBackground= function(){
     image(foregroundImg,bgX,225)
@@ -53,4 +62,5 @@ function Intro(){
       bgX = -5
     }
   }
+  
 }
