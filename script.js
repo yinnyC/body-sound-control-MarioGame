@@ -8,6 +8,7 @@
 let foregroundImg, backgroundImg, groundImg, title;
 let soundMode, bodyMode;
 
+
 function preload() {
   // load background Images
   foregroundImg = loadImage("https://cdn.glitch.com/075b311a-0371-463a-a6ba-c4f6c09e32cb%2Fsky_2.png?v=1595568118809");
@@ -26,7 +27,7 @@ function setup() {
   mgr.gImage = groundImg;
   mgr.title = title;
   mgr.wire();
-  mgr.showScene(Game);
+  mgr.showScene(Intro);
 }
 
 function Intro() {
@@ -94,9 +95,9 @@ function Intro() {
 
 function Game() {
   let bgX = 0;
-  let ground;
+
   this.preload = function(){
-    ground = loadImage("https://cdn.glitch.com/075b311a-0371-463a-a6ba-c4f6c09e32cb%2Fground-top.gif?v=1595699623445")
+    
   }
   this.setup = function() {
     
@@ -108,11 +109,7 @@ function Game() {
     image(this.sceneManager.bImage, bgX, 255);
     //image(this.sceneManager.gImage, bgX, 540);
     
-    //text(this.sceneArgs+" Mode",210,300)
-    for(let i =0;i<10;i++){
-      image(ground,i*10,540,50,50)
-    }
-    image(ground,10,30,50,50)
+    //text(this.sceneArgs+" Mode",210,300);
   };
   
 }
