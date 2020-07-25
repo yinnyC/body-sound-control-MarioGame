@@ -28,17 +28,30 @@ function setup(){
   manager.title = title;
   manager.wire();
   manager.showScene(Intro);
-  // set up clickable 
+  // set up clickable - Button soundMode
   soundMode = new Clickable();
   soundMode.locate(width/2-50,350)
   soundMode.text = "Sound Mode"
   soundMode.onHover = function(){
-    this.color = "#AAAAFF";
+    this.color = "#808080";
   }
+  soundMode.onOutside = function () {
+    this.color = "#FFFFFF";
+  }
+  
+  // set up clickable - Button bodyMode
   bodyMode = new Clickable();
   bodyMode.locate(width/2-50,420)
   bodyMode.text = "Body Mode"
-  
+  bodyMode.onHover = function(){
+    this.color = "#808080";
+  }
+  bodyMode.onOutside = function () {
+    this.color = "#FFFFFF";
+  }
+  bodyMode.onPress = function(){
+  console.log("I have been pressed!");
+}
 }
 
 function Intro(){
@@ -63,4 +76,10 @@ function Intro(){
     }
   }
   
+}
+
+function bodyModeGame(){
+  this.draw = function(){
+    background(200,66,100)
+  }
 }
