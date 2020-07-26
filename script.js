@@ -128,14 +128,6 @@ function Game() {
   };
 
   this.draw = function() {
-    
-    // if no input
-    
-
-    
-    //image(ledge, 150, 475);
-    //image(ledge, 400, 475);
-    
     camera.position.x = mario.position.x + width/4;
     background(210, 90, 100);
     camera.off();
@@ -144,17 +136,14 @@ function Game() {
     marioStayOnPlatform();
     marioMove();
     spawnLedges();
-    
-    
-    
-    
+       
     drawSprites();
     drawSprites(ledges)
     
   };
   function marioStayOnPlatform() {
     mario.velocity.y += GRAVITY;
-    if (mario.collide(platform)) {
+    if (mario.collide(platform)||mario.collide(ledges)) {
       mario.velocity.y = 0;
       mario.changeAnimation("normal");
     }
