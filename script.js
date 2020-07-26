@@ -1,6 +1,6 @@
 // Name any p5.js functions we use in `global` so Glitch can recognize them.
 /* global
- *    Group,keyWentDown,drawSprites,createSprite,Clickable,drawIntroScreen,SceneManager,loadImage,ESCAPE,textSize,image,VIDEO,createCapture,ml5,HSB, background, color, collideRectRect, colorMode, createCanvas, fill, frameRate, keyCode, height,
+ *    camera,Group,keyWentDown,drawSprites,createSprite,Clickable,drawIntroScreen,SceneManager,loadImage,ESCAPE,textSize,image,VIDEO,createCapture,ml5,HSB, background, color, collideRectRect, colorMode, createCanvas, fill, frameRate, keyCode, height,
  *    loop, noFill, noLoop, noStroke, random, rect, round, stroke, sqrt, text, width
  *    frameCount,UP_ARROW, DOWN_ARROW, LEFT_ARROW, RIGHT_ARROW
  */
@@ -109,7 +109,7 @@ function Game() {
   let platform, ledges, mario,ledgeImg;
   this.setup = function() {
     ledgeImg = loadImage("https://cdn.glitch.com/075b311a-0371-463a-a6ba-c4f6c09e32cb%2Fledge.png?v=1595738720120");
-    mario = createSprite(50, 515);
+    mario = createSprite(width/2, 515);
     mario.scale = 2.2;
     mario.addAnimation("normal","https://cdn.glitch.com/075b311a-0371-463a-a6ba-c4f6c09e32cb%2FStanding-mario.png?v=1595741033822");
     mario.addAnimation("move",
@@ -122,6 +122,10 @@ function Game() {
     platform.addAnimation("normal","https://cdn.glitch.com/075b311a-0371-463a-a6ba-c4f6c09e32cb%2Ftop_ground.png?v=1595568970498");
     
     ledges = new Group();
+    camera.position.y = height/2;
+    //wrap ground
+    if(camera.position.x > ground.position.x-ground.width+width/2)
+    ground.position.x+=ground.width;
   };
 
   this.draw = function() {
@@ -132,7 +136,8 @@ function Game() {
     this.showBackground()
     //image(ledge, 150, 475);
     //image(ledge, 400, 475);
-
+    
+    camera.position.x = mario.position.x + width/4;
     marioStayOnPlatform();
     marioMove();
     spawnLedges();
