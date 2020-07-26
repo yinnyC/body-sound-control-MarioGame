@@ -123,24 +123,29 @@ function Game() {
     
     ledges = new Group();
     camera.position.y = height/2;
-    //wrap ground
-    if(camera.position.x > ground.position.x-ground.width+width/2)
-    ground.position.x+=ground.width;
   };
 
   this.draw = function() {
-    background(210, 90, 100);
+    
     // if no input
-    mario.velocity.x = 0;
+    //mario.velocity.x = 0;
 
-    this.showBackground()
+    
     //image(ledge, 150, 475);
     //image(ledge, 400, 475);
     
     camera.position.x = mario.position.x + width/4;
+    background(210, 90, 100);
+    camera.off();
+    this.showBackground()
+    camera.on();
     marioStayOnPlatform();
     marioMove();
     spawnLedges();
+    
+    
+    
+    
     drawSprites();
     drawSprites(ledges)
     
