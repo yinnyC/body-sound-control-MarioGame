@@ -150,7 +150,7 @@ function Game() {
     marioMove();
 
     text(this.sceneArgs + " Mode", 210, 300);
-    text(bgX, 210, 380);
+    text(mario.position.x, 210, 380);
     text(player.x, 210, 400);
 
     player.show();
@@ -174,14 +174,20 @@ function Game() {
     }
   }
   function marioMove(){
+    // Use space key to move mario
     if(keyWentDown(' ')){
     mario.changeAnimation('move');
     mario.animation.rewind();
-    mario.velocity.x = 5;
-    mario.velocity.y = -JUMP;
     
-      
-    //bgX -=50   
+    mario.velocity.y = -JUMP;
+    if(mario.position.x<220){
+      mario.velocity.x = 30;
+    }
+    
+    
+    if(bgX-50 > width - 2000){
+      bgX -=50  
+    }     
   }
   }
   function moveBackgroundLeft() {
