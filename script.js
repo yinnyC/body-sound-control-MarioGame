@@ -105,8 +105,7 @@ function Intro() {
 }
 function Game() {
   let bgX = 0;
-  var GRAVITY = 1,
-    JUMP = 15;
+  let GRAVITY = 1,JUMP = 15;
   let platform, ledges, mario,ledgeImg;
   this.setup = function() {
     ledgeImg = loadImage("https://cdn.glitch.com/075b311a-0371-463a-a6ba-c4f6c09e32cb%2Fledge.png?v=1595738720120");
@@ -123,7 +122,6 @@ function Game() {
     platform.addAnimation("normal","https://cdn.glitch.com/075b311a-0371-463a-a6ba-c4f6c09e32cb%2Ftop_ground.png?v=1595568970498");
     
     ledges = new Group();
-    
   };
 
   this.draw = function() {
