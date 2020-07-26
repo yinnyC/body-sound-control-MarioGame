@@ -95,7 +95,7 @@ function Intro() {
 }
 
 function Game() {
-  let bgX = 0,moveSpeed = 15;;
+  let bgX = 0,moveSpeed = 20;
   let ggg
   let mario
   this.setup = function() {
@@ -110,6 +110,7 @@ function Game() {
     image(ggg, 0, 540);
     //image(startGround, 0, 540);
     text(this.sceneArgs+" Mode",210,300);
+    text(this.sceneManager.fImage.width,210,350);
     mario.show()
   };
     this.keyPressed = function(){
@@ -124,7 +125,7 @@ function Game() {
     }
   }
   function moveBackgroundLeft(){
-  let minBgLeft = -this.sceneManager.fImage.width + width;
+  let minBgLeft = width-2000;
   if (bgX - moveSpeed > minBgLeft){
     bgX -= moveSpeed;
   }
@@ -139,7 +140,7 @@ class Mario{
   constructor(){
     this.x = width/2;
     this.y = 500;
-    this.speed = 15;
+    this.speed = 25;
   }
   canMoveRight(){
    if (this.x < width - (50 + this.speed)){
@@ -162,7 +163,9 @@ class Mario{
   moveRight(){
     this.x += this.speed;
   }
-  
+  jump(){
+    
+  }
   show(){
     fill(255);
     rect(this.x, this.y, 20, 20);  
