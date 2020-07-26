@@ -131,17 +131,18 @@ function Game() {
        
     drawSprites();
     drawSprites(ledges)
-    
   };
+  
   function chickCollision() {
     mario.velocity.y += GRAVITY;
     if (mario.collide(platform)||mario.collide(ledges)) {
       mario.velocity.y = 0;
       mario.changeAnimation("normal");
     }
-    if(ledges.overlapPixel(mario.position.x+5,mario.position.y)){
-      ledges.displace(mario);
-    }
+
+      //ledges.displace(mario);
+   // console.log(ledges.overlapPixel(mario.position.x+10, mario.position.y))
+  
   }
   function marioMove() {
     // Use space key to move mario
