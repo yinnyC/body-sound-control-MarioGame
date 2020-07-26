@@ -38,7 +38,7 @@ function setup() {
   mgr.gImage = groundImg;
   mgr.title = title;
   mgr.wire();
-  mgr.showScene(Game);
+  mgr.showScene(Intro);
 }
 
 function Intro() {
@@ -160,14 +160,14 @@ function Game() {
         mario.velocity.x = 30;
       }
 
-      if (bgX - 50 > width - 2000) {
+      if (bgX - 50 > width - 2050) {
         bgX -= 50;
       }
     }
   }
   function spawnLedges(){
     //spawn pipes
-    if(frameCount%60 === 0) {
+    if(frameCount%100 === 0) {
       let ledge = createSprite(mario.position.x + width, 475);
       ledge.addImage(ledgeImg);
       ledges.add(ledge);
