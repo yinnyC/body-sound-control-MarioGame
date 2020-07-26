@@ -30,11 +30,11 @@ function setup() {
   mgr.gImage = groundImg;
   mgr.title = title;
   mgr.wire();
-  mgr.showScene(Game);
+  mgr.showScene(Intro);
 }
 
 function Intro() {
-  let bgX = 0;
+  let bgX = 0;   // To scroll the background
   let choice  = "1"
   this.setup = function() {
     // set up clickable - Button soundMode
@@ -71,7 +71,7 @@ function Intro() {
     bodyMode.draw();
   };
   this.mousePressed = function(){
-    if(choice!=""){
+    if(choice!=""){ 
       this.sceneManager.showScene(Game,choice)
     }
     
