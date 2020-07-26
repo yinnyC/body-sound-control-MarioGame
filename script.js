@@ -28,7 +28,7 @@ function setup() {
   mgr.gImage = groundImg;
   mgr.title = title;
   mgr.wire();
-  mgr.showScene(Intro);
+  mgr.showScene(Game);
 }
 
 function Intro() {
@@ -102,7 +102,7 @@ function Game() {
     longledgeImg = loadImage("https://cdn.glitch.com/075b311a-0371-463a-a6ba-c4f6c09e32cb%2Flongledge.png?v=1595787233575")
     mario = createSprite(width/2, 515);
     mario.scale = 2.2;
-    mario.addAnimation("normal","https://cdn.glitch.com/075b311a-0371-463a-a6ba-c4f6c09e32cb%2FStanding-mario.png?v=1595741033822");
+    mario.addAnimation("normal","https://cdn.glitch.com/075b311a-0371-463a-a6ba-c4f6c09e32cb%2FRunning-mario_01.png?v=1595741137506","","","");
     mario.addAnimation("move",
       "https://cdn.glitch.com/075b311a-0371-463a-a6ba-c4f6c09e32cb%2FStanding-mario.png?v=1595741033822",
       "https://cdn.glitch.com/075b311a-0371-463a-a6ba-c4f6c09e32cb%2FRunning-mario_01.png?v=1595741137506",
