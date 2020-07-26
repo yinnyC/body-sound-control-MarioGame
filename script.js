@@ -112,20 +112,22 @@ function Game() {
   this.setup = function() {
     platform = loadImage("https://cdn.glitch.com/075b311a-0371-463a-a6ba-c4f6c09e32cb%2Ftop_ground.png?v=1595568970498");
     ledge = loadImage("https://cdn.glitch.com/075b311a-0371-463a-a6ba-c4f6c09e32cb%2Fledge.png?v=1595738720120")
-    backgroundImg = loadImage("https://cdn.glitch.com/075b311a-0371-463a-a6ba-c4f6c09e32cb%2FBackground.png?v=1595739509653");
+    backgroundImg = loadImage("https://cdn.glitch.com/075b311a-0371-463a-a6ba-c4f6c09e32cb%2FBackground.png?v=1595740406803");
     player = new Mario();
   };
 
   this.draw = function() {
-    background(200, 66, 100);
-    image(this.sceneManager.fImage, bgX, 227);
+    background(210, 90, 100);
+    image(backgroundImg,0,170);
+    image(this.sceneManager.fImage, bgX-10, 227);
     image(this.sceneManager.bImage, bgX, 265);
-    image(ledge, 150, 540);
-    image(ledge, 400, 540);
+    image(ledge, -150, 540);
+    image(ledge, -400, 540);
     //image(platform, 0, 540);
     text(this.sceneArgs + " Mode", 210, 300);
     text(this.sceneManager.fImage.width, 210, 350);
     text(bgX, 210, 380);
+    text(player.x, 210, 400);
     player.show();
   };
   this.keyPressed = function() {
