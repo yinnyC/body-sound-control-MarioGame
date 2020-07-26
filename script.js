@@ -71,6 +71,7 @@ function Intro() {
       choice = "";
     };
   };
+
   this.draw = function() {
     background(210, 90, 100);
     this.showBackground();
@@ -79,8 +80,8 @@ function Intro() {
     bodyMode.draw();
   };
   this.mousePressed = function() {
+    // Switch to Game scene when user click any of the buttons
     if (choice != "") {
-      // Switch to Game scene when user click any of the buttons
       this.sceneManager.showScene(Game, choice);
     }
   };
@@ -95,26 +96,22 @@ function Intro() {
     }
   };
   this.moveBackground = function() {
+    // Reset bgX when it runs out
     bgX -= 1;
     if (bgX <= width - foregroundImg.width) {
       bgX = 0;
     }
   };
 }
-
 function Game() {
-  let bgX = 0,
-    moveSpeed = 20;
-  var GRAVITY = 1;
-  var JUMP = 15;
-  let platform, ledge, backgroundImg;
-  let mario;
-  let player;
+  let bgX = 0;
+  var GRAVITY = 1,
+    JUMP = 15;
+  let platform, ledge, mario;
   this.setup = function() {
     ledge = loadImage(
       "https://cdn.glitch.com/075b311a-0371-463a-a6ba-c4f6c09e32cb%2Fledge.png?v=1595738720120"
     );
-    player = new Mario();
     mario = createSprite(50, 515);
     mario.scale = 2.2;
     mario.addAnimation(
@@ -140,31 +137,17 @@ function Game() {
     background(210, 90, 100);
     // if no input
     mario.velocity.x = 0;
-    
-    image(this.sceneManager.fImage, bgX - 100, 227);
-    image(this.sceneManager.bImage, bgX, 265);
+
+    this.showBackground()
     image(ledge, 150, 475);
     image(ledge, 400, 475);
 
     marioStayOnPlatform();
     marioMove();
 
-    text(this.sceneArgs + " Mode", 210, 300);
-    text(mario.position.x, 210, 380);
-    text(player.x, 210, 400);
+    
 
-    player.show();
     drawSprites();
-  };
-  this.keyPressed = function() {
-    if (keyCode === RIGHT_ARROW) {
-      if (player.canMoveRight()) {
-        player.moveRight();
-      } else {
-        moveBackgroundLeft();
-      }
-    } else if (keyCode === LEFT_ARROW) {
-    }
   };
   function marioStayOnPlatform() {
     mario.velocity.y += GRAVITY;
@@ -173,71 +156,28 @@ function Game() {
       mario.changeAnimation("normal");
     }
   }
-  function marioMove(){
+  function marioMove() {
     // Use space key to move mario
-    if(keyWentDown(' ')){
-    mario.changeAnimation('move');
-    mario.animation.rewind();
-    
-    mario.velocity.y = -JUMP;
-    if(mario.position.x<220){
-      mario.velocity.x = 30;
-    }
-    
-    
-    if(bgX-50 > width - 2000){
-      bgX -=50  
-    }     
-  }
-  }
-  function moveBackgroundLeft() {
-    let minBgLeft = width - 2000;
-    if (bgX - moveSpeed > minBgLeft) {
-      bgX -= moveSpeed;
-    }
-  }
+    if (keyWentDown(" ")) {
+      mario.changeAnimation("move");
+      mario.animation.rewind();
 
-  function moveBackgroundRight() {
-    if (bgX + moveSpeed < 0) {
-      bgX += moveSpeed;
-    }
-  }
-  
-  // Make sure Mario doesn't move out of window
-  function canMoveRight(){
-    
-  }
-  class Mario {
-    constructor() {
-      this.x = width / 2;
-      this.y = 500;
-      this.speed = 25;
-    }
-    canMoveRight() {
-      if (this.x < width - (50 + this.speed)) {
-        return true;
-      } else {
-        return false;
+      mario.velocity.y = -JUMP;
+      if (mario.position.x < 220) {
+        mario.velocity.x = 30;
+      }
+
+      if (bgX - 50 > width - 2000) {
+        bgX -= 50;
       }
     }
-    canMoveLeft() {
-      if (this.x > 50 + this.speed) {
-        return true;
-      } else {
-        return false;
-      }
-    }
-    moveLeft() {
-      this.x -= this.speed;
-    }
-
-    moveRight() {
-      this.x += this.speed;
-    }
-    jump() {}
-    show() {
-      fill(255);
-      rect(this.x, this.y, 20, 20);
-    }
+  }
+  this.showBackground = function() {
+    image(this.sceneManager.fImage, bgX - 100, 227);
+    image(this.sceneManager.bImage, bgX, 265);
   }
 }
+
+
+/*text(this.sceneArgs + " Mode", 210, 300);
+    text(mario.position.x, 210, 380);*/
