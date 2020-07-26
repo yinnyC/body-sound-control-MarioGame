@@ -1,6 +1,6 @@
 // Name any p5.js functions we use in `global` so Glitch can recognize them.
 /* global
- *    keyWentDown,drawSprites,createSprite,Clickable,drawIntroScreen,SceneManager,loadImage,ESCAPE,textSize,image,VIDEO,createCapture,ml5,HSB, background, color, collideRectRect, colorMode, createCanvas, fill, frameRate, keyCode, height,
+ *    Group,keyWentDown,drawSprites,createSprite,Clickable,drawIntroScreen,SceneManager,loadImage,ESCAPE,textSize,image,VIDEO,createCapture,ml5,HSB, background, color, collideRectRect, colorMode, createCanvas, fill, frameRate, keyCode, height,
  *    loop, noFill, noLoop, noStroke, random, rect, round, stroke, sqrt, text, width
  *    frameCount,UP_ARROW, DOWN_ARROW, LEFT_ARROW, RIGHT_ARROW
  */
@@ -107,30 +107,23 @@ function Game() {
   let bgX = 0;
   var GRAVITY = 1,
     JUMP = 15;
-  let platform, ledge, mario;
+  let platform, ledges, mario,ledgeImg;
   this.setup = function() {
-    ledge = loadImage(
-      "https://cdn.glitch.com/075b311a-0371-463a-a6ba-c4f6c09e32cb%2Fledge.png?v=1595738720120"
-    );
+    ledgeImg = loadImage("https://cdn.glitch.com/075b311a-0371-463a-a6ba-c4f6c09e32cb%2Fledge.png?v=1595738720120");
     mario = createSprite(50, 515);
     mario.scale = 2.2;
-    mario.addAnimation(
-      "normal",
-      "https://cdn.glitch.com/075b311a-0371-463a-a6ba-c4f6c09e32cb%2FStanding-mario.png?v=1595741033822"
-    );
-    mario.addAnimation(
-      "move",
+    mario.addAnimation("normal","https://cdn.glitch.com/075b311a-0371-463a-a6ba-c4f6c09e32cb%2FStanding-mario.png?v=1595741033822");
+    mario.addAnimation("move",
       "https://cdn.glitch.com/075b311a-0371-463a-a6ba-c4f6c09e32cb%2FStanding-mario.png?v=1595741033822",
       "https://cdn.glitch.com/075b311a-0371-463a-a6ba-c4f6c09e32cb%2FRunning-mario_01.png?v=1595741137506",
       "https://cdn.glitch.com/075b311a-0371-463a-a6ba-c4f6c09e32cb%2FJumping-mario.png?v=1595741095055",
-      "https://cdn.glitch.com/075b311a-0371-463a-a6ba-c4f6c09e32cb%2FStanding-mario.png?v=1595741033822"
-    );
+      "https://cdn.glitch.com/075b311a-0371-463a-a6ba-c4f6c09e32cb%2FStanding-mario.png?v=1595741033822");
 
-    platform = createSprite(0, 570);
-    platform.addAnimation(
-      "normal",
-      "https://cdn.glitch.com/075b311a-0371-463a-a6ba-c4f6c09e32cb%2Ftop_ground.png?v=1595568970498"
-    );
+    platform = createSprite(0,570);
+    platform.addAnimation("normal","https://cdn.glitch.com/075b311a-0371-463a-a6ba-c4f6c09e32cb%2Ftop_ground.png?v=1595568970498");
+    
+    ledges = new Group();
+    
   };
 
   this.draw = function() {
@@ -139,15 +132,15 @@ function Game() {
     mario.velocity.x = 0;
 
     this.showBackground()
-    image(ledge, 150, 475);
-    image(ledge, 400, 475);
+    //image(ledge, 150, 475);
+    //image(ledge, 400, 475);
 
     marioStayOnPlatform();
     marioMove();
-
-    
-
+    spawnLedges();
     drawSprites();
+    drawSprites(ledges)
+    
   };
   function marioStayOnPlatform() {
     mario.velocity.y += GRAVITY;
@@ -172,6 +165,22 @@ function Game() {
       }
     }
   }
+  function spawnLedges(){
+    //spawn pipes
+    if(frameCount%60 === 0) {
+      let ledge = createSprite(mario.position.x + width, 475);
+      ledge.addImage(ledgeImg);
+      ledges.add(ledge);
+    }
+    //get rid of passed pipes
+    for(let i = 0; i<ledges.length; i++){
+      if(ledges[i].position.x < mario.position.x-width/2){
+        ledges[i].remove();
+      }
+    }   
+    console.log(ledges)
+  }
+  
   this.showBackground = function() {
     image(this.sceneManager.fImage, bgX - 100, 227);
     image(this.sceneManager.bImage, bgX, 265);
