@@ -158,7 +158,7 @@ function Game() {
         mario.velocity.x = 30;
       }
 
-      if (bgX - 50 > width - 2050) {
+      if (bgX - 50 > width - foregroundImg.width) {
         bgX -= 50;
       }
     }
@@ -180,7 +180,7 @@ function Game() {
   }
   
   this.showBackground = function() {
-    image(this.sceneManager.fImage, bgX - 100, 227);
+    image(this.sceneManager.fImage, bgX, 227);
     image(this.sceneManager.bImage, bgX, 265);
   }
 }
