@@ -11,11 +11,21 @@ let startGround, ground, endGroud;
 
 function preload() {
   // load background Images
-  foregroundImg = loadImage("https://cdn.glitch.com/075b311a-0371-463a-a6ba-c4f6c09e32cb%2Fsky_2.png?v=1595568118809");
-  backgroundImg = loadImage("https://cdn.glitch.com/075b311a-0371-463a-a6ba-c4f6c09e32cb%2Fsky.png?v=1595568225904");
-  groundImg = loadImage("https://cdn.glitch.com/075b311a-0371-463a-a6ba-c4f6c09e32cb%2Ftop_ground.png?v=1595568970498");
-  title = loadImage("https://cdn.glitch.com/075b311a-0371-463a-a6ba-c4f6c09e32cb%2FSuper.png?v=1595626658046");
-  startGround = loadImage("https://cdn.glitch.com/075b311a-0371-463a-a6ba-c4f6c09e32cb%2Fstarting.png?v=1595721097175");
+  foregroundImg = loadImage(
+    "https://cdn.glitch.com/075b311a-0371-463a-a6ba-c4f6c09e32cb%2Fsky_2.png?v=1595568118809"
+  );
+  backgroundImg = loadImage(
+    "https://cdn.glitch.com/075b311a-0371-463a-a6ba-c4f6c09e32cb%2Fsky.png?v=1595568225904"
+  );
+  groundImg = loadImage(
+    "https://cdn.glitch.com/075b311a-0371-463a-a6ba-c4f6c09e32cb%2Ftop_ground.png?v=1595568970498"
+  );
+  title = loadImage(
+    "https://cdn.glitch.com/075b311a-0371-463a-a6ba-c4f6c09e32cb%2FSuper.png?v=1595626658046"
+  );
+  startGround = loadImage(
+    "https://cdn.glitch.com/075b311a-0371-463a-a6ba-c4f6c09e32cb%2Fstarting.png?v=1595721097175"
+  );
 }
 
 function setup() {
@@ -95,61 +105,84 @@ function Intro() {
 }
 
 function Game() {
-  let bgX = 0;
-  let GRAVITY = 1,JUMP = 15;
-  let platform, ledges, mario,ledgeImg,longledgeImg,bgImg;
+  let bgX = 0;               
+  let GRAVITY = 1,
+    JUMP = 15;
+  let platform, ledges, mario, ledgeImg, longledgeImg, bgImg;
   this.setup = function() {
-    bgImg = loadImage("https://cdn.glitch.com/075b311a-0371-463a-a6ba-c4f6c09e32cb%2Fbg.png?v=1595800295790")
-    ledgeImg = loadImage("https://cdn.glitch.com/075b311a-0371-463a-a6ba-c4f6c09e32cb%2Fledge.png?v=1595738720120");
-    longledgeImg = loadImage("https://cdn.glitch.com/075b311a-0371-463a-a6ba-c4f6c09e32cb%2Flongledge.png?v=1595801236364")
-    mario = createSprite(width/2, 515);
+    bgImg = loadImage(
+      "https://cdn.glitch.com/075b311a-0371-463a-a6ba-c4f6c09e32cb%2Fbg.png?v=1595800295790"
+    );
+    ledgeImg = loadImage(
+      "https://cdn.glitch.com/075b311a-0371-463a-a6ba-c4f6c09e32cb%2Fledge.png?v=1595738720120"
+    );
+    longledgeImg = loadImage(
+      "https://cdn.glitch.com/075b311a-0371-463a-a6ba-c4f6c09e32cb%2Flongledge.png?v=1595801236364"
+    );
+    mario = createSprite(width / 2, 515);
     mario.scale = 2.2;
-    mario.addAnimation("normal","https://cdn.glitch.com/075b311a-0371-463a-a6ba-c4f6c09e32cb%2FRunning-mario_01.png?v=1595741137506","https://cdn.glitch.com/075b311a-0371-463a-a6ba-c4f6c09e32cb%2FRunning-mario_02.png?v=1595799759140","https://cdn.glitch.com/075b311a-0371-463a-a6ba-c4f6c09e32cb%2FRunning-mario_03.png?v=1595799765213","https://cdn.glitch.com/075b311a-0371-463a-a6ba-c4f6c09e32cb%2FStanding-mario.png?v=1595741033822");
-    mario.addAnimation("move",
+    mario.addAnimation(
+      "normal",
+      "https://cdn.glitch.com/075b311a-0371-463a-a6ba-c4f6c09e32cb%2FRunning-mario_01.png?v=1595741137506",
+      "https://cdn.glitch.com/075b311a-0371-463a-a6ba-c4f6c09e32cb%2FRunning-mario_02.png?v=1595799759140",
+      "https://cdn.glitch.com/075b311a-0371-463a-a6ba-c4f6c09e32cb%2FRunning-mario_03.png?v=1595799765213",
+      "https://cdn.glitch.com/075b311a-0371-463a-a6ba-c4f6c09e32cb%2FStanding-mario.png?v=1595741033822"
+    );
+    mario.addAnimation(
+      "move",
       "https://cdn.glitch.com/075b311a-0371-463a-a6ba-c4f6c09e32cb%2FStanding-mario.png?v=1595741033822",
       "https://cdn.glitch.com/075b311a-0371-463a-a6ba-c4f6c09e32cb%2FRunning-mario_01.png?v=1595741137506",
       "https://cdn.glitch.com/075b311a-0371-463a-a6ba-c4f6c09e32cb%2FJumping-mario.png?v=1595741095055",
-      "https://cdn.glitch.com/075b311a-0371-463a-a6ba-c4f6c09e32cb%2FStanding-mario.png?v=1595741033822");
+      "https://cdn.glitch.com/075b311a-0371-463a-a6ba-c4f6c09e32cb%2FStanding-mario.png?v=1595741033822"
+    );
 
-    platform = createSprite(450,570);
-    platform.addAnimation("normal","https://cdn.glitch.com/075b311a-0371-463a-a6ba-c4f6c09e32cb%2Fstartledge.png?v=1595801238081");
-    
+    platform = createSprite(450, 570);
+    platform.addAnimation(
+      "normal",
+      "https://cdn.glitch.com/075b311a-0371-463a-a6ba-c4f6c09e32cb%2Fstartledge.png?v=1595801238081"
+    );
+
     ledges = new Group();
-    camera.position.y = height/2;
+    camera.position.y = height / 2;
     mario.velocity.x = 4;
   };
 
   this.draw = function() {
-    camera.position.x = mario.position.x + width/4;
+    camera.position.x = mario.position.x + width / 4;
     background(210, 90, 100);
     camera.off();
-    this.showBackground()
+    this.showBackground();
     camera.on();
     chickCollision();
     marioMove();
     spawnLedges();
-       
+
     drawSprites();
-    drawSprites(ledges)
+    drawSprites(ledges);
   };
-  
+
   function chickCollision() {
     mario.velocity.y += GRAVITY;
-    // Check if mario touch platform or ledges
-    if (mario.collide(platform)||mario.collide(ledges)) {
+    if (mario.collide(platform) || mario.collide(ledges)) {
+      let check =  ledges.overlap(mario, checkLedgeside)
+      
+      if(check){
+        ledges.displace(mario);
+      }
       // Check if mario hit the ledgeside
       mario.velocity.y = 0;
       mario.changeAnimation("normal");
     }
-    
 
-function explosion(spriteA, spriteB) {
-  spriteA.remove();
-  spriteB.score++;
-}
-      //ledges.displace(mario);
-   // console.log(ledges.overlapPixel(mario.position.x+10, mario.position.y))
-  
+
+    function checkLedgeside(ledge, mario) {
+      //Check if mario touch platform or ledges
+      console.log(ledge.overlapPixel(mario.position.x +20, mario.position.y))
+      return ledge.overlapPixel(mario.position.x +20, mario.position.y);
+    }
+
+    //
+    // console.log(ledges.overlapPixel(mario.position.x+10, mario.position.y))
   }
   function marioMove() {
     // Use space key to move mario
@@ -167,33 +200,32 @@ function explosion(spriteA, spriteB) {
       }
     }
   }
-  function spawnLedges(){    
+  function spawnLedges() {
     //spawn pipes
-    if(frameCount%100=== 0) {
+    if (frameCount % 100 === 0 && mario.position.x!=0) {
       //let ledge = createSprite(mario.position.x + width, 575);
-      let longledge = createSprite(mario.position.x + width-100  , 580);
+      let longledge = createSprite(mario.position.x + width - 100, 580);
       //ledge.addImage(ledgeImg);
       longledge.addImage(longledgeImg);
       //ledges.add(ledge);
-      ledges.add(longledge);  
+      ledges.add(longledge);
     }
     //get rid of passed pipes
-    for(let i = 0; i<ledges.length; i++){
-      if(ledges[i].position.x < mario.position.x-width/2){
+    for (let i = 0; i < ledges.length; i++) {
+      if (ledges[i].position.x < mario.position.x - width / 2) {
         ledges[i].remove();
       }
-    }   
-    console.log(ledges)
+    }
+    console.log(ledges);
   }
-  
+
   this.showBackground = function() {
     image(bgImg, bgX, 200);
-    
+
     //image(this.sceneManager.fImage, bgX, 227);
     //image(this.sceneManager.bImage, bgX, 265);
-  }
+  };
 }
-
 
 /*text(this.sceneArgs + " Mode", 210, 300);
     text(mario.position.x, 210, 380);*/
