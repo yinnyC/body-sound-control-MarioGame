@@ -106,9 +106,10 @@ function Intro() {
 function Game() {
   let bgX = 0;
   let GRAVITY = 1,JUMP = 15;
-  let platform, ledges, mario,ledgeImg;
+  let platform, ledges, mario,ledgeImg,longledgeImg;
   this.setup = function() {
     ledgeImg = loadImage("https://cdn.glitch.com/075b311a-0371-463a-a6ba-c4f6c09e32cb%2Fledge.png?v=1595738720120");
+    longledgeImg = loadImage("https://cdn.glitch.com/075b311a-0371-463a-a6ba-c4f6c09e32cb%2Flongledge.png?v=1595787233575")
     mario = createSprite(width/2, 515);
     mario.scale = 2.2;
     mario.addAnimation("normal","https://cdn.glitch.com/075b311a-0371-463a-a6ba-c4f6c09e32cb%2FStanding-mario.png?v=1595741033822");
@@ -123,7 +124,7 @@ function Game() {
     
     ledges = new Group();
     camera.position.y = height/2;
-    mario.velocity.x = 4;
+    mario.velocity.x = 1;
   };
 
   this.draw = function() {
@@ -177,9 +178,12 @@ function Game() {
   function spawnLedges(){
     //spawn pipes
     if(frameCount%100 === 0) {
-      let ledge = createSprite(mario.position.x + width, 475);
+      let ledge = createSprite(mario.position.x + width, 575);
+      let longledge = createSprite(ledge.position.x + width+250, 580);
       ledge.addImage(ledgeImg);
+      longledge.addImage(longledgeImg);
       ledges.add(ledge);
+      ledges.add(longledge);  
     }
     //get rid of passed pipes
     for(let i = 0; i<ledges.length; i++){
