@@ -1,6 +1,6 @@
 // Name any p5.js functions we use in `global` so Glitch can recognize them.
 /* global
- *    drawSprites,createSprite,Clickable,drawIntroScreen,SceneManager,loadImage,ESCAPE,textSize,image,VIDEO,createCapture,ml5,HSB, background, color, collideRectRect, colorMode, createCanvas, fill, frameRate, keyCode, height,
+ *    keyWentDown,drawSprites,createSprite,Clickable,drawIntroScreen,SceneManager,loadImage,ESCAPE,textSize,image,VIDEO,createCapture,ml5,HSB, background, color, collideRectRect, colorMode, createCanvas, fill, frameRate, keyCode, height,
  *    loop, noFill, noLoop, noStroke, random, rect, round, stroke, sqrt, text, width
  *    frameCount,UP_ARROW, DOWN_ARROW, LEFT_ARROW, RIGHT_ARROW
  */
@@ -115,7 +115,7 @@ function Game() {
       "https://cdn.glitch.com/075b311a-0371-463a-a6ba-c4f6c09e32cb%2Fledge.png?v=1595738720120"
     );
     player = new Mario();
-    mario = createSprite(width / 2, 515);
+    mario = createSprite(50, 515);
     mario.scale = 2.2;
     mario.addAnimation(
       "normal",
@@ -140,8 +140,8 @@ function Game() {
     background(210, 90, 100);
     image(this.sceneManager.fImage, bgX - 100, 227);
     image(this.sceneManager.bImage, bgX, 265);
-    image(ledge, 20, 475);
-    image(ledge, -400, 540);
+    image(ledge, 150, 475);
+    image(ledge, 400, 475);
 
     marioStayOnPlatform();
     marioMove();
@@ -171,11 +171,11 @@ function Game() {
     }
   }
   function marioMove(){
-     if(keyWentDown(' ')){
+    if(keyWentDown(' ')){
     mario.changeAnimation('move');
     mario.animation.rewind();
     mario.velocity.y = -JUMP;
-    mario .x += 5
+    bgX -=50   
   }
   }
   function moveBackgroundLeft() {
@@ -189,6 +189,11 @@ function Game() {
     if (bgX + moveSpeed < 0) {
       bgX += moveSpeed;
     }
+  }
+  
+  // Make sure Mario doesn't move out of window
+  function canMoveRight(){
+    
   }
   class Mario {
     constructor() {
