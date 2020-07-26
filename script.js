@@ -123,12 +123,13 @@ function Game() {
     
     ledges = new Group();
     camera.position.y = height/2;
+    mario.velocity.x = 4;
   };
 
   this.draw = function() {
     
     // if no input
-    //mario.velocity.x = 0;
+    
 
     
     //image(ledge, 150, 475);
