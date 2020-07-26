@@ -38,7 +38,7 @@ function setup() {
   mgr.gImage = groundImg;
   mgr.title = title;
   mgr.wire();
-  mgr.showScene(Intro);
+  mgr.showScene(Game);
 }
 
 function Intro() {
@@ -103,16 +103,16 @@ function Intro() {
 }
 
 function Game() {
-  let bgX = 0,
-    moveSpeed = 20;
+  let bgX = 0,moveSpeed = 20;
   var GRAVITY = 1;
   var JUMP = 15;
-  let platform,ledge;
+  let platform,ledge,backgroundImg;
   let mario;
   let player;
   this.setup = function() {
     platform = loadImage("https://cdn.glitch.com/075b311a-0371-463a-a6ba-c4f6c09e32cb%2Ftop_ground.png?v=1595568970498");
     ledge = loadImage("https://cdn.glitch.com/075b311a-0371-463a-a6ba-c4f6c09e32cb%2Fledge.png?v=1595738720120")
+    backgroundImg = loadImage("https://cdn.glitch.com/075b311a-0371-463a-a6ba-c4f6c09e32cb%2FBackground.png?v=1595739509653");
     player = new Mario();
   };
 
@@ -125,6 +125,7 @@ function Game() {
     //image(platform, 0, 540);
     text(this.sceneArgs + " Mode", 210, 300);
     text(this.sceneManager.fImage.width, 210, 350);
+    text(bgX, 210, 380);
     player.show();
   };
   this.keyPressed = function() {
