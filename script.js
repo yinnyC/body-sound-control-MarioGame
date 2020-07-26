@@ -1,6 +1,6 @@
 // Name any p5.js functions we use in `global` so Glitch can recognize them.
 /* global
- *    createSprite,Clickable,drawIntroScreen,SceneManager,loadImage,ESCAPE,textSize,image,VIDEO,createCapture,ml5,HSB, background, color, collideRectRect, colorMode, createCanvas, fill, frameRate, keyCode, height,
+ *    drawSprites,createSprite,Clickable,drawIntroScreen,SceneManager,loadImage,ESCAPE,textSize,image,VIDEO,createCapture,ml5,HSB, background, color, collideRectRect, colorMode, createCanvas, fill, frameRate, keyCode, height,
  *    loop, noFill, noLoop, noStroke, random, rect, round, stroke, sqrt, text, width
  *    frameCount,UP_ARROW, DOWN_ARROW, LEFT_ARROW, RIGHT_ARROW
  */
@@ -112,12 +112,12 @@ function Game() {
   this.setup = function() {
     ledge = loadImage("https://cdn.glitch.com/075b311a-0371-463a-a6ba-c4f6c09e32cb%2Fledge.png?v=1595738720120")
     player = new Mario();
-    mario = createSprite(player.x, player.y);
+    mario = createSprite(width / 2, 520,100,100);
     mario.addAnimation('normal','https://cdn.glitch.com/075b311a-0371-463a-a6ba-c4f6c09e32cb%2FStanding-mario.png?v=1595741033822')
     mario.addAnimation('move','https://cdn.glitch.com/075b311a-0371-463a-a6ba-c4f6c09e32cb%2FStanding-mario.png?v=1595741033822','https://cdn.glitch.com/075b311a-0371-463a-a6ba-c4f6c09e32cb%2FRunning-mario_01.png?v=1595741137506','https://cdn.glitch.com/075b311a-0371-463a-a6ba-c4f6c09e32cb%2FJumping-mario.png?v=1595741095055','https://cdn.glitch.com/075b311a-0371-463a-a6ba-c4f6c09e32cb%2FStanding-mario.png?v=1595741033822')
     
     
-    platform = createSprite()
+    platform = createSprite(0,570)
     platform.addAnimation('normal','https://cdn.glitch.com/075b311a-0371-463a-a6ba-c4f6c09e32cb%2Ftop_ground.png?v=1595568970498')
   };
 
@@ -127,12 +127,14 @@ function Game() {
     image(this.sceneManager.bImage, bgX, 265);
     image(ledge, -150, 540);
     image(ledge, -400, 540);
-    image(platform, 0, 540);
+
     text(this.sceneArgs + " Mode", 210, 300);
     text(this.sceneManager.fImage.width, 210, 350);
     text(bgX, 210, 380);
     text(player.x, 210, 400);
+    
     player.show();
+    drawSprites();
   };
   this.keyPressed = function() {
     if (keyCode === RIGHT_ARROW) {
