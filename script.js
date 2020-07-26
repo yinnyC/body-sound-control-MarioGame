@@ -138,6 +138,9 @@ function Game() {
 
   this.draw = function() {
     background(210, 90, 100);
+    // if no input
+    mario.velocity.x = 0;
+    
     image(this.sceneManager.fImage, bgX - 100, 227);
     image(this.sceneManager.bImage, bgX, 265);
     image(ledge, 150, 475);
@@ -174,8 +177,11 @@ function Game() {
     if(keyWentDown(' ')){
     mario.changeAnimation('move');
     mario.animation.rewind();
+    mario.velocity.x = 5;
     mario.velocity.y = -JUMP;
-    bgX -=50   
+    
+      
+    //bgX -=50   
   }
   }
   function moveBackgroundLeft() {
