@@ -135,11 +135,18 @@ function Game() {
   
   function chickCollision() {
     mario.velocity.y += GRAVITY;
+    // Check if mario touch platform or ledges
     if (mario.collide(platform)||mario.collide(ledges)) {
+      // Check if mario hit the ledgeside
       mario.velocity.y = 0;
       mario.changeAnimation("normal");
     }
+    
 
+function explosion(spriteA, spriteB) {
+  spriteA.remove();
+  spriteB.score++;
+}
       //ledges.displace(mario);
    // console.log(ledges.overlapPixel(mario.position.x+10, mario.position.y))
   
