@@ -112,7 +112,8 @@ function Game() {
   this.setup = function() {
     ledge = loadImage("https://cdn.glitch.com/075b311a-0371-463a-a6ba-c4f6c09e32cb%2Fledge.png?v=1595738720120")
     player = new Mario();
-    mario = createSprite(width / 2, 520,100,100);
+    mario = createSprite(width / 2, 515);
+    mario.scale = 2.2
     mario.addAnimation('normal','https://cdn.glitch.com/075b311a-0371-463a-a6ba-c4f6c09e32cb%2FStanding-mario.png?v=1595741033822')
     mario.addAnimation('move','https://cdn.glitch.com/075b311a-0371-463a-a6ba-c4f6c09e32cb%2FStanding-mario.png?v=1595741033822','https://cdn.glitch.com/075b311a-0371-463a-a6ba-c4f6c09e32cb%2FRunning-mario_01.png?v=1595741137506','https://cdn.glitch.com/075b311a-0371-463a-a6ba-c4f6c09e32cb%2FJumping-mario.png?v=1595741095055','https://cdn.glitch.com/075b311a-0371-463a-a6ba-c4f6c09e32cb%2FStanding-mario.png?v=1595741033822')
     
@@ -125,11 +126,10 @@ function Game() {
     background(210, 90, 100);
     image(this.sceneManager.fImage, bgX-100, 227);
     image(this.sceneManager.bImage, bgX, 265);
-    image(ledge, -150, 540);
+    image(ledge, 20, 475);
     image(ledge, -400, 540);
 
     text(this.sceneArgs + " Mode", 210, 300);
-    text(this.sceneManager.fImage.width, 210, 350);
     text(bgX, 210, 380);
     text(player.x, 210, 400);
     
