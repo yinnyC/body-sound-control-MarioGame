@@ -100,6 +100,7 @@ function Game() {
   let mario
   this.setup = function() {
     ggg = loadImage("https://cdn.glitch.com/075b311a-0371-463a-a6ba-c4f6c09e32cb%2Ftop_ground.png?v=1595568970498");
+    mario = new Mario()
   };
 
   this.draw = function() {
@@ -109,11 +110,35 @@ function Game() {
     image(ggg, 0, 540);
     //image(startGround, 0, 540);
     text(this.sceneArgs+" Mode",210,300);
+    mario.show()
   };
     this.keyPressed = function(){
-    if(keyCode === UP_ARROW){
+    if(keyCode === RIGHT_ARROW){
       
     }
   }
+class Mario{
+  constructor(){
+    this.x = width/2;
+    this.y = 500;
+    this.speed = 1;
+  }
+  canMoveRight(){
+   if (this.x < width - (50 + this.speed)){
+     return true;
+   } else {
+     return false;
+   }
+  }
+  moveRight(){
+    this.x += this.speed;
+  }
   
+  show(){
+    fill(255);
+    rect(this.x, this.y, 20, 20);  
+  }
+}  
 }
+
+
