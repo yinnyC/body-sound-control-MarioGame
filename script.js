@@ -95,7 +95,7 @@ function Intro() {
 }
 
 function Game() {
-  let bgX = 0;
+  let bgX = 0,moveSpeed = 15;;
   let ggg
   let mario
   this.setup = function() {
@@ -114,14 +114,32 @@ function Game() {
   };
     this.keyPressed = function(){
     if(keyCode === RIGHT_ARROW){
+      if (mario.canMoveRight()){
+        mario.moveRight();
+    } else {
+      moveBackgroundLeft();
+    }
+    }else if(keyCode === LEFT_ARROW){
       
     }
   }
+  function moveBackgroundLeft(){
+  let minBgLeft = -this.sceneManager.fImage.width + width;
+  if (bgX - moveSpeed > minBgLeft){
+    bgX -= moveSpeed;
+  }
+}
+
+function moveBackgroundRight(){
+  if (bgX + moveSpeed < 0){
+    bgX += moveSpeed;  
+  }
+}
 class Mario{
   constructor(){
     this.x = width/2;
     this.y = 500;
-    this.speed = 1;
+    this.speed = 15;
   }
   canMoveRight(){
    if (this.x < width - (50 + this.speed)){
@@ -130,6 +148,17 @@ class Mario{
      return false;
    }
   }
+   canMoveLeft(){
+   if (this.x > 50 + this.speed){
+     return true;
+   } else {
+     return false;
+   }
+  }
+   moveLeft(){
+    this.x -= this.speed;
+  }
+  
   moveRight(){
     this.x += this.speed;
   }
