@@ -96,19 +96,17 @@ function Intro() {
 
 function Game() {
   let bgX = 0;
-  
-  this.preload = function(){
-    
-  }
+  let ggg
+  let mario
   this.setup = function() {
-    
+    ggg = loadImage("https://cdn.glitch.com/075b311a-0371-463a-a6ba-c4f6c09e32cb%2Ftop_ground.png?v=1595568970498");
   };
 
   this.draw = function() {
     background(200, 66, 100);
     image(this.sceneManager.fImage, bgX, 227);
     image(this.sceneManager.bImage, bgX, 265);
-    image(this.sceneManager.gImage, 0, 540);
+    image(ggg, 0, 540);
     //image(startGround, 0, 540);
     text(this.sceneArgs+" Mode",210,300);
   };
