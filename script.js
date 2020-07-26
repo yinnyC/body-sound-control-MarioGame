@@ -124,7 +124,7 @@ function Game() {
     
     ledges = new Group();
     camera.position.y = height/2;
-    mario.velocity.x = 1;
+    mario.velocity.x = 4;
   };
 
   this.draw = function() {
@@ -178,11 +178,11 @@ function Game() {
   function spawnLedges(){
     //spawn pipes
     if(frameCount%100 === 0) {
-      let ledge = createSprite(mario.position.x + width, 575);
-      let longledge = createSprite(ledge.position.x + width+250, 580);
-      ledge.addImage(ledgeImg);
+      //let ledge = createSprite(mario.position.x + width, 575);
+      let longledge = createSprite(mario.position.x + width+250, 580);
+      //ledge.addImage(ledgeImg);
       longledge.addImage(longledgeImg);
-      ledges.add(ledge);
+      //ledges.add(ledge);
       ledges.add(longledge);  
     }
     //get rid of passed pipes
