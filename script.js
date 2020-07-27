@@ -162,8 +162,8 @@ function Game() {
       logLastMarioX();
       checkAlive();
     } else {
-      resetGame();
       this.sceneManager.showScene(result);
+      resetGame();
     }    
   };
 
@@ -171,10 +171,12 @@ function Game() {
     // Check if Mario is out of window
     if (mario.position.y > height + 50) {
       gameIsOver = true;
+      updateSprites(false);
+      camera.position.x = width/2 // Reset the camera
     }
   }
   function resetGame() { 
-    camera.position.x = width/2 // Reset the camera
+    
   }
 
   function logLastMarioX() {
@@ -193,7 +195,6 @@ function Game() {
       }
     }
   }
-
   /*Implementation of sound or body mode in function marioMove()
 if(this.sceneArgs==="sound"){
 
@@ -211,11 +212,12 @@ if(this.sceneArgs==="sound"){
   }
   function spawnLedges() {
     //spawn ledges
-    if (frameCount % 110 === 0 && mario.position.x > MariolastX) {
+    if (frameCount % 120 === 0 && mario.position.x > MariolastX) {
       // if Mario stuck at the ledge side, don't create new ledge
       let longledge = createSprite(mario.position.x + width, random(520, 610));
       longledge.addImage(longledgeImg);
       ledges.add(longledge);
+      console.log(ledges)
     }
     //get rid of passed ledges
     for (let i = 0; i < ledges.length; i++) {
@@ -226,13 +228,31 @@ if(this.sceneArgs==="sound"){
   }
 }
 
-
 function result() {
+  let bgX 
+  this.enter = function(){
+    bgX = 0
+  }
   this.draw = function() {
     background(0, 90, 100);
+    this.showBackground();
+    this.moveBackground();
+    text("Game Over",width/2-20, height/2)
   }
     this.mousePressed = function() {
       this.sceneManager.showScene(Intro);
+  };
+   this.showBackground = function() {
+    image(this.sceneManager.fImage, bgX, 227);
+    image(this.sceneManager.bImage, bgX, 255);
+    image(this.sceneManager.gImage, bgX, 540);
+  };
+  this.moveBackground = function() {
+    // Reset bgX when it runs out
+    bgX -= 2;
+    if (bgX <= width - foregroundImg.width) {
+      bgX = 0;
+    }
   };
   
 }
