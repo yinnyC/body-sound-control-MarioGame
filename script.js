@@ -81,13 +81,9 @@ function Intro() {
   };
   this.mousePressed = function() {
     // Switch to Game scene when user click any of the buttons
-    console.log("Im here")
     if (choice != "") {
-      console.log("Im in if")
       // Make sure user's is on the buttons
-      this.sceneManager.showScene(Game, choice);
-      choice = ""
-      bgX = 0;
+      this.sceneManager.showScene(Game,choice);
     }
   };
   this.showBackground = function() {
@@ -184,9 +180,7 @@ function Game() {
       camera.position.x = width/2
       resetGame();
       this.sceneManager.showScene(result);
-      
-    }
-    
+    }    
   };
 
   function checkAlive() {
@@ -197,6 +191,8 @@ function Game() {
   function resetGame() {
     camera.position.x = 250
     gameIsOver = false;
+    // mario.position.x = width / 2 - 70;
+    // mario.position.y = 300;
   }
 
   function logLastMarioX() {
