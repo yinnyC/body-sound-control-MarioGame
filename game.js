@@ -114,12 +114,12 @@ if(this.sceneArgs==="sound"){
     //spawn ledges
     if (frameCount % 100 === 0 && mario.position.x > MariolastX) {
       // if Mario stuck at the ledge side, don't create new ledge
-      let longledge = createSprite(mario.position.x +width-120, random(520, 610));
+      let longledge = createSprite(mario.position.x +width-120, random(520, 630));
       longledge.addImage(longledgeImg);
       ledges.add(longledge);
       spriteToBeKilled.add(longledge)
       for(let i=0;i<3;i++){
-        let coin = createSprite(longledge.position.x+i*25,longledge.position.y-100);
+        let coin = createSprite(longledge.position.x-25+i*35,longledge.position.y-100);
         coin.addAnimation("normal","https://cdn.glitch.com/075b311a-0371-463a-a6ba-c4f6c09e32cb%2Fcoins_01.png?v=1595864834355","https://cdn.glitch.com/075b311a-0371-463a-a6ba-c4f6c09e32cb%2Fcoins_02.png?v=1595864834664","https://cdn.glitch.com/075b311a-0371-463a-a6ba-c4f6c09e32cb%2Fcoins_03.png?v=1595864834265","https://cdn.glitch.com/075b311a-0371-463a-a6ba-c4f6c09e32cb%2Fcoins_04.png?v=1595864834678");
         coin.addAnimation("collected","https://cdn.glitch.com/075b311a-0371-463a-a6ba-c4f6c09e32cb%2Fsquish_koppa02.png?v=1595885959837")
         coins.add(coin)
@@ -131,9 +131,7 @@ if(this.sceneArgs==="sound"){
     //get rid of passed ledges
     for (let i = 0; i < ledges.length; i++) {
       if (ledges[i].position.x < mario.position.x - width / 2) {
-        //removeSprites(ledges[i])
         ledges[i].remove();
-        // console.log(ledges[i])
       }
     }
   }
