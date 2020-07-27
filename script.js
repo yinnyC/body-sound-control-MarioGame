@@ -105,7 +105,7 @@ function Intro() {
 }
 
 function Game() {
-  let MariolastX=0,GRAVITY = 1,JUMP = 15;
+  let MariolastX=0,GRAVITY = 1,JUMP = 20;
   let platform, ledges, mario, ledgeImg, longledgeImg, bgImg;
   this.setup = function() {
     // Load Images
@@ -135,7 +135,7 @@ function Game() {
     camera.position.x = mario.position.x;
     background(210, 90, 100);
     camera.off(); 
-    image(bgImg, -mario.position.x%1500, 200);
+    image(bgImg, -mario.position.x%1300, 200);
     camera.on(); // scrolling and zooming for scenes extending beyond the canvas
     
     marioMove();
@@ -146,6 +146,7 @@ function Game() {
     drawSprites(ledges);// Draw ledges
     
     logLastMarioX()
+    gameIsOver()
     test()
   };
 
@@ -165,7 +166,11 @@ function Game() {
       }
     }
   }
-  
+  function gameIsOver(){
+    if(mario.position.y>height+10){
+      this.sceneManager.showScene(Intro);
+    }
+  }
   /*Implementation of sound or body mode in function marioMove()
 if(this.sceneArgs==="sound"){
 
@@ -191,7 +196,7 @@ if(this.sceneArgs==="sound"){
     }
     //get rid of passed ledges
     for (let i = 0; i < ledges.length; i++) {
-      if (ledges[i].position.x < mario.position.x - 100) {
+      if (ledges[i].position.x < mario.position.x -width/2) {
         ledges[i].remove();
       }
     }
@@ -200,7 +205,7 @@ if(this.sceneArgs==="sound"){
 
   function test(){
     text(MariolastX,mario.position.x,200)
-    text(mario.position.x,mario.position.x,220)
+    text(mario.position.y,mario.position.x,220)
     text(mario.position.x>MariolastX,mario.position.x,230)
   };
 }
