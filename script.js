@@ -105,7 +105,7 @@ function Intro() {
 }
 
 function Game() {
-  let bgX = 0;
+  let bgX = 0,MariolastX=0;
   let GRAVITY = 1,
     JUMP = 15;
   let platform, ledges, mario, ledgeImg, longledgeImg, bgImg;
@@ -156,12 +156,16 @@ function Game() {
     chickCollision();
     marioMove();
     spawnLedges();
-    text(mario.velocity.y,mario.position.x,200)
+    text(MariolastX,mario.position.x,200)
     text(mario.position.x,mario.position.x,250)
     drawSprites();
     drawSprites(ledges);
+    checkMarioMove()
   };
 
+  function checkMarioMove(){
+    MariolastX = mario.position.x
+  }
   function chickCollision() {
     mario.velocity.y += GRAVITY;  
     if (mario.collide(platform) || mario.collide(ledges)) {
@@ -188,7 +192,7 @@ function Game() {
   }
   function spawnLedges() {
     //spawn pipes
-    if (frameCount % 100 === 0) {
+    if (frameCount % 100 === 0 &&  mario.position.x> MariolastX) { 
       //let ledge = createSprite(mario.position.x + width, 575);
       let longledge = createSprite(mario.position.x + width, random(520,610));
       //ledge.addImage(ledgeImg);
