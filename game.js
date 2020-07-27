@@ -2,7 +2,7 @@
 /* global
  *    removeSprite,updateSprites,camera,Group,keyWentDown,drawSprites,createSprite,Clickable,drawIntroScreen,SceneManager,loadImage,ESCAPE,textSize,image,VIDEO,createCapture,ml5,HSB, background, color, collideRectRect, colorMode, createCanvas, fill, frameRate, keyCode, height,
  *    loop, noFill, noLoop, noStroke, random, rect, round, stroke, sqrt, text, width
- *    frameCount,UP_ARROW, DOWN_ARROW, LEFT_ARROW, RIGHT_ARROW
+ *    frameCount,UP_ARROW, DOWN_ARROW, LEFT_ARROW, RIGHT_ARROW,Gameover
  */
 
 function Game() {
@@ -48,8 +48,6 @@ function Game() {
 
   this.draw = function() {
     background(210, 90, 100);
-    
-    
     if (!gameIsOver) {
       checkAlive();
       marioMove();
@@ -62,9 +60,9 @@ function Game() {
       camera.on(); // scrolling and zooming for scenes extending beyond the canvas
       drawSprites(); 
       logLastMarioX();
-      
     } else {
-      this.sceneManager.showScene(result);
+      
+      this.sceneManager.showScene(Gameover);
       resetGame();
     }    
   };
