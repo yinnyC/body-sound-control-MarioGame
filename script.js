@@ -188,11 +188,11 @@ function Game() {
   }
   function resetGame() {
     gameIsOver = false;
-    camera.position.x = 250
     mario.position.x = width / 2 - 70;
     mario.position.y = 300;
     mario.velocity.x = 4;
     camera.position.x = width/2
+    ledges = new Group();
   }
 
   function logLastMarioX() {
