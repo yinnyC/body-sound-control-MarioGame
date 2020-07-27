@@ -156,7 +156,8 @@ function Game() {
     chickCollision();
     marioMove();
     spawnLedges();
-
+    text(mario.velocity.y,mario.position.x,200)
+    text(mario.position.x,mario.position.x,250)
     drawSprites();
     drawSprites(ledges);
   };
