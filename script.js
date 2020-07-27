@@ -162,7 +162,6 @@ function Game() {
     camera.position.x = mario.position.x;
     camera.off();
     image(bgImg, -mario.position.x % 1300, 200);
-    
     if (!gameIsOver) {
       camera.on(); // scrolling and zooming for scenes extending beyond the canvas
       marioMove();
@@ -177,7 +176,6 @@ function Game() {
     } else {
       mario.velocity.x = 0
       text(camera.active, width/2, 230);
-      camera.position.x = width/2
       resetGame();
       this.sceneManager.showScene(result);
     }    
@@ -189,10 +187,12 @@ function Game() {
     }
   }
   function resetGame() {
-    camera.position.x = 250
     gameIsOver = false;
+    camera.position.x = 250
     mario.position.x = width / 2 - 70;
     mario.position.y = 300;
+    mario.velocity.x = 4;
+    camera.position.x = width/2
   }
 
   function logLastMarioX() {
