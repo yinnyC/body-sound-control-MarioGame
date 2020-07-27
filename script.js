@@ -120,8 +120,8 @@ function Game() {
     mario.addAnimation("move","https://cdn.glitch.com/075b311a-0371-463a-a6ba-c4f6c09e32cb%2FStanding-mario.png?v=1595741033822","https://cdn.glitch.com/075b311a-0371-463a-a6ba-c4f6c09e32cb%2FRunning-mario_01.png?v=1595741137506","https://cdn.glitch.com/075b311a-0371-463a-a6ba-c4f6c09e32cb%2FJumping-mario.png?v=1595741095055","https://cdn.glitch.com/075b311a-0371-463a-a6ba-c4f6c09e32cb%2FStanding-mario.png?v=1595741033822");
 
     // Create Mario 
-    platform = createSprite(-250, 570);
-    platform.addAnimation("normal","https://cdn.glitch.com/075b311a-0371-463a-a6ba-c4f6c09e32cb%2Ftop_ground.png?v=1595568970498");
+    platform = createSprite(-220, 570);
+    platform.addAnimation("normal","https://cdn.glitch.com/075b311a-0371-463a-a6ba-c4f6c09e32cb%2Fplatform.png?v=1595813439873");
 
     // Create Ledges Group
     ledges = new Group();
@@ -135,19 +135,18 @@ function Game() {
     camera.position.x = mario.position.x;
     background(210, 90, 100);
     camera.off(); 
-    this.showBackground();
+    image(bgImg, -mario.position.x%1500, 200);
     camera.on(); // scrolling and zooming for scenes extending beyond the canvas
     
     marioMove();
     checkCollision();
-
     spawnLedges();
-    
     
     drawSprites(); // Draw Mario and platform
     drawSprites(ledges);// Draw ledges
     
     logLastMarioX()
+    test()
   };
 
   function logLastMarioX(){ 
@@ -192,15 +191,14 @@ if(this.sceneArgs==="sound"){
     }
     //get rid of passed ledges
     for (let i = 0; i < ledges.length; i++) {
-      if (ledges[i].position.x < mario.position.x - width / 2) {
+      if (ledges[i].position.x < mario.position.x - 100) {
         ledges[i].remove();
       }
     }
     console.log(ledges);
   }
 
-  this.showBackground = function() {
-    image(bgImg, -mario.position.x%1500, 200);
+  function test(){
     text(MariolastX,mario.position.x,200)
     text(mario.position.x,mario.position.x,220)
     text(mario.position.x>MariolastX,mario.position.x,230)
