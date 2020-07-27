@@ -59,7 +59,6 @@ function Game() {
       camera.position.x = mario.position.x;
       camera.off();
       image(bgImg, -mario.position.x % 1300, 200);
-      text(mario.position.x,width/2,height/2);
       displayInfo()
       camera.on(); // scrolling and zooming for scenes extending beyond the canvas
       drawSprites(); 
@@ -124,9 +123,6 @@ if(this.sceneArgs==="sound"){
         coin.addAnimation("normal","https://cdn.glitch.com/075b311a-0371-463a-a6ba-c4f6c09e32cb%2Fcoins_01.png?v=1595864834355","https://cdn.glitch.com/075b311a-0371-463a-a6ba-c4f6c09e32cb%2Fcoins_02.png?v=1595864834664","https://cdn.glitch.com/075b311a-0371-463a-a6ba-c4f6c09e32cb%2Fcoins_03.png?v=1595864834265","https://cdn.glitch.com/075b311a-0371-463a-a6ba-c4f6c09e32cb%2Fcoins_04.png?v=1595864834678");
         coins.add(coin)
       }
-      
-      
-     
       longledge.addImage(longledgeImg);
       ledges.add(longledge);
       console.log(ledges)
