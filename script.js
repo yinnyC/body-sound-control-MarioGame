@@ -111,7 +111,7 @@ function Game() {
     GRAVITY = 1,
     JUMP = 20;
   let platform, ledges, mario, ledgeImg, longledgeImg, bgImg, gameIsOver;
-  this.setup = function() {
+  this.enter = function() {
     gameIsOver = false;
     // Load Images
     bgImg = loadImage(
@@ -174,25 +174,21 @@ function Game() {
       logLastMarioX();
       checkAlive();
     } else {
-      mario.velocity.x = 0
-      text(camera.active, width/2, 230);
       resetGame();
       this.sceneManager.showScene(result);
     }    
   };
 
   function checkAlive() {
+    // Check if Mario is out of window
     if (mario.position.y > height + 50) {
       gameIsOver = true;
     }
   }
-  function resetGame() {
-    gameIsOver = false;
-    mario.position.x = width / 2 - 70;
-    mario.position.y = 300;
-    mario.velocity.x = 4;
-    camera.position.x = width/2
-    ledges = new Group();
+  function resetGame() { 
+    camera.position.x = width/2 // Reset the camera
+    
+    
   }
 
   function logLastMarioX() {
