@@ -38,7 +38,7 @@ function setup() {
   mgr.gImage = groundImg;
   mgr.title = title;
   mgr.wire();
-  mgr.showScene(Game);
+  mgr.showScene(Intro);
 }
 
 function Intro() {
@@ -81,7 +81,8 @@ function Intro() {
   };
   this.mousePressed = function() {
     // Switch to Game scene when user click any of the buttons
-    if (choice != "") { // Make sure user's is on the buttons
+    if (choice != "") {
+      // Make sure user's is on the buttons
       this.sceneManager.showScene(Game, choice);
     }
   };
@@ -97,7 +98,7 @@ function Intro() {
   };
   this.moveBackground = function() {
     // Reset bgX when it runs out
-    bgX -= 1;
+    bgX -= 2;
     if (bgX <= width - foregroundImg.width) {
       bgX = 0;
     }
@@ -105,70 +106,103 @@ function Intro() {
 }
 
 function Game() {
-  let MariolastX=0,GRAVITY = 1,JUMP = 20;
-  let platform, ledges, mario, ledgeImg, longledgeImg, bgImg;
+  let MariolastX = 0,
+    GRAVITY = 1,
+    JUMP = 20;
+  let platform, ledges, mario, ledgeImg, longledgeImg, bgImg, gameIsOver;
   this.setup = function() {
+    gameIsOver = false;
     // Load Images
-    bgImg = loadImage("https://cdn.glitch.com/075b311a-0371-463a-a6ba-c4f6c09e32cb%2Fbg.png?v=1595800295790");
-    ledgeImg = loadImage("https://cdn.glitch.com/075b311a-0371-463a-a6ba-c4f6c09e32cb%2Fledge.png?v=1595738720120");
-    longledgeImg = loadImage("https://cdn.glitch.com/075b311a-0371-463a-a6ba-c4f6c09e32cb%2Flongledge.png?v=1595801236364");
-    
-    // Create Mario 
-    mario = createSprite(width / 2-70, 300);
-    mario.scale = 2.2;
-    mario.addAnimation("normal","https://cdn.glitch.com/075b311a-0371-463a-a6ba-c4f6c09e32cb%2FRunning-mario_01.png?v=1595741137506","https://cdn.glitch.com/075b311a-0371-463a-a6ba-c4f6c09e32cb%2FRunning-mario_02.png?v=1595799759140","https://cdn.glitch.com/075b311a-0371-463a-a6ba-c4f6c09e32cb%2FRunning-mario_03.png?v=1595799765213","https://cdn.glitch.com/075b311a-0371-463a-a6ba-c4f6c09e32cb%2FStanding-mario.png?v=1595741033822");
-    mario.addAnimation("move","https://cdn.glitch.com/075b311a-0371-463a-a6ba-c4f6c09e32cb%2FStanding-mario.png?v=1595741033822","https://cdn.glitch.com/075b311a-0371-463a-a6ba-c4f6c09e32cb%2FRunning-mario_01.png?v=1595741137506","https://cdn.glitch.com/075b311a-0371-463a-a6ba-c4f6c09e32cb%2FJumping-mario.png?v=1595741095055","https://cdn.glitch.com/075b311a-0371-463a-a6ba-c4f6c09e32cb%2FStanding-mario.png?v=1595741033822");
+    bgImg = loadImage(
+      "https://cdn.glitch.com/075b311a-0371-463a-a6ba-c4f6c09e32cb%2Fbg.png?v=1595800295790"
+    );
+    ledgeImg = loadImage(
+      "https://cdn.glitch.com/075b311a-0371-463a-a6ba-c4f6c09e32cb%2Fledge.png?v=1595738720120"
+    );
+    longledgeImg = loadImage(
+      "https://cdn.glitch.com/075b311a-0371-463a-a6ba-c4f6c09e32cb%2Flongledge.png?v=1595801236364"
+    );
 
-    // Create Mario 
+    // Create Mario
+    mario = createSprite(width / 2 - 70, 300);
+    mario.scale = 2.2;
+    mario.addAnimation(
+      "normal",
+      "https://cdn.glitch.com/075b311a-0371-463a-a6ba-c4f6c09e32cb%2FRunning-mario_01.png?v=1595741137506",
+      "https://cdn.glitch.com/075b311a-0371-463a-a6ba-c4f6c09e32cb%2FRunning-mario_02.png?v=1595799759140",
+      "https://cdn.glitch.com/075b311a-0371-463a-a6ba-c4f6c09e32cb%2FRunning-mario_03.png?v=1595799765213",
+      "https://cdn.glitch.com/075b311a-0371-463a-a6ba-c4f6c09e32cb%2FStanding-mario.png?v=1595741033822"
+    );
+    mario.addAnimation(
+      "move",
+      "https://cdn.glitch.com/075b311a-0371-463a-a6ba-c4f6c09e32cb%2FStanding-mario.png?v=1595741033822",
+      "https://cdn.glitch.com/075b311a-0371-463a-a6ba-c4f6c09e32cb%2FRunning-mario_01.png?v=1595741137506",
+      "https://cdn.glitch.com/075b311a-0371-463a-a6ba-c4f6c09e32cb%2FJumping-mario.png?v=1595741095055",
+      "https://cdn.glitch.com/075b311a-0371-463a-a6ba-c4f6c09e32cb%2FStanding-mario.png?v=1595741033822"
+    );
+
+    // Create Mario
     platform = createSprite(-220, 570);
-    platform.addAnimation("normal","https://cdn.glitch.com/075b311a-0371-463a-a6ba-c4f6c09e32cb%2Fplatform.png?v=1595813439873");
+    platform.addAnimation(
+      "normal",
+      "https://cdn.glitch.com/075b311a-0371-463a-a6ba-c4f6c09e32cb%2Fplatform.png?v=1595813439873"
+    );
 
     // Create Ledges Group
     ledges = new Group();
 
     // Mario will move forward at the speed of 4
-    mario.velocity.x = 4; 
+    mario.velocity.x = 4;
     camera.position.y = mario.position.y;
   };
 
   this.draw = function() {
-    camera.position.x = mario.position.x;
-    background(210, 90, 100);
-    camera.off(); 
-    image(bgImg, -mario.position.x%1300, 200);
-    camera.on(); // scrolling and zooming for scenes extending beyond the canvas
-    
-    marioMove();
-    checkCollision();
-    spawnLedges();
-    
-    drawSprites(); // Draw Mario and platform
-    drawSprites(ledges);// Draw ledges
-    
-    logLastMarioX()
-    gameIsOver()
-    test()
-  };
+    if (!gameIsOver) {
+      camera.position.x = mario.position.x;
+      background(210, 90, 100);
+      camera.off();
+      image(bgImg, -mario.position.x % 1300, 200);
+      camera.on(); // scrolling and zooming for scenes extending beyond the canvas
 
-  function logLastMarioX(){ 
+      marioMove();
+      checkCollision();
+      spawnLedges();
+
+      drawSprites(); // Draw Mario and platform
+      drawSprites(ledges); // Draw ledges
+
+      logLastMarioX();
+      checkAlive();
+      test();
+    }else{
+      this.sceneManager.showScene(Intro);
+    }
+    
+  };
+  
+  function checkAlive(){
+    if(mario.position.y>height+50){
+      gameIsOver = true
+    }
+  }
+  
+  function logLastMarioX() {
     // Record last Mario,to check if Mario stuck at the ledge side
-    MariolastX = mario.position.x
+    MariolastX = mario.position.x;
   }
   function checkCollision() {
     // If Mario is on the platform or ledges, y value stays the same
-    mario.velocity.y += GRAVITY;  
+    mario.velocity.y += GRAVITY;
     if (mario.collide(platform) || mario.collide(ledges)) {
-      if(mario.position.x>MariolastX){
+      if (mario.position.x > MariolastX) {
         mario.velocity.y = 0;
         mario.changeAnimation("normal");
-      }else{
+      } else {
         mario.velocity.y = 1000;
       }
     }
   }
-  function gameIsOver(){
-   
-  }
+
   /*Implementation of sound or body mode in function marioMove()
 if(this.sceneArgs==="sound"){
 
@@ -179,33 +213,31 @@ if(this.sceneArgs==="sound"){
   function marioMove() {
     // While receibe user input, Mario jumps
     if (keyWentDown(" ")) {
-      mario.changeAnimation("move"); 
+      mario.changeAnimation("move");
       mario.animation.rewind();
       mario.velocity.y = -JUMP;
     }
   }
   function spawnLedges() {
     //spawn ledges
-    if (frameCount % 100 === 0 &&  mario.position.x>MariolastX) { 
+    if (frameCount % 100 === 0 && mario.position.x > MariolastX) {
       // if Mario stuck at the ledge side, don't create new ledge
-      let longledge = createSprite(mario.position.x + width, random(520,610));
+      let longledge = createSprite(mario.position.x + width, random(520, 610));
       longledge.addImage(longledgeImg);
       ledges.add(longledge);
     }
     //get rid of passed ledges
     for (let i = 0; i < ledges.length; i++) {
-      if (ledges[i].position.x < mario.position.x -width/2) {
+      if (ledges[i].position.x < mario.position.x - width / 2) {
         ledges[i].remove();
       }
     }
     console.log(ledges);
   }
 
-  function test(){
-    text(MariolastX,mario.position.x,200)
-    text(mario.position.y,mario.position.x,220)
-    text(mario.position.x>MariolastX,mario.position.x,230)
-  };
+  function test() {
+    text(MariolastX, mario.position.x, 200);
+    text(mario.position.y, mario.position.x, 220);
+    text(mario.position.x > MariolastX, mario.position.x, 230);
+  }
 }
-
-
