@@ -1,6 +1,6 @@
 // Name any p5.js functions we use in `global` so Glitch can recognize them.
 /* global
- *    camera,Group,keyWentDown,drawSprites,createSprite,Clickable,drawIntroScreen,SceneManager,loadImage,ESCAPE,textSize,image,VIDEO,createCapture,ml5,HSB, background, color, collideRectRect, colorMode, createCanvas, fill, frameRate, keyCode, height,
+ *    removeSprite,updateSprites,camera,Group,keyWentDown,drawSprites,createSprite,Clickable,drawIntroScreen,SceneManager,loadImage,ESCAPE,textSize,image,VIDEO,createCapture,ml5,HSB, background, color, collideRectRect, colorMode, createCanvas, fill, frameRate, keyCode, height,
  *    loop, noFill, noLoop, noStroke, random, rect, round, stroke, sqrt, text, width
  *    frameCount,UP_ARROW, DOWN_ARROW, LEFT_ARROW, RIGHT_ARROW
  */
@@ -91,7 +91,6 @@ function Intro() {
     image(this.sceneManager.bImage, bgX, 255);
     image(this.sceneManager.gImage, bgX, 540);
     image(this.sceneManager.title, 70, 100, 350, 200);
-    text(choice, 70, 420);
     if (Math.floor(frameCount / 30) % 2 == 0) {
       // A blinking Info
       text("Select mode to start game", width / 2 - 70, height - 20);
@@ -107,35 +106,28 @@ function Intro() {
 }
 
 function Game() {
-  let MariolastX = 0,
-    GRAVITY = 1,
-    JUMP = 20;
+  let MariolastX,GRAVITY,JUMP;
   let platform, ledges, mario, ledgeImg, longledgeImg, bgImg, gameIsOver;
   this.enter = function() {
+    MariolastX = 0;
     gameIsOver = false;
+    GRAVITY = 1;
+    JUMP = 20
     // Load Images
-    bgImg = loadImage(
-      "https://cdn.glitch.com/075b311a-0371-463a-a6ba-c4f6c09e32cb%2Fbg.png?v=1595800295790"
-    );
-    ledgeImg = loadImage(
-      "https://cdn.glitch.com/075b311a-0371-463a-a6ba-c4f6c09e32cb%2Fledge.png?v=1595738720120"
-    );
-    longledgeImg = loadImage(
-      "https://cdn.glitch.com/075b311a-0371-463a-a6ba-c4f6c09e32cb%2Flongledge.png?v=1595801236364"
-    );
+    bgImg = loadImage("https://cdn.glitch.com/075b311a-0371-463a-a6ba-c4f6c09e32cb%2Fbg.png?v=1595800295790");
+    ledgeImg = loadImage("https://cdn.glitch.com/075b311a-0371-463a-a6ba-c4f6c09e32cb%2Fledge.png?v=1595738720120");
+    longledgeImg = loadImage("https://cdn.glitch.com/075b311a-0371-463a-a6ba-c4f6c09e32cb%2Flongledge.png?v=1595801236364");
 
     // Create Mario
     mario = createSprite(width / 2 - 70, 300);
     mario.scale = 2.2;
-    mario.addAnimation(
-      "normal",
+    mario.addAnimation("normal",
       "https://cdn.glitch.com/075b311a-0371-463a-a6ba-c4f6c09e32cb%2FRunning-mario_01.png?v=1595741137506",
       "https://cdn.glitch.com/075b311a-0371-463a-a6ba-c4f6c09e32cb%2FRunning-mario_02.png?v=1595799759140",
       "https://cdn.glitch.com/075b311a-0371-463a-a6ba-c4f6c09e32cb%2FRunning-mario_03.png?v=1595799765213",
       "https://cdn.glitch.com/075b311a-0371-463a-a6ba-c4f6c09e32cb%2FStanding-mario.png?v=1595741033822"
     );
-    mario.addAnimation(
-      "move",
+    mario.addAnimation("move",
       "https://cdn.glitch.com/075b311a-0371-463a-a6ba-c4f6c09e32cb%2FStanding-mario.png?v=1595741033822",
       "https://cdn.glitch.com/075b311a-0371-463a-a6ba-c4f6c09e32cb%2FRunning-mario_01.png?v=1595741137506",
       "https://cdn.glitch.com/075b311a-0371-463a-a6ba-c4f6c09e32cb%2FJumping-mario.png?v=1595741095055",
@@ -144,10 +136,7 @@ function Game() {
 
     // Create Mario
     platform = createSprite(-300, 570);
-    platform.addAnimation(
-      "normal",
-      "https://cdn.glitch.com/075b311a-0371-463a-a6ba-c4f6c09e32cb%2Fplatform.png?v=1595813439873"
-    );
+    platform.addAnimation("normal","https://cdn.glitch.com/075b311a-0371-463a-a6ba-c4f6c09e32cb%2Fplatform.png?v=1595813439873");
 
     // Create Ledges Group
     ledges = new Group();
@@ -166,8 +155,7 @@ function Game() {
       camera.on(); // scrolling and zooming for scenes extending beyond the canvas
       marioMove();
       checkCollision();
-      spawnLedges();
-      test()
+      spawnLedges(); 
       drawSprites(); // Draw Mario and platform
       drawSprites(ledges); // Draw ledges
 
@@ -187,8 +175,6 @@ function Game() {
   }
   function resetGame() { 
     camera.position.x = width/2 // Reset the camera
-    
-    
   }
 
   function logLastMarioX() {
@@ -237,12 +223,6 @@ if(this.sceneArgs==="sound"){
         ledges[i].remove();
       }
     }
-  }
-
-  function test() {
-    text(MariolastX, mario.position.x, 200);
-    text(mario.position.y, mario.position.x, 220);
-    text(camera.active, mario.position.x, 230);
   }
 }
 
