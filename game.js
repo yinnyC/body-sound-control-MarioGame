@@ -34,8 +34,8 @@ function Game() {
     );
 
     // Create Mario
-    platform = createSprite(200, 570);
-    platform.addAnimation("normal","https://cdn.glitch.com/075b311a-0371-463a-a6ba-c4f6c09e32cb%2Fplatform.png?v=1595813439873");
+    platform = createSprite(230, 570);
+    platform.addAnimation("normal","https://cdn.glitch.com/075b311a-0371-463a-a6ba-c4f6c09e32cb%2Fstartledge.png?v=1595801238081");
 
     // Create Ledges Group
     ledges = new Group();
@@ -61,7 +61,6 @@ function Game() {
       drawSprites(); 
       logLastMarioX();
     } else {
-      
       this.sceneManager.showScene(Gameover);
       resetGame();
     }    
@@ -71,7 +70,6 @@ function Game() {
     // Check if Mario is out of window
     if (mario.position.y > height + 50) {
       gameIsOver = true;
-      
     }
   }
   function resetGame() { 
@@ -116,7 +114,7 @@ if(this.sceneArgs==="sound"){
     //spawn ledges
     if (frameCount % 100 === 0 && mario.position.x > MariolastX) {
       // if Mario stuck at the ledge side, don't create new ledge
-      let longledge = createSprite(mario.position.x +width+longledgeImg.width, random(520, 610));
+      let longledge = createSprite(mario.position.x +width-120, random(520, 610));
       if(!longledge.collide(ledges)){
         longledge.addImage(longledgeImg);
         ledges.add(longledge);
