@@ -146,21 +146,24 @@ function Game() {
   };
 
   this.draw = function() {
+    
+    
     background(210, 90, 100);
-    camera.position.x = mario.position.x;
-    camera.off();
-    image(bgImg, -mario.position.x % 1300, 200);
-    text(mario.position.x,width/2,height/2);
+    
+    
     if (!gameIsOver) {
-      camera.on(); // scrolling and zooming for scenes extending beyond the canvas
-      
+      checkAlive();
       marioMove();
       checkCollision();
       spawnLedges(); 
+      camera.position.x = mario.position.x;
+      camera.off();
+      image(bgImg, -mario.position.x % 1300, 200);
+      text(mario.position.x,width/2,height/2);
+      camera.on(); // scrolling and zooming for scenes extending beyond the canvas
       drawSprites(); 
-      
       logLastMarioX();
-      checkAlive();
+      
     } else {
       this.sceneManager.showScene(result);
       resetGame();
