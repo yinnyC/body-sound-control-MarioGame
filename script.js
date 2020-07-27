@@ -191,8 +191,8 @@ function Game() {
   function resetGame() {
     camera.position.x = 250
     gameIsOver = false;
-    // mario.position.x = width / 2 - 70;
-    // mario.position.y = 300;
+    mario.position.x = width / 2 - 70;
+    mario.position.y = 300;
   }
 
   function logLastMarioX() {
