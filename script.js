@@ -114,37 +114,39 @@ function Game() {
     longledgeImg = loadImage("https://cdn.glitch.com/075b311a-0371-463a-a6ba-c4f6c09e32cb%2Flongledge.png?v=1595801236364");
     
     // Create Mario 
-    mario = createSprite(width / 2, 515);
+    mario = createSprite(width / 2-70, 300);
     mario.scale = 2.2;
     mario.addAnimation("normal","https://cdn.glitch.com/075b311a-0371-463a-a6ba-c4f6c09e32cb%2FRunning-mario_01.png?v=1595741137506","https://cdn.glitch.com/075b311a-0371-463a-a6ba-c4f6c09e32cb%2FRunning-mario_02.png?v=1595799759140","https://cdn.glitch.com/075b311a-0371-463a-a6ba-c4f6c09e32cb%2FRunning-mario_03.png?v=1595799765213","https://cdn.glitch.com/075b311a-0371-463a-a6ba-c4f6c09e32cb%2FStanding-mario.png?v=1595741033822");
     mario.addAnimation("move","https://cdn.glitch.com/075b311a-0371-463a-a6ba-c4f6c09e32cb%2FStanding-mario.png?v=1595741033822","https://cdn.glitch.com/075b311a-0371-463a-a6ba-c4f6c09e32cb%2FRunning-mario_01.png?v=1595741137506","https://cdn.glitch.com/075b311a-0371-463a-a6ba-c4f6c09e32cb%2FJumping-mario.png?v=1595741095055","https://cdn.glitch.com/075b311a-0371-463a-a6ba-c4f6c09e32cb%2FStanding-mario.png?v=1595741033822");
 
     // Create Mario 
-    platform = createSprite(440, 570);
-    platform.addAnimation("normal","https://cdn.glitch.com/075b311a-0371-463a-a6ba-c4f6c09e32cb%2Fstartledge.png?v=1595801238081");
+    platform = createSprite(-250, 570);
+    platform.addAnimation("normal","https://cdn.glitch.com/075b311a-0371-463a-a6ba-c4f6c09e32cb%2Ftop_ground.png?v=1595568970498");
 
     // Create Ledges Group
     ledges = new Group();
 
     // Mario will move forward at the speed of 4
     mario.velocity.x = 4; 
+    camera.position.y = mario.position.y;
   };
 
   this.draw = function() {
-    camera.position.x = mario.position.x + width / 4;
+    camera.position.x = mario.position.x;
     background(210, 90, 100);
-    camera.off();
+    camera.off(); 
     this.showBackground();
-    camera.on();
-    checkCollision();
+    camera.on(); // scrolling and zooming for scenes extending beyond the canvas
+    
     marioMove();
+    checkCollision();
+
     spawnLedges();
-    text(MariolastX,mario.position.x,200)
-    text(mario.position.x,mario.position.x,250)
-    text(MariolastX,mario.position.x,200)
-    text(mario.position.x>MariolastX,mario.position.x,260)
-    drawSprites();
-    drawSprites(ledges);
+    
+    
+    drawSprites(); // Draw Mario and platform
+    drawSprites(ledges);// Draw ledges
+    
     logLastMarioX()
   };
 
@@ -159,6 +161,8 @@ function Game() {
       if(mario.position.x>MariolastX){
         mario.velocity.y = 0;
         mario.changeAnimation("normal");
+      }else{
+        mario.velocity.y = 1000;
       }
     }
   }
@@ -197,6 +201,9 @@ if(this.sceneArgs==="sound"){
 
   this.showBackground = function() {
     image(bgImg, -mario.position.x%1500, 200);
+    text(MariolastX,mario.position.x,200)
+    text(mario.position.x,mario.position.x,220)
+    text(mario.position.x>MariolastX,mario.position.x,230)
   };
 }
 
