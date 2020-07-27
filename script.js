@@ -84,6 +84,7 @@ function Intro() {
     if (choice != "") {
       // Make sure user's is on the buttons
       bgX = 0;
+      console.log("Im here")
       this.sceneManager.showScene(Game, choice);
     }
   };
@@ -92,6 +93,7 @@ function Intro() {
     image(this.sceneManager.bImage, bgX, 255);
     image(this.sceneManager.gImage, bgX, 540);
     image(this.sceneManager.title, 70, 100, 350, 200);
+    text(choice, 70, 420);
     if (Math.floor(frameCount / 30) % 2 == 0) {
       // A blinking Info
       text("Select mode to start game", width / 2 - 70, height - 20);
@@ -159,27 +161,29 @@ function Game() {
 
   this.draw = function() {
     background(210, 90, 100);
+    camera.position.x = mario.position.x;
+    camera.off();
+    image(bgImg, -mario.position.x % 1300, 200);
+    
     if (!gameIsOver) {
-      camera.position.x = mario.position.x;
-      
-      camera.off();
-      image(bgImg, -mario.position.x % 1300, 200);
       camera.on(); // scrolling and zooming for scenes extending beyond the canvas
-
       marioMove();
       checkCollision();
       spawnLedges();
-
+      test()
       drawSprites(); // Draw Mario and platform
       drawSprites(ledges); // Draw ledges
 
       logLastMarioX();
       checkAlive();
     } else {
-      resetGame();
+      mario.velocity.x = 0
+      text(camera.active, width/2, 230);
+      camera.position.x = width/2
+      //resetGame();
       this.sceneManager.showScene(Intro);
     }
-    test()
+    
   };
 
   function checkAlive() {
