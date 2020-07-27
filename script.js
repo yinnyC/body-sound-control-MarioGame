@@ -167,9 +167,7 @@ function Game() {
     }
   }
   function gameIsOver(){
-    if(mario.position.y>height+10){
-      this.sceneManager.showScene(Intro);
-    }
+   
   }
   /*Implementation of sound or body mode in function marioMove()
 if(this.sceneArgs==="sound"){
