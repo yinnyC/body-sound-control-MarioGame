@@ -162,29 +162,12 @@ function Game() {
   };
 
   function chickCollision() {
-    mario.velocity.y += GRAVITY;
-    let check = ledges.overlap(mario, checkLedgeside);
-    if (mario.collide(platform)) {
+    mario.velocity.y += GRAVITY;  
+    if (mario.collide(platform) || mario.collide(ledges)) {
       mario.velocity.y = 0;
       mario.changeAnimation("normal");
-    } else if (mario.collide(ledges)) {
-      if (check) {
-        mario.velocity.y = 0;
-        mario.changeAnimation("normal");
-      }else{
-        mario.velocity.x = -4;
-      }
-      // Check if mario hit the ledgeside
     }
-
-    function checkLedgeside(ledge, mario) {
-      //Check if mario touch platform or ledges
-      console.log(ledge.overlapPixel(mario.position.x, mario.position.y + 30));
-      return ledge.overlapPixel(mario.position.x, mario.position.y + 30);
-    }
-
-    //
-    // console.log(ledges.overlapPixel(mario.position.x+10, mario.position.y))
+    // Check if mario hit the ledgeside
   }
   function marioMove() {
     // Use space key to move mario
@@ -204,9 +187,9 @@ function Game() {
   }
   function spawnLedges() {
     //spawn pipes
-    if (frameCount % 100 === 0 && mario.velocity.x > 0) {
+    if (frameCount % 100 === 0) {
       //let ledge = createSprite(mario.position.x + width, 575);
-      let longledge = createSprite(mario.position.x + width - 100, 580);
+      let longledge = createSprite(mario.position.x + width, random(520,610));
       //ledge.addImage(ledgeImg);
       longledge.addImage(longledgeImg);
       //ledges.add(ledge);
