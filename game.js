@@ -50,7 +50,6 @@ function Game() {
   this.draw = function() {
     background(210, 90, 100);
     if (!gameIsOver) {
-      
       checkAlive();
       mario.overlap(coins, collectCoins);
       marioMove();
@@ -138,6 +137,7 @@ if(this.sceneArgs==="sound"){
     camera.position.x = width/2 
     updateSprites(false);
     ledges.removeSprites ()
+    coins.removeSprites ()
     score = 0;
   }
 
