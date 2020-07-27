@@ -81,11 +81,13 @@ function Intro() {
   };
   this.mousePressed = function() {
     // Switch to Game scene when user click any of the buttons
+    console.log("Im here")
     if (choice != "") {
+      console.log("Im in if")
       // Make sure user's is on the buttons
-      bgX = 0;
-      console.log("Im here")
       this.sceneManager.showScene(Game, choice);
+      choice = ""
+      bgX = 0;
     }
   };
   this.showBackground = function() {
@@ -180,8 +182,9 @@ function Game() {
       mario.velocity.x = 0
       text(camera.active, width/2, 230);
       camera.position.x = width/2
-      //resetGame();
-      this.sceneManager.showScene(Intro);
+      resetGame();
+      this.sceneManager.showScene(result);
+      
     }
     
   };
@@ -193,6 +196,7 @@ function Game() {
   }
   function resetGame() {
     camera.position.x = 250
+    gameIsOver = false;
   }
 
   function logLastMarioX() {
@@ -248,4 +252,15 @@ if(this.sceneArgs==="sound"){
     text(mario.position.y, mario.position.x, 220);
     text(camera.active, mario.position.x, 230);
   }
+}
+
+
+function result() {
+  this.draw = function() {
+    background(0, 90, 100);
+  }
+    this.mousePressed = function() {
+      this.sceneManager.showScene(Intro);
+  };
+  
 }
