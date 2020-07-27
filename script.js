@@ -83,7 +83,7 @@ function Intro() {
     // Switch to Game scene when user click any of the buttons
     if (choice != "") {
       // Make sure user's is on the buttons
-      bgX = 0
+      bgX = 0;
       this.sceneManager.showScene(Game, choice);
     }
   };
@@ -158,9 +158,10 @@ function Game() {
   };
 
   this.draw = function() {
+    background(210, 90, 100);
     if (!gameIsOver) {
       camera.position.x = mario.position.x;
-      background(210, 90, 100);
+      
       camera.off();
       image(bgImg, -mario.position.x % 1300, 200);
       camera.on(); // scrolling and zooming for scenes extending beyond the canvas
@@ -174,19 +175,22 @@ function Game() {
 
       logLastMarioX();
       checkAlive();
-      test();
-    }else{
-      //this.sceneManager.showScene(Intro);
+    } else {
+      resetGame();
+      this.sceneManager.showScene(Intro);
     }
-    
+    test()
   };
-  
-  function checkAlive(){
-    if(mario.position.y>height+50){
-      gameIsOver = true
+
+  function checkAlive() {
+    if (mario.position.y > height + 50) {
+      gameIsOver = true;
     }
   }
-  
+  function resetGame() {
+    camera.position.x = 250
+  }
+
   function logLastMarioX() {
     // Record last Mario,to check if Mario stuck at the ledge side
     MariolastX = mario.position.x;
@@ -238,6 +242,6 @@ if(this.sceneArgs==="sound"){
   function test() {
     text(MariolastX, mario.position.x, 200);
     text(mario.position.y, mario.position.x, 220);
-    text(mario.position.x > MariolastX, mario.position.x, 230);
+    text(camera.active, mario.position.x, 230);
   }
 }
