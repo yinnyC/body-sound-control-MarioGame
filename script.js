@@ -150,14 +150,15 @@ function Game() {
     camera.position.x = mario.position.x;
     camera.off();
     image(bgImg, -mario.position.x % 1300, 200);
+    text(mario.position.x,width/2,height/2);
     if (!gameIsOver) {
       camera.on(); // scrolling and zooming for scenes extending beyond the canvas
+      
       marioMove();
       checkCollision();
       spawnLedges(); 
-      drawSprites(); // Draw Mario and platform
-      drawSprites(ledges); // Draw ledges
-
+      drawSprites(); 
+      
       logLastMarioX();
       checkAlive();
     } else {
@@ -176,7 +177,7 @@ function Game() {
   function resetGame() { 
     camera.position.x = width/2 // Reset the camera
     updateSprites(false);
-    ledges.clear()
+    ledges.removeSprites ()
     
   }
 
@@ -192,7 +193,7 @@ function Game() {
         mario.velocity.y = 0;
         mario.changeAnimation("normal");
       } else {
-        mario.velocity.y = 2   ;
+        mario.velocity.y = 2;
       }
     }
   }
