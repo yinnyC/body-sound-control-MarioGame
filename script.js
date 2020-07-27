@@ -83,6 +83,7 @@ function Intro() {
     // Switch to Game scene when user click any of the buttons
     if (choice != "") {
       // Make sure user's is on the buttons
+      bgX = 0
       this.sceneManager.showScene(Game, choice);
     }
   };
@@ -142,7 +143,7 @@ function Game() {
     );
 
     // Create Mario
-    platform = createSprite(-220, 570);
+    platform = createSprite(-300, 570);
     platform.addAnimation(
       "normal",
       "https://cdn.glitch.com/075b311a-0371-463a-a6ba-c4f6c09e32cb%2Fplatform.png?v=1595813439873"
@@ -175,7 +176,7 @@ function Game() {
       checkAlive();
       test();
     }else{
-      this.sceneManager.showScene(Intro);
+      //this.sceneManager.showScene(Intro);
     }
     
   };
@@ -220,7 +221,7 @@ if(this.sceneArgs==="sound"){
   }
   function spawnLedges() {
     //spawn ledges
-    if (frameCount % 100 === 0 && mario.position.x > MariolastX) {
+    if (frameCount % 110 === 0 && mario.position.x > MariolastX) {
       // if Mario stuck at the ledge side, don't create new ledge
       let longledge = createSprite(mario.position.x + width, random(520, 610));
       longledge.addImage(longledgeImg);
@@ -232,7 +233,6 @@ if(this.sceneArgs==="sound"){
         ledges[i].remove();
       }
     }
-    console.log(ledges);
   }
 
   function test() {
