@@ -105,10 +105,19 @@ if(this.sceneArgs==="sound"){
     if (frameCount % 100 === 0 && mario.position.x > MariolastX) {
       // if Mario stuck at the ledge side, don't create new ledge
       let longledge = createSprite(mario.position.x +width-120, random(520, 610));
-      if(!longledge.collide(ledges)){
-        longledge.addImage(longledgeImg);
-        ledges.add(longledge);
+      for(let i=0;i<3;i++){
+        let coin = createSprite(longledge.position.x+150+i*20,longledge.position.y-200-+i*20);
+        coin.addAnimation("normal","https://cdn.glitch.com/075b311a-0371-463a-a6ba-c4f6c09e32cb%2Fcoins_01.png?v=1595864834355","https://cdn.glitch.com/075b311a-0371-463a-a6ba-c4f6c09e32cb%2Fcoins_02.png?v=1595864834664","https://cdn.glitch.com/075b311a-0371-463a-a6ba-c4f6c09e32cb%2Fcoins_03.png?v=1595864834265","https://cdn.glitch.com/075b311a-0371-463a-a6ba-c4f6c09e32cb%2Fcoins_04.png?v=1595864834678");
       }
+      for(let i=0;i<3;i++){
+        let coin = createSprite(longledge.position.x+210+i*20,longledge.position.y-140-+i*20);
+        coin.addAnimation("normal","https://cdn.glitch.com/075b311a-0371-463a-a6ba-c4f6c09e32cb%2Fcoins_01.png?v=1595864834355","https://cdn.glitch.com/075b311a-0371-463a-a6ba-c4f6c09e32cb%2Fcoins_02.png?v=1595864834664","https://cdn.glitch.com/075b311a-0371-463a-a6ba-c4f6c09e32cb%2Fcoins_03.png?v=1595864834265","https://cdn.glitch.com/075b311a-0371-463a-a6ba-c4f6c09e32cb%2Fcoins_04.png?v=1595864834678");
+      }
+      
+      
+     
+      longledge.addImage(longledgeImg);
+      ledges.add(longledge);
       console.log(ledges)
     }
     //get rid of passed ledges
@@ -117,9 +126,6 @@ if(this.sceneArgs==="sound"){
         ledges[i].remove();
       }
     }
-  }
-  function spawnCoins(){
-    
   }
     function resetGame() { 
     camera.position.x = width/2 
