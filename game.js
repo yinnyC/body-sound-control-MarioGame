@@ -7,8 +7,9 @@
 
 function Game() {
   let MariolastX,GRAVITY,JUMP;
-  let platform, ledges, mario, ledgeImg, longledgeImg, bgImg, gameIsOver,coins;
+  let platform, ledges, mario, ledgeImg, longledgeImg, bgImg, gameIsOver,coins,score;
   this.enter = function() {
+    score = 0;
     MariolastX = 0;
     gameIsOver = false;
     GRAVITY = 1;
@@ -16,7 +17,7 @@ function Game() {
     // Load Images
     bgImg = loadImage("https://cdn.glitch.com/075b311a-0371-463a-a6ba-c4f6c09e32cb%2Fbg.png?v=1595800295790");
     longledgeImg = loadImage("https://cdn.glitch.com/075b311a-0371-463a-a6ba-c4f6c09e32cb%2Flongledge.png?v=1595801236364");
-
+    
     // Create Mario
     mario = createSprite(width / 2 - 70, 300);
     mario.scale = 2.2;
@@ -72,17 +73,6 @@ function Game() {
       gameIsOver = true;
     }
   }
-  function resetGame() { 
-    camera.position.x = width/2 // Reset the camera
-    updateSprites(false);
-    ledges.removeSprites ()
-    
-  }
-
-  function logLastMarioX() {
-    // Record last Mario,to check if Mario stuck at the ledge side
-    MariolastX = mario.position.x;
-  }
   function checkCollision() {
     // If Mario is on the platform or ledges, y value stays the same
     mario.velocity.y += GRAVITY;
@@ -91,7 +81,7 @@ function Game() {
         mario.velocity.y = 0;
         mario.changeAnimation("normal");
       } else {
-        mario.velocity.y = 2;
+        mario.velocity.y = 1;
       }
     }
   }
@@ -127,5 +117,19 @@ if(this.sceneArgs==="sound"){
         ledges[i].remove();
       }
     }
+  }
+  function spawnCoins(){
+    
+  }
+    function resetGame() { 
+    camera.position.x = width/2 
+    updateSprites(false);
+    ledges.removeSprites ()
+    score = 0;
+  }
+
+  function logLastMarioX() {
+    // Record last Mario,to check if Mario stuck at the ledge side
+    MariolastX = mario.position.x;
   }
 }
