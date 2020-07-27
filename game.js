@@ -7,7 +7,7 @@
 
 function Game() {
   let MariolastX,GRAVITY,JUMP;
-  let platform, ledges, mario, ledgeImg, longledgeImg, bgImg, gameIsOver,coins,score;
+  let platform, ledges, mario, ledgeImg, longledgeImg, bgImg, gameIsOver,coins,score,spriteTo;
   this.enter = function() {
     score = 0;
     MariolastX = 0;
@@ -74,8 +74,7 @@ function Game() {
     console.log('coin collected')
     score +=1;
     collectedCoin.visible = false;
-    collectedCoin.remove();
-    collectedCoin.remove();
+    collectedCoin.remove()
     
   }
   function checkAlive() {
