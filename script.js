@@ -171,11 +171,13 @@ function Game() {
     // Check if Mario is out of window
     if (mario.position.y > height + 50) {
       gameIsOver = true;
-      updateSprites(false);
-      camera.position.x = width/2 // Reset the camera
+      
     }
   }
   function resetGame() { 
+    camera.position.x = width/2 // Reset the camera
+    updateSprites(false);
+    ledges.clear()
     
   }
 
@@ -191,7 +193,7 @@ function Game() {
         mario.velocity.y = 0;
         mario.changeAnimation("normal");
       } else {
-        mario.velocity.y = 1000;
+        mario.velocity.y = 0   ;
       }
     }
   }
@@ -212,9 +214,9 @@ if(this.sceneArgs==="sound"){
   }
   function spawnLedges() {
     //spawn ledges
-    if (frameCount % 120 === 0 && mario.position.x > MariolastX) {
+    if (frameCount % 100 === 0 && mario.position.x > MariolastX) {
       // if Mario stuck at the ledge side, don't create new ledge
-      let longledge = createSprite(mario.position.x + width, random(520, 610));
+      let longledge = createSprite(mario.position.x + longledgeImg.width, random(520, 610));
       longledge.addImage(longledgeImg);
       ledges.add(longledge);
       console.log(ledges)
