@@ -73,7 +73,10 @@ function Game() {
   function collectCoins(mario,collectedCoin){
     console.log('coin collected')
     score +=1;
-    collectedCoin.remove()
+    collectedCoin.visible = false;
+    collectedCoin.remove();
+    collectedCoin.remove();
+    
   }
   function checkAlive() {
     // Check if Mario is out of window
@@ -110,7 +113,7 @@ if(this.sceneArgs==="sound"){
   }
   function spawnLedges() {
     //spawn ledges
-    if (frameCount % 300 === 0 && mario.position.x > MariolastX) {
+    if (frameCount % 200 === 0 && mario.position.x > MariolastX) {
       // if Mario stuck at the ledge side, don't create new ledge
       let longledge = createSprite(mario.position.x +width-120, random(520, 610));
       for(let i=0;i<3;i++){
@@ -134,8 +137,12 @@ if(this.sceneArgs==="sound"){
     function resetGame() { 
     camera.position.x = width/2 
     updateSprites(false);
+    console.log(ledges.size())
     ledges.removeSprites()
+    console.log(ledges.size())
+    console.log(coins.size())
     coins.removeSprites()
+    console.log(coins.size())
     score = 0;
   }
 
