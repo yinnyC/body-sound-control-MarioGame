@@ -1,6 +1,6 @@
 // Name any p5.js functions we use in `global` so Glitch can recognize them.
 /* global
- *    removeSprite,updateSprites,camera,Group,keyWentDown,drawSprites,createSprite,Clickable,drawIntroScreen,SceneManager,loadImage,ESCAPE,textSize,image,VIDEO,createCapture,ml5,HSB, background, color, collideRectRect, colorMode, createCanvas, fill, frameRate, keyCode, height,
+ *    removeSprites,removeSprite,updateSprites,camera,Group,keyWentDown,drawSprites,createSprite,Clickable,drawIntroScreen,SceneManager,loadImage,ESCAPE,textSize,image,VIDEO,createCapture,ml5,HSB, background, color, collideRectRect, colorMode, createCanvas, fill, frameRate, keyCode, height,
  *    loop, noFill, noLoop, noStroke, random, rect, round, stroke, sqrt, text, width
  *    frameCount,UP_ARROW, DOWN_ARROW, LEFT_ARROW, RIGHT_ARROW,Gameover
  */
@@ -72,7 +72,7 @@ function Game() {
   }
   function collectCoins(mario,collectedCoin){
     score +=1;
-    collectedCoin.remove();
+    collectedCoin.remove()
   }
   function checkAlive() {
     // Check if Mario is out of window
@@ -129,15 +129,17 @@ if(this.sceneArgs==="sound"){
     //get rid of passed ledges
     for (let i = 0; i < ledges.length; i++) {
       if (ledges[i].position.x < mario.position.x - width / 2) {
+        //removeSprites(ledges[i])
         ledges[i].remove();
+        // console.log(ledges[i])
       }
     }
   }
     function resetGame() { 
     camera.position.x = width/2 
     updateSprites(false);
-    ledges.removeSprites ()
-    coins.removeSprites ()
+    ledges.removeSprites()
+    coins.removeSprites()
     score = 0;
   }
 
