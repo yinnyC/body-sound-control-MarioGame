@@ -43,7 +43,7 @@ function setup() {
 
 function Intro() {
   let bgX = 0; // To scroll the background
-  let choice = "1";
+  let choice = "";
   this.setup = function() {
     // set up clickable - Button soundMode
     soundMode = new Clickable();
@@ -134,7 +134,7 @@ function Game() {
     );
 
     // Create Mario
-    platform = createSprite(-500, 570);
+    platform = createSprite(200, 570);
     platform.addAnimation("normal","https://cdn.glitch.com/075b311a-0371-463a-a6ba-c4f6c09e32cb%2Fplatform.png?v=1595813439873");
 
     // Create Ledges Group
@@ -143,11 +143,10 @@ function Game() {
     // Mario will move forward at the speed of 4
     mario.velocity.x = 4;
     camera.position.y = mario.position.y;
+    updateSprites(false);
   };
 
   this.draw = function() {
-    
-    
     background(210, 90, 100);
     
     
@@ -219,7 +218,7 @@ if(this.sceneArgs==="sound"){
     //spawn ledges
     if (frameCount % 100 === 0 && mario.position.x > MariolastX) {
       // if Mario stuck at the ledge side, don't create new ledge
-      let longledge = createSprite(mario.position.x + longledgeImg.width, random(520, 610));
+      let longledge = createSprite(mario.position.x +width+longledgeImg.width, random(520, 610));
       if(!longledge.collide(ledges)){
         longledge.addImage(longledgeImg);
         ledges.add(longledge);
