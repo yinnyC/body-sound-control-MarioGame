@@ -52,8 +52,8 @@ function Game() {
     background(210, 90, 100);
     if (!gameIsOver) {
       checkAlive();
-      mario.overlap(coins, collectCoins);
       marioMove();
+      mario.overlap(coins, collectCoins);
       checkGravity();
       spawnLedges(); 
       camera.position.x = mario.position.x;
