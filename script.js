@@ -115,7 +115,6 @@ function Game() {
     JUMP = 20
     // Load Images
     bgImg = loadImage("https://cdn.glitch.com/075b311a-0371-463a-a6ba-c4f6c09e32cb%2Fbg.png?v=1595800295790");
-    ledgeImg = loadImage("https://cdn.glitch.com/075b311a-0371-463a-a6ba-c4f6c09e32cb%2Fledge.png?v=1595738720120");
     longledgeImg = loadImage("https://cdn.glitch.com/075b311a-0371-463a-a6ba-c4f6c09e32cb%2Flongledge.png?v=1595801236364");
 
     // Create Mario
@@ -135,7 +134,7 @@ function Game() {
     );
 
     // Create Mario
-    platform = createSprite(-300, 570);
+    platform = createSprite(-500, 570);
     platform.addAnimation("normal","https://cdn.glitch.com/075b311a-0371-463a-a6ba-c4f6c09e32cb%2Fplatform.png?v=1595813439873");
 
     // Create Ledges Group
@@ -193,7 +192,7 @@ function Game() {
         mario.velocity.y = 0;
         mario.changeAnimation("normal");
       } else {
-        mario.velocity.y = 0   ;
+        mario.velocity.y = 2   ;
       }
     }
   }
@@ -217,8 +216,10 @@ if(this.sceneArgs==="sound"){
     if (frameCount % 100 === 0 && mario.position.x > MariolastX) {
       // if Mario stuck at the ledge side, don't create new ledge
       let longledge = createSprite(mario.position.x + longledgeImg.width, random(520, 610));
-      longledge.addImage(longledgeImg);
-      ledges.add(longledge);
+      if(!longledge.collide(ledges)){
+        longledge.addImage(longledgeImg);
+        ledges.add(longledge);
+      }
       console.log(ledges)
     }
     //get rid of passed ledges
