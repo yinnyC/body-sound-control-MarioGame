@@ -7,7 +7,7 @@
 
 function Game() {
   let MariolastX,GRAVITY,JUMP;
-  let platform, ledges, mario, ledgeImg, longledgeImg, bgImg, gameIsOver;
+  let platform, ledges, mario, ledgeImg, longledgeImg, bgImg, gameIsOver,coins;
   this.enter = function() {
     MariolastX = 0;
     gameIsOver = false;
@@ -39,6 +39,7 @@ function Game() {
 
     // Create Ledges Group
     ledges = new Group();
+    coins = new Group();
 
     // Mario will move forward at the speed of 4
     mario.velocity.x = 4;
