@@ -50,14 +50,17 @@ function Game() {
   this.draw = function() {
     background(210, 90, 100);
     if (!gameIsOver) {
+      
       checkAlive();
+      mario.overlap(coins, collectCoins);
       marioMove();
-      checkCollision();
+      checkGravity();
       spawnLedges(); 
       camera.position.x = mario.position.x;
       camera.off();
       image(bgImg, -mario.position.x % 1300, 200);
       text(mario.position.x,width/2,height/2);
+      displayInfo()
       camera.on(); // scrolling and zooming for scenes extending beyond the canvas
       drawSprites(); 
       logLastMarioX();
@@ -66,14 +69,20 @@ function Game() {
       resetGame();
     }    
   };
-
+  function displayInfo(){
+    text("score: "+score,width-70,30)
+  }
+  function collectCoins(mario,collectedCoin){
+    score +=1;
+    collectedCoin.remove();
+  }
   function checkAlive() {
     // Check if Mario is out of window
     if (mario.position.y > height + 50) {
       gameIsOver = true;
     }
   }
-  function checkCollision() {
+  function checkGravity() {
     // If Mario is on the platform or ledges, y value stays the same
     mario.velocity.y += GRAVITY;
     if (mario.collide(platform) || mario.collide(ledges)) {
@@ -106,12 +115,14 @@ if(this.sceneArgs==="sound"){
       // if Mario stuck at the ledge side, don't create new ledge
       let longledge = createSprite(mario.position.x +width-120, random(520, 610));
       for(let i=0;i<3;i++){
-        let coin = createSprite(longledge.position.x+150+i*20,longledge.position.y-200-+i*20);
+        let coin = createSprite(longledge.position.x+170+i*20,longledge.position.y-200-i*20);
         coin.addAnimation("normal","https://cdn.glitch.com/075b311a-0371-463a-a6ba-c4f6c09e32cb%2Fcoins_01.png?v=1595864834355","https://cdn.glitch.com/075b311a-0371-463a-a6ba-c4f6c09e32cb%2Fcoins_02.png?v=1595864834664","https://cdn.glitch.com/075b311a-0371-463a-a6ba-c4f6c09e32cb%2Fcoins_03.png?v=1595864834265","https://cdn.glitch.com/075b311a-0371-463a-a6ba-c4f6c09e32cb%2Fcoins_04.png?v=1595864834678");
+        coins.add(coin)
       }
-      for(let i=0;i<3;i++){
-        let coin = createSprite(longledge.position.x+210+i*20,longledge.position.y-140-+i*20);
+      for(let i=0;i<4;i++){
+        let coin = createSprite(longledge.position.x+230+i*20,longledge.position.y-260+i*20);
         coin.addAnimation("normal","https://cdn.glitch.com/075b311a-0371-463a-a6ba-c4f6c09e32cb%2Fcoins_01.png?v=1595864834355","https://cdn.glitch.com/075b311a-0371-463a-a6ba-c4f6c09e32cb%2Fcoins_02.png?v=1595864834664","https://cdn.glitch.com/075b311a-0371-463a-a6ba-c4f6c09e32cb%2Fcoins_03.png?v=1595864834265","https://cdn.glitch.com/075b311a-0371-463a-a6ba-c4f6c09e32cb%2Fcoins_04.png?v=1595864834678");
+        coins.add(coin)
       }
       
       
