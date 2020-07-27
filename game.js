@@ -34,7 +34,7 @@ function Game() {
     );
 
     // Create Mario
-    platform = createSprite(230, 570);
+    platform = createSprite(260, 570);
     platform.addAnimation("normal","https://cdn.glitch.com/075b311a-0371-463a-a6ba-c4f6c09e32cb%2Fstartledge.png?v=1595801238081");
 
     // Create Ledges Group
@@ -43,7 +43,6 @@ function Game() {
     // Mario will move forward at the speed of 4
     mario.velocity.x = 4;
     camera.position.y = mario.position.y;
-    updateSprites(false);
   };
 
   this.draw = function() {
