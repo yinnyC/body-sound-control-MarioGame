@@ -121,11 +121,9 @@ if(this.sceneArgs==="sound"){
       for(let i=0;i<3;i++){
         let coin = createSprite(longledge.position.x-25+i*35,longledge.position.y-100);
         coin.addAnimation("normal","https://cdn.glitch.com/075b311a-0371-463a-a6ba-c4f6c09e32cb%2Fcoins_01.png?v=1595864834355","https://cdn.glitch.com/075b311a-0371-463a-a6ba-c4f6c09e32cb%2Fcoins_02.png?v=1595864834664","https://cdn.glitch.com/075b311a-0371-463a-a6ba-c4f6c09e32cb%2Fcoins_03.png?v=1595864834265","https://cdn.glitch.com/075b311a-0371-463a-a6ba-c4f6c09e32cb%2Fcoins_04.png?v=1595864834678");
-        
         coins.add(coin)
         spriteToBeKilled.add(coin)
-      }
-      
+      }    
       // console.log(ledges)
     }
     //get rid of passed ledges
@@ -137,6 +135,7 @@ if(this.sceneArgs==="sound"){
   }
     function resetGame() { 
     camera.position.x = width/2 
+    score = 0;
     updateSprites(false);
     console.log(ledges.size())
     ledges.removeSprites()
@@ -146,7 +145,6 @@ if(this.sceneArgs==="sound"){
     console.log(coins.size())
     for (let i = 0; i < spriteToBeKilled.length; i++) {
       spriteToBeKilled[i].remove()
-    score = 0;
     }
   }
   function logLastMarioX() {
