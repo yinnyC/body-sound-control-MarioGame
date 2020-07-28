@@ -254,6 +254,6 @@ if(this.sceneArgs==="sound"){
     console.log(results[0]);
     label = results[0].label;
     // Classifiy again!
-    setTimeout(classifyVideo, 1000);
+    setTimeout(classifyVideo, 1200);
   }
 }
