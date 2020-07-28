@@ -21,8 +21,7 @@ function Game() {
   /****Set up teachable machine stuff****/
   let classifier; // Classifier Variable
   // Model URL
-  let imageModelURL =
-    "https://teachablemachine.withgoogle.com/models/GEQao0cv0/";
+  let imageModelURL ="https://teachablemachine.withgoogle.com/models/GEQao0cv0/";
   // Video
   let video;
   let flippedVideo;
@@ -82,7 +81,7 @@ function Game() {
 
     video = createCapture(VIDEO);
     video.size(120, 90);
-
+    
     flippedVideo = ml5.flipImage(video);
     // Start classifying
     classifyVideo();
@@ -250,7 +249,7 @@ if(this.sceneArgs==="sound"){
       return;
     }
     // The results are in an array ordered by confidence.
-    // console.log(results[0]);
+    console.log(results[0]);
     label = results[0].label;
     // Classifiy again!
     classifyVideo();
