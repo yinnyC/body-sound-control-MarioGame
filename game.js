@@ -8,7 +8,21 @@
 function Game() {
   let MariolastX,GRAVITY,JUMP;
   let platform, ledges, mario, ledgeImg, longledgeImg, bgImg, gameIsOver,coins,score,spriteToBeKilled;
+  /****Set up teachable machine stuff****/
+   // Classifier Variable
+  let classifier;
+  // Model URL
+  let imageModelURL = 'https://teachablemachine.withgoogle.com/models/GEQao0cv0/';
+  // Video
+  let video;
+  let flippedVideo;
+  // To store the classification
+  let label = "";
+  this.preload= function() {
+    classifier = ml5.imageClassifier(imageModelURL + 'model.json');
+  }
   this.enter = function() {
+    
     score = 0;
     MariolastX = 0;
     gameIsOver = false;
