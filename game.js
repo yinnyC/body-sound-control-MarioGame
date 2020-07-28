@@ -126,10 +126,15 @@ if(this.sceneArgs==="sound"){
       }    
       // console.log(ledges)
     }
-    //get rid of passed ledges
+    //get rid of passed ledges and coins
     for (let i = 0; i < ledges.length; i++) {
-      if (ledges[i].position.x < mario.position.x - width / 2) {
+      if (ledges[i].position.x < mario.position.x - width / 2-10) {
         ledges[i].remove();
+      }
+    }
+    for (let i = 0; i < coins.length; i++) {
+      if (coins[i].position.x < mario.position.x - width / 2-10) {
+        coins[i].remove();
       }
     }
   }
