@@ -76,7 +76,7 @@ function Game() {
     spriteToBeKilled = new Group();
 
     // Mario will move forward at the speed of 4
-    mario.velocity.x = 2;
+    mario.velocity.x = 1;
     camera.position.y = mario.position.y;
     useQuadTree(false);
 
@@ -150,6 +150,7 @@ if(this.sceneArgs==="sound"){
     if (choice=== "sound") {
       
     } else if (choice === "body"&& label==="jump"&& mario.position.y>100) {
+      mario.velocity.x = 4;
       JUMP = 2
       mario.changeAnimation("move");
       mario.animation.rewind();
