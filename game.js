@@ -61,7 +61,11 @@ function Game() {
     useQuadTree(false);
     
     video = createCapture(VIDEO);
-    video.size(160, 120);
+    video.size(120, 90);
+
+    flippedVideo = ml5.flipImage(video);
+    // Start classifying
+    //classifyVideo();
   };
 
   this.draw = function() {
@@ -86,6 +90,7 @@ function Game() {
   };
   function displayInfo(){
     text("score: "+score,width-70,30)
+    
   }
   function collectCoins(mario,collectedCoin){
     console.log('coin collected')
@@ -177,5 +182,6 @@ if(this.sceneArgs==="sound"){
     // Record last Mario,to check if Mario stuck at the ledge side
     MariolastX = mario.position.x;
   }
+  
 
 }
