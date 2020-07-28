@@ -126,7 +126,11 @@ if(this.sceneArgs==="sound"){
         coins.add(coin)
         spriteToBeKilled.add(coin)
       } 
-      // console.log(ledges)
+      for(let i=0;i<4;i++){
+        let coin = createSprite(longledge.position.x+230+i*20,longledge.position.y-260+i*20);
+        coin.addAnimation("normal","https://cdn.glitch.com/075b311a-0371-463a-a6ba-c4f6c09e32cb%2Fcoins_01.png?v=1595864834355","https://cdn.glitch.com/075b311a-0371-463a-a6ba-c4f6c09e32cb%2Fcoins_02.png?v=1595864834664","https://cdn.glitch.com/075b311a-0371-463a-a6ba-c4f6c09e32cb%2Fcoins_03.png?v=1595864834265","https://cdn.glitch.com/075b311a-0371-463a-a6ba-c4f6c09e32cb%2Fcoins_04.png?v=1595864834678");
+        coins.add(coin)
+      }
     }
     //get rid of passed ledges and coins
     for (let i = 0; i < ledges.length; i++) {
