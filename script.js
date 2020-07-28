@@ -80,7 +80,6 @@ function Intro() {
     image(this.sceneManager.bImage, bgX, 255);
     image(this.sceneManager.gImage, bgX, 540);
     image(this.sceneManager.title, 70, 100, 350, 200);
-    text(choice,250,300)
     if (Math.floor(frameCount / 30) % 2 == 0) {
       // A blinking Info
       text("Select mode to start game", width / 2 - 70, height - 20);

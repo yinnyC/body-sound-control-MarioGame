@@ -81,6 +81,7 @@ function Game() {
 
     video = createCapture(VIDEO);
     video.size(120, 90);
+    video.hide()
     
     flippedVideo = ml5.flipImage(video);
     // Start classifying
@@ -97,6 +98,7 @@ function Game() {
       spawnLedges();
       camera.position.x = mario.position.x;
       camera.off();
+      image(flippedVideo, 0, 0);
       image(bgImg, -mario.position.x % 1024, 200);
       text("Choice: " + choice, width - 70, 70);
       displayInfo();
