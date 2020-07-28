@@ -13,7 +13,7 @@ function Game() {
     MariolastX = 0;
     gameIsOver = false;
     GRAVITY = 1;
-    JUMP = 20
+    JUMP = 13
     // Load Images
     bgImg = loadImage("https://cdn.glitch.com/075b311a-0371-463a-a6ba-c4f6c09e32cb%2Fbg.png?v=1595800295790");
     longledgeImg = loadImage("https://cdn.glitch.com/075b311a-0371-463a-a6ba-c4f6c09e32cb%2Flongledge.png?v=1595801236364");
@@ -108,6 +108,7 @@ if(this.sceneArgs==="sound"){
     if (keyWentDown(" ")) {
       mario.changeAnimation("move");
       mario.animation.rewind();
+      mario.position.y -= JUMP
       mario.velocity.y = -JUMP;
     }
   }
