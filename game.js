@@ -237,6 +237,9 @@ if(this.sceneArgs==="sound"){
     // Record last Mario,to check if Mario stuck at the ledge side
     MariolastX = mario.position.x;
   }
+  
+  
+  /**/
   function classifyVideo() {
     flippedVideo = ml5.flipImage(video);
     classifier.classify(flippedVideo, gotResult);
