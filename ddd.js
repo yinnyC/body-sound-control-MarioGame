@@ -1,7 +1,19 @@
 
- 
+  // Classifier Variable
+  let classifier;
+  // Model URL
+  let imageModelURL = 'https://teachablemachine.withgoogle.com/models/GEQao0cv0/';
+  // Video
+  let video;
+  let flippedVideo;
+  // To store the classification
+  let label = "";
 
   // Load the model first
+  function preload() {
+    classifier = ml5.imageClassifier(imageModelURL + 'model.json');
+  }
+
   function setup() {
     createCanvas(320, 260);
     // Create the video
@@ -47,3 +59,4 @@
     // Classifiy again!
     classifyVideo();
   }
+</script>

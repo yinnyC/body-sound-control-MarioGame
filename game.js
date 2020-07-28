@@ -8,9 +8,9 @@
 function Game() {
   let MariolastX,GRAVITY,JUMP;
   let platform, ledges, mario, ledgeImg, longledgeImg, bgImg, gameIsOver,coins,score,spriteToBeKilled;
-  /****Set up teachable machine stuff****/
-   // Classifier Variable
-  let classifier;
+
+    /****Set up teachable machine stuff****/
+  let classifier;// Classifier Variable
   // Model URL
   let imageModelURL = 'https://teachablemachine.withgoogle.com/models/GEQao0cv0/';
   // Video
@@ -18,10 +18,9 @@ function Game() {
   let flippedVideo;
   // To store the classification
   let label = "";
-  this.preload= function() {
-    classifier = ml5.imageClassifier(imageModelURL + 'model.json');
-  }
+
   this.enter = function() {
+    classifier = ml5.imageClassifier(imageModelURL + 'model.json'); 
     score = 0;
     MariolastX = 0;
     gameIsOver = false;
@@ -62,12 +61,7 @@ function Game() {
     useQuadTree(false);
     
     video = createCapture(VIDEO);
-    video.size(320, 240);
-    video.hide();
-
-    flippedVideo = ml5.flipImage(video);
-    // Start classifying
-    classifyVideo();
+    video.size(160, 120);
   };
 
   this.draw = function() {
@@ -183,26 +177,5 @@ if(this.sceneArgs==="sound"){
     // Record last Mario,to check if Mario stuck at the ledge side
     MariolastX = mario.position.x;
   }
-   function classifyVideo() {
-    flippedVideo = ml5.flipImage(video)
-    classifier.classify(flippedVideo, gotResult);
-    flippedVideo.remove();
-
-  }
-
-  // When we get a result
-  function gotResult(error, results) {
-    // If there is an error
-    if (error) {
-      console.error(error);
-      return;
-    }
-    // The results are in an array ordered by confidence.
-    // console.log(results[0]);
-    label = results[0].label;
-    // Classifiy again!
-    classifyVideo();
-  }
-
 
 }
