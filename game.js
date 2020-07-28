@@ -17,7 +17,7 @@ function Game() {
     coins,
     score,
     spriteToBeKilled;
-
+   let choice;
   /****Set up teachable machine stuff****/
   let classifier; // Classifier Variable
   // Model URL
@@ -28,14 +28,15 @@ function Game() {
   let flippedVideo;
   // To store the classification
   let label = "";
-
+  
   this.enter = function() {
     classifier = ml5.imageClassifier(imageModelURL + "model.json");
+    choice = this.sceneArgs;
     score = 0;
     MariolastX = 0;
     gameIsOver = false;
     GRAVITY = 1;
-    JUMP = 13;
+    JUMP = 10;
     // Load Images
     bgImg = loadImage(
       "https://cdn.glitch.com/075b311a-0371-463a-a6ba-c4f6c09e32cb%2Fbg.png?v=1595800295790"
@@ -75,7 +76,7 @@ function Game() {
     spriteToBeKilled = new Group();
 
     // Mario will move forward at the speed of 4
-    mario.velocity.x = 4;
+    mario.velocity.x = 2;
     camera.position.y = mario.position.y;
     useQuadTree(false);
 
@@ -98,6 +99,7 @@ function Game() {
       camera.position.x = mario.position.x;
       camera.off();
       image(bgImg, -mario.position.x % 1024, 200);
+      text("Choice: " + choice, width - 70, 70);
       displayInfo();
       camera.on(); // scrolling and zooming for scenes extending beyond the canvas
       drawSprites();
@@ -110,7 +112,7 @@ function Game() {
   function displayInfo() {
     text("score: " + score, width - 70, 30);
     text("Label: " + label, width - 70, 50);
-    text("Choice: " + this.sceneArgs, width - 70, 70);
+    
   }
   function collectCoins(mario, collectedCoin) {
     console.log("coin collected");
@@ -145,9 +147,9 @@ if(this.sceneArgs==="sound"){
 */
   function marioMove() {
     // While receibe user input, Mario jumps
-    if (this.sceneArgs === "sound") {
+    if (choice=== "sound") {
       
-    } else if (this.sceneArgs === "body"&& label==="jump" && mario.velocity.y>100) {
+    } else if (choice === "body"&& label==="jump"&& mario.position.y>100) {
       mario.changeAnimation("move");
       mario.animation.rewind();
       mario.position.y -= JUMP;
