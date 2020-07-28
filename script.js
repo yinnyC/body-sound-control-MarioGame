@@ -88,9 +88,7 @@ function Intro() {
   this.moveBackground = function() {
     // Reset bgX when it runs out
     bgX -= 2;
-    if (bgX <= width - foregroundImg.width) {
-      bgX = 0;
-    }
+    bgX %=1024
   };
 }
 

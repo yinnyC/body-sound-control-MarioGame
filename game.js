@@ -1,6 +1,6 @@
 // Name any p5.js functions we use in `global` so Glitch can recognize them.
 /* global
- *    removeSprites,removeSprite,updateSprites,camera,Group,keyWentDown,drawSprites,createSprite,Clickable,drawIntroScreen,SceneManager,loadImage,ESCAPE,textSize,image,VIDEO,createCapture,ml5,HSB, background, color, collideRectRect, colorMode, createCanvas, fill, frameRate, keyCode, height,
+ *    useQuadTree,removeSprites,removeSprite,updateSprites,camera,Group,keyWentDown,drawSprites,createSprite,Clickable,drawIntroScreen,SceneManager,loadImage,ESCAPE,textSize,image,VIDEO,createCapture,ml5,HSB, background, color, collideRectRect, colorMode, createCanvas, fill, frameRate, keyCode, height,
  *    loop, noFill, noLoop, noStroke, random, rect, round, stroke, sqrt, text, width
  *    frameCount,UP_ARROW, DOWN_ARROW, LEFT_ARROW, RIGHT_ARROW,Gameover
  */
@@ -46,6 +46,7 @@ function Game() {
     // Mario will move forward at the speed of 4
     mario.velocity.x = 4;
     camera.position.y = mario.position.y;
+    useQuadTree(false);
   };
 
   this.draw = function() {
@@ -58,7 +59,7 @@ function Game() {
       spawnLedges(); 
       camera.position.x = mario.position.x;
       camera.off();
-      image(bgImg, -mario.position.x % 1300, 200);
+      image(bgImg, -mario.position.x % 1024, 200);
       displayInfo()
       camera.on(); // scrolling and zooming for scenes extending beyond the canvas
       drawSprites(); 

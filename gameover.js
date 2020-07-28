@@ -27,9 +27,7 @@ function Gameover() {
   this.moveBackground = function() {
     // Reset bgX when it runs out
     bgX -= 2;
-    if (bgX <= width - this.sceneManager.fImage.width){
-      bgX = 0;
-    }
+    bgX %=1024
   };
   
 }
