@@ -22,7 +22,6 @@ function Game() {
     classifier = ml5.imageClassifier(imageModelURL + 'model.json');
   }
   this.enter = function() {
-    
     score = 0;
     MariolastX = 0;
     gameIsOver = false;
@@ -61,6 +60,14 @@ function Game() {
     mario.velocity.x = 4;
     camera.position.y = mario.position.y;
     useQuadTree(false);
+    
+    video = createCapture(VIDEO);
+    video.size(320, 240);
+    video.hide();
+
+    flippedVideo = ml5.flipImage(video);
+    // Start classifying
+    classifyVideo();
   };
 
   this.draw = function() {
@@ -176,4 +183,26 @@ if(this.sceneArgs==="sound"){
     // Record last Mario,to check if Mario stuck at the ledge side
     MariolastX = mario.position.x;
   }
+   function classifyVideo() {
+    flippedVideo = ml5.flipImage(video)
+    classifier.classify(flippedVideo, gotResult);
+    flippedVideo.remove();
+
+  }
+
+  // When we get a result
+  function gotResult(error, results) {
+    // If there is an error
+    if (error) {
+      console.error(error);
+      return;
+    }
+    // The results are in an array ordered by confidence.
+    // console.log(results[0]);
+    label = results[0].label;
+    // Classifiy again!
+    classifyVideo();
+  }
+
+
 }
