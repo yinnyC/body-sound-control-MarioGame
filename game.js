@@ -149,7 +149,7 @@ if(this.sceneArgs==="sound"){
     if (choice=== "sound") {
       
     } else if (choice === "body"&& label==="jump"&& mario.position.y>100) {
-      mario.velocity.x = 8;
+      mario.velocity.x = 4;
       JUMP = 2
       mario.changeAnimation("move");
       mario.animation.rewind();
@@ -252,6 +252,6 @@ if(this.sceneArgs==="sound"){
     console.log(results[0]);
     label = results[0].label;
     // Classifiy again!
-    classifyVideo();
+    setTimeout(classifyVideo, 1000);
   }
 }
