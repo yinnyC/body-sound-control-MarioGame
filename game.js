@@ -65,7 +65,7 @@ function Game() {
 
     flippedVideo = ml5.flipImage(video);
     // Start classifying
-    //classifyVideo();
+    classifyVideo();
   };
 
   this.draw = function() {
@@ -90,6 +90,7 @@ function Game() {
   };
   function displayInfo(){
     text("score: "+score,width-70,30)
+    text("Label: "+label,width-70,50)
     
   }
   function collectCoins(mario,collectedCoin){
@@ -125,7 +126,7 @@ if(this.sceneArgs==="sound"){
 */
   function marioMove() {
     // While receibe user input, Mario jumps
-    if (keyWentDown(" ")) {
+    if (keyWentDown(" ")||label==="jump") {
       mario.changeAnimation("move");
       mario.animation.rewind();
       mario.position.y -= JUMP
@@ -182,6 +183,25 @@ if(this.sceneArgs==="sound"){
     // Record last Mario,to check if Mario stuck at the ledge side
     MariolastX = mario.position.x;
   }
-  
+  function classifyVideo() {
+    flippedVideo = ml5.flipImage(video)
+    classifier.classify(flippedVideo, gotResult);
+    flippedVideo.remove();
+
+  }
+
+  // When we get a result
+  function gotResult(error, results) {
+    // If there is an error
+    if (error) {
+      console.error(error);
+      return;
+    }
+    // The results are in an array ordered by confidence.
+    // console.log(results[0]);
+    label = results[0].label;
+    // Classifiy again!
+    classifyVideo();
+  }
 
 }
