@@ -6,13 +6,23 @@
  */
 
 function Game() {
-  let MariolastX,GRAVITY,JUMP;
-  let platform, ledges, mario, ledgeImg, longledgeImg, bgImg, gameIsOver,coins,score,spriteToBeKilled;
+  let MariolastX, GRAVITY, JUMP;
+  let platform,
+    ledges,
+    mario,
+    ledgeImg,
+    longledgeImg,
+    bgImg,
+    gameIsOver,
+    coins,
+    score,
+    spriteToBeKilled;
 
-    /****Set up teachable machine stuff****/
-  let classifier;// Classifier Variable
+  /****Set up teachable machine stuff****/
+  let classifier; // Classifier Variable
   // Model URL
-  let imageModelURL = 'https://teachablemachine.withgoogle.com/models/GEQao0cv0/';
+  let imageModelURL =
+    "https://teachablemachine.withgoogle.com/models/GEQao0cv0/";
   // Video
   let video;
   let flippedVideo;
@@ -20,26 +30,32 @@ function Game() {
   let label = "";
 
   this.enter = function() {
-    classifier = ml5.imageClassifier(imageModelURL + 'model.json'); 
+    classifier = ml5.imageClassifier(imageModelURL + "model.json");
     score = 0;
     MariolastX = 0;
     gameIsOver = false;
     GRAVITY = 1;
-    JUMP = 13
+    JUMP = 13;
     // Load Images
-    bgImg = loadImage("https://cdn.glitch.com/075b311a-0371-463a-a6ba-c4f6c09e32cb%2Fbg.png?v=1595800295790");
-    longledgeImg = loadImage("https://cdn.glitch.com/075b311a-0371-463a-a6ba-c4f6c09e32cb%2Flongledge.png?v=1595801236364");
-    
+    bgImg = loadImage(
+      "https://cdn.glitch.com/075b311a-0371-463a-a6ba-c4f6c09e32cb%2Fbg.png?v=1595800295790"
+    );
+    longledgeImg = loadImage(
+      "https://cdn.glitch.com/075b311a-0371-463a-a6ba-c4f6c09e32cb%2Flongledge.png?v=1595801236364"
+    );
+
     // Create Mario
     mario = createSprite(width / 2 - 70, 300);
     mario.scale = 2.2;
-    mario.addAnimation("normal",
+    mario.addAnimation(
+      "normal",
       "https://cdn.glitch.com/075b311a-0371-463a-a6ba-c4f6c09e32cb%2FRunning-mario_01.png?v=1595741137506",
       "https://cdn.glitch.com/075b311a-0371-463a-a6ba-c4f6c09e32cb%2FRunning-mario_02.png?v=1595799759140",
       "https://cdn.glitch.com/075b311a-0371-463a-a6ba-c4f6c09e32cb%2FRunning-mario_03.png?v=1595799765213",
       "https://cdn.glitch.com/075b311a-0371-463a-a6ba-c4f6c09e32cb%2FStanding-mario.png?v=1595741033822"
     );
-    mario.addAnimation("move",
+    mario.addAnimation(
+      "move",
       "https://cdn.glitch.com/075b311a-0371-463a-a6ba-c4f6c09e32cb%2FStanding-mario.png?v=1595741033822",
       "https://cdn.glitch.com/075b311a-0371-463a-a6ba-c4f6c09e32cb%2FRunning-mario_01.png?v=1595741137506",
       "https://cdn.glitch.com/075b311a-0371-463a-a6ba-c4f6c09e32cb%2FJumping-mario.png?v=1595741095055",
@@ -48,18 +64,21 @@ function Game() {
 
     // Create Mario
     platform = createSprite(260, 570);
-    platform.addAnimation("normal","https://cdn.glitch.com/075b311a-0371-463a-a6ba-c4f6c09e32cb%2Fstartledge.png?v=1595801238081");
+    platform.addAnimation(
+      "normal",
+      "https://cdn.glitch.com/075b311a-0371-463a-a6ba-c4f6c09e32cb%2Fstartledge.png?v=1595801238081"
+    );
 
     // Create Ledges Group
     ledges = new Group();
     coins = new Group();
-    spriteToBeKilled = new Group()
+    spriteToBeKilled = new Group();
 
     // Mario will move forward at the speed of 4
     mario.velocity.x = 4;
     camera.position.y = mario.position.y;
     useQuadTree(false);
-    
+
     video = createCapture(VIDEO);
     video.size(120, 90);
 
@@ -75,29 +94,29 @@ function Game() {
       marioMove();
       mario.overlap(coins, collectCoins);
       checkGravity();
-      spawnLedges(); 
+      spawnLedges();
       camera.position.x = mario.position.x;
       camera.off();
-      image(bgImg,-mario.position.x % 1024, 200);
-      displayInfo()
+      image(bgImg, -mario.position.x % 1024, 200);
+      displayInfo();
       camera.on(); // scrolling and zooming for scenes extending beyond the canvas
-      drawSprites(); 
+      drawSprites();
       logLastMarioX();
     } else {
       this.sceneManager.showScene(Gameover);
       resetGame();
-    }    
+    }
   };
-  function displayInfo(){
-    text("score: "+score,width-70,30)
-    text("Label: "+label,width-70,50)
-    
+  function displayInfo() {
+    text("score: " + score, width - 70, 30);
+    text("Label: " + label, width - 70, 50);
+    text("Choice: " + this.sceneArgs, width - 70, 70);
   }
-  function collectCoins(mario,collectedCoin){
-    console.log('coin collected')
-    score +=1;
-  
-    collectedCoin.remove()
+  function collectCoins(mario, collectedCoin) {
+    console.log("coin collected");
+    score += 1;
+
+    collectedCoin.remove();
   }
   function checkAlive() {
     // Check if Mario is out of window
@@ -126,57 +145,87 @@ if(this.sceneArgs==="sound"){
 */
   function marioMove() {
     // While receibe user input, Mario jumps
-    if (keyWentDown(" ")||label==="jump") {
+    if (this.sceneArgs === "sound") {
+      
+    } else if (this.sceneArgs === "body"&& label==="jump" && mario.velocity.y>100) {
       mario.changeAnimation("move");
       mario.animation.rewind();
-      mario.position.y -= JUMP
+      mario.position.y -= JUMP;
       mario.velocity.y = -JUMP;
+    } else {
+      if (keyWentDown(" ")) {
+      mario.changeAnimation("move");
+      mario.animation.rewind();
+      mario.position.y -= JUMP;
+      mario.velocity.y = -JUMP;
+      }
     }
   }
   function spawnLedges() {
     //spawn ledges and coins
     if (frameCount % 90 === 0 && mario.position.x > MariolastX) {
       // if Mario stuck at the ledge side, don't create new ledge
-      let longledge = createSprite(mario.position.x +width-10,random(520, 630));
+      let longledge = createSprite(
+        mario.position.x + width - 10,
+        random(520, 630)
+      );
       longledge.addImage(longledgeImg);
       ledges.add(longledge);
-      spriteToBeKilled.add(longledge)
-      for(let i=0;i<3;i++){
-        let coin = createSprite(longledge.position.x+170+i*20,longledge.position.y-200-i*20);
-        coin.addAnimation("normal","https://cdn.glitch.com/075b311a-0371-463a-a6ba-c4f6c09e32cb%2Fcoins_01.png?v=1595864834355","https://cdn.glitch.com/075b311a-0371-463a-a6ba-c4f6c09e32cb%2Fcoins_02.png?v=1595864834664","https://cdn.glitch.com/075b311a-0371-463a-a6ba-c4f6c09e32cb%2Fcoins_03.png?v=1595864834265","https://cdn.glitch.com/075b311a-0371-463a-a6ba-c4f6c09e32cb%2Fcoins_04.png?v=1595864834678");
-        coins.add(coin)
-        spriteToBeKilled.add(coin)
-      } 
-      for(let i=0;i<4;i++){
-        let coin = createSprite(longledge.position.x+230+i*20,longledge.position.y-260+i*20);
-        coin.addAnimation("normal","https://cdn.glitch.com/075b311a-0371-463a-a6ba-c4f6c09e32cb%2Fcoins_01.png?v=1595864834355","https://cdn.glitch.com/075b311a-0371-463a-a6ba-c4f6c09e32cb%2Fcoins_02.png?v=1595864834664","https://cdn.glitch.com/075b311a-0371-463a-a6ba-c4f6c09e32cb%2Fcoins_03.png?v=1595864834265","https://cdn.glitch.com/075b311a-0371-463a-a6ba-c4f6c09e32cb%2Fcoins_04.png?v=1595864834678");
-        coins.add(coin)
+      spriteToBeKilled.add(longledge);
+      for (let i = 0; i < 3; i++) {
+        let coin = createSprite(
+          longledge.position.x + 170 + i * 20,
+          longledge.position.y - 200 - i * 20
+        );
+        coin.addAnimation(
+          "normal",
+          "https://cdn.glitch.com/075b311a-0371-463a-a6ba-c4f6c09e32cb%2Fcoins_01.png?v=1595864834355",
+          "https://cdn.glitch.com/075b311a-0371-463a-a6ba-c4f6c09e32cb%2Fcoins_02.png?v=1595864834664",
+          "https://cdn.glitch.com/075b311a-0371-463a-a6ba-c4f6c09e32cb%2Fcoins_03.png?v=1595864834265",
+          "https://cdn.glitch.com/075b311a-0371-463a-a6ba-c4f6c09e32cb%2Fcoins_04.png?v=1595864834678"
+        );
+        coins.add(coin);
+        spriteToBeKilled.add(coin);
+      }
+      for (let i = 0; i < 4; i++) {
+        let coin = createSprite(
+          longledge.position.x + 230 + i * 20,
+          longledge.position.y - 260 + i * 20
+        );
+        coin.addAnimation(
+          "normal",
+          "https://cdn.glitch.com/075b311a-0371-463a-a6ba-c4f6c09e32cb%2Fcoins_01.png?v=1595864834355",
+          "https://cdn.glitch.com/075b311a-0371-463a-a6ba-c4f6c09e32cb%2Fcoins_02.png?v=1595864834664",
+          "https://cdn.glitch.com/075b311a-0371-463a-a6ba-c4f6c09e32cb%2Fcoins_03.png?v=1595864834265",
+          "https://cdn.glitch.com/075b311a-0371-463a-a6ba-c4f6c09e32cb%2Fcoins_04.png?v=1595864834678"
+        );
+        coins.add(coin);
       }
     }
     //get rid of passed ledges and coins
     for (let i = 0; i < ledges.length; i++) {
-      if (ledges[i].position.x < mario.position.x - width / 2-10) {
+      if (ledges[i].position.x < mario.position.x - width / 2 - 10) {
         ledges[i].remove();
       }
     }
     for (let i = 0; i < coins.length; i++) {
-      if (coins[i].position.x < mario.position.x - width / 2-10) {
+      if (coins[i].position.x < mario.position.x - width / 2 - 10) {
         coins[i].remove();
       }
     }
   }
-    function resetGame() { 
-    camera.position.x = width/2 
+  function resetGame() {
+    camera.position.x = width / 2;
     score = 0;
     updateSprites(false);
-    console.log(ledges.size())
-    ledges.removeSprites()
-    console.log(ledges.size())
-    console.log(coins.size())
-    coins.removeSprites()
-    console.log(coins.size())
+    console.log(ledges.size());
+    ledges.removeSprites();
+    console.log(ledges.size());
+    console.log(coins.size());
+    coins.removeSprites();
+    console.log(coins.size());
     for (let i = 0; i < spriteToBeKilled.length; i++) {
-      spriteToBeKilled[i].remove()
+      spriteToBeKilled[i].remove();
     }
   }
   function logLastMarioX() {
@@ -184,10 +233,9 @@ if(this.sceneArgs==="sound"){
     MariolastX = mario.position.x;
   }
   function classifyVideo() {
-    flippedVideo = ml5.flipImage(video)
+    flippedVideo = ml5.flipImage(video);
     classifier.classify(flippedVideo, gotResult);
     flippedVideo.remove();
-
   }
 
   // When we get a result
@@ -203,5 +251,4 @@ if(this.sceneArgs==="sound"){
     // Classifiy again!
     classifyVideo();
   }
-
 }
