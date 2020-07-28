@@ -150,7 +150,7 @@ if(this.sceneArgs==="sound"){
     if (choice=== "sound") {
       
     } else if (choice === "body"&& label==="jump"&& mario.position.y>100) {
-      mario.velocity.x = 4;
+      mario.velocity.x = 8;
       JUMP = 2
       mario.changeAnimation("move");
       mario.animation.rewind();
