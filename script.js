@@ -9,7 +9,8 @@
 let foregroundImg, backgroundImg, groundImg, title;
 let soundMode, bodyMode,howToPlay; // Buttons
 let introSong
-// Variables for Intro
+// Variables for Game
+let classifier,coin1Img,coin2Img,coin3Img,coin4Img,marioJumpImg,marioRun1Img,marioRun2Img,marioRun3Img,marioRun4Img;
 
 function preload() {
   // set the global sound format
@@ -20,7 +21,8 @@ function preload() {
   groundImg = loadImage("https://cdn.glitch.com/075b311a-0371-463a-a6ba-c4f6c09e32cb%2Ftop_ground.png?v=1595568970498");
   title = loadImage("https://cdn.glitch.com/075b311a-0371-463a-a6ba-c4f6c09e32cb%2FSuper.png?v=1595626658046");
   // Load Materials for bodyGame and soundGame scene
-  
+  classifier = ml5.imageClassifier("https://teachablemachine.withgoogle.com/models/GEQao0cv0/" + "model.json");
+  coin1Img 
   
 }
 function setup() {
@@ -32,8 +34,10 @@ function setup() {
   mgr.bImage = backgroundImg;
   mgr.gImage = groundImg;
   mgr.title = title;
+  mgr.classifier = classifier;
   mgr.wire();
   mgr.showScene(Intro);
+  
 }
   
 function Intro() {
