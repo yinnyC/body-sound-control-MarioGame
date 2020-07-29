@@ -26,7 +26,6 @@ function bodyGame() {
     gameIsOver = false;
     GRAVITY = 1;
     JUMP = 15;
-    
     classifier = ml5.imageClassifier(imageModelURL + "model.json");
     // Load Images
     bgImg = loadImage("https://cdn.glitch.com/075b311a-0371-463a-a6ba-c4f6c09e32cb%2Fbg.png?v=1595800295790");
@@ -203,6 +202,8 @@ function bodyGame() {
     video.stop()
     camera.position.x = width / 2;
     score = 0;
+    label = "";
+    lastLabel = "";
     updateSprites(false);
     console.log(ledges.size());
     ledges.removeSprites();
