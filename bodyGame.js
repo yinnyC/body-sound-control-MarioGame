@@ -81,7 +81,7 @@ function bodyGame() {
   this.draw = function() {
     background(210, 90, 100);
     if (!gameIsOver) {
-      checkAlive();
+      checkGameState();
       marioMove();
       mario.overlap(coins, collectCoins);
       checkGravity();
@@ -110,7 +110,7 @@ function bodyGame() {
 
     collectedCoin.remove();
   }
-  function checkAlive() {
+  function checkGameState() {
     // Check if Mario is out of window
     if (mario.position.y > height + 50) {
       gameIsOver = true;
@@ -120,7 +120,7 @@ function bodyGame() {
     // If Mario is on the platform or ledges, y value stays the same
     mario.velocity.y += GRAVITY;
     if (mario.collide(platform) || mario.collide(ledges)) {
-      if (mario.position.x > MariolastX) {
+      if (mario.position.x > MariolastX) {// If Mario stuck at the side of the ledges, let him fall
         mario.velocity.y = 0;
         mario.changeAnimation("normal");
       } else {
@@ -169,13 +169,7 @@ if(this.sceneArgs==="sound"){
           longledge.position.x + 170 + i * 20,
           longledge.position.y - 200 - i * 20
         );
-        coin.addAnimation(
-          "normal",
-          "https://cdn.glitch.com/075b311a-0371-463a-a6ba-c4f6c09e32cb%2Fcoins_01.png?v=1595864834355",
-          "https://cdn.glitch.com/075b311a-0371-463a-a6ba-c4f6c09e32cb%2Fcoins_02.png?v=1595864834664",
-          "https://cdn.glitch.com/075b311a-0371-463a-a6ba-c4f6c09e32cb%2Fcoins_03.png?v=1595864834265",
-          "https://cdn.glitch.com/075b311a-0371-463a-a6ba-c4f6c09e32cb%2Fcoins_04.png?v=1595864834678"
-        );
+        coin.addAnimation("normal","https://cdn.glitch.com/075b311a-0371-463a-a6ba-c4f6c09e32cb%2Fcoins_01.png?v=1595864834355","https://cdn.glitch.com/075b311a-0371-463a-a6ba-c4f6c09e32cb%2Fcoins_02.png?v=1595864834664","https://cdn.glitch.com/075b311a-0371-463a-a6ba-c4f6c09e32cb%2Fcoins_03.png?v=1595864834265","https://cdn.glitch.com/075b311a-0371-463a-a6ba-c4f6c09e32cb%2Fcoins_04.png?v=1595864834678");
         coins.add(coin);
         spriteToBeKilled.add(coin);
       }
@@ -225,8 +219,7 @@ if(this.sceneArgs==="sound"){
     MariolastX = mario.position.x;
   }
   
-  
-  /**/
+  /**************Classifying functions for Teachable Machine*********************/
   function classifyVideo() {
     flippedVideo = ml5.flipImage(video);
     classifier.classify(flippedVideo, gotResult);
