@@ -10,9 +10,33 @@
 function soundGame() {
   let MariolastX, GRAVITY, JUMP;
   let platform,ledges,mario,ledgeImg,longledgeImg,bgImg,gameIsOver,coins,score,spriteToBeKilled;
-  var myRec = new p5.SpeechRec('en-US', parseResult);
-  myRec.continuous = true
-  myRec.intrimResults = true
+  
+//   function parseResult() {
+    
+//     // recognition system will often append words into phrases.
+// 		// so hack here is to only use the last word:
+// 		var mostrecentword = myRec.resultString.split(' ').pop();
+// 		if(mostrecentword.indexOf("jump")!==-1) {
+//       text(myRec.resultString, width/2, height/2-50); 
+//       //Insert Mario Commands here
+     
+//     }
+		
+//     else if(mostrecentword.indexOf("double")!==-1) { 
+      
+//        text(myRec.resultString, width/2, height/2+50); 
+//       //Insert Mario Commands Here
+      
+//     }
+//     else if(mostrecentword.indexOf("triple")!==-1){
+//       text(myRec.resultString, width/2, height/2+100)
+//     }
+//     console.log(mostrecentword);
+//   }
+  
+//   var myRec = new p5.SpeechRec('en-US', parseResult);
+//   myRec.continuous = true
+//   myRec.intrimResults = true
  
 
   this.enter = function() {
@@ -65,11 +89,6 @@ function soundGame() {
     myRec.onResult = showResult;
  		myRec.start();*/
     
-     // Sound commands variables
-  
-//   var myRec = new p5.SpeechRec('en-US', parseResult);
-//  myRec.continuous = true
-//  myRec.intrimResults = true
     
     // Sound commands Setup
     
@@ -99,28 +118,7 @@ function soundGame() {
     }
   };
   
-  function parseResult() {
-    
-    // recognition system will often append words into phrases.
-		// so hack here is to only use the last word:
-		var mostrecentword = myRec.resultString.split(' ').pop();
-		if(mostrecentword.indexOf("jump")!==-1) {
-      text(myRec.resultString, width/2, height/2-50); 
-      //Insert Mario Commands here
-     
-    }
-		
-    else if(mostrecentword.indexOf("double")!==-1) { 
-      
-       text(myRec.resultString, width/2, height/2+50); 
-      //Insert Mario Commands Here
-      
-    }
-    else if(mostrecentword.indexOf("triple")!==-1){
-      text(myRec.resultString, width/2, height/2+100)
-    }
-    console.log(mostrecentword);
-  }
+  
   
   function displayInfo() {
     text("score: " + score, width - 70, 30);
