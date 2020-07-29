@@ -4,41 +4,23 @@
  *    loop, noFill, noLoop, noStroke, random, rect, round, stroke, sqrt, text, width
  *    frameCount,UP_ARROW, DOWN_ARROW, LEFT_ARROW, RIGHT_ARROW,Gameover
  */
-// 		textSize(32);
-// 		textAlign(CENTER);
-// 		text("Command Mario", width/2, height/2);
+ 		
 // 		myRec.onResult = showResult;
 // 		myRec.start();
+
 function Game() {
   let MariolastX, GRAVITY, JUMP;
   let platform,ledges,mario,ledgeImg,longledgeImg,bgImg,gameIsOver,coins,score,spriteToBeKilled;
-  let choice;
-  
-  /****Set up teachable machine stuff****/
-  let classifier; // Classifier Variable
-  // Model URL
-  let imageModelURL ="https://teachablemachine.withgoogle.com/models/GEQao0cv0/";
-  // Video
-  let video;
-  let flippedVideo;
-  // To store the classification
-  let label = "";
   
   this.enter = function() {
-    classifier = ml5.imageClassifier(imageModelURL + "model.json");
-    choice = this.sceneArgs;
     score = 0;
     MariolastX = 0;
     gameIsOver = false;
     GRAVITY = 1;
     JUMP = 10;
     // Load Images
-    bgImg = loadImage(
-      "https://cdn.glitch.com/075b311a-0371-463a-a6ba-c4f6c09e32cb%2Fbg.png?v=1595800295790"
-    );
-    longledgeImg = loadImage(
-      "https://cdn.glitch.com/075b311a-0371-463a-a6ba-c4f6c09e32cb%2Flongledge.png?v=1595801236364"
-    );
+    bgImg = loadImage("https://cdn.glitch.com/075b311a-0371-463a-a6ba-c4f6c09e32cb%2Fbg.png?v=1595800295790");
+    longledgeImg = loadImage("https://cdn.glitch.com/075b311a-0371-463a-a6ba-c4f6c09e32cb%2Flongledge.png?v=1595801236364");
 
     // Create Mario
     mario = createSprite(width / 2 - 70, 300);
@@ -74,14 +56,6 @@ function Game() {
     mario.velocity.x = 1;
     camera.position.y = mario.position.y;
     useQuadTree(false);
-
-    video = createCapture(VIDEO);
-    video.size(120, 90);
-    video.hide()
-    
-    flippedVideo = ml5.flipImage(video);
-    // Start classifying
-    classifyVideo();
   };
 
   this.draw = function() {
@@ -94,9 +68,7 @@ function Game() {
       spawnLedges();
       camera.position.x = mario.position.x;
       camera.off();
-      image(flippedVideo, 0, 0);
       image(bgImg, -mario.position.x % 1024, 200);
-      text("Choice: " + choice, width - 70, 70);
       displayInfo();
       camera.on(); // scrolling and zooming for scenes extending beyond the canvas
       drawSprites();
@@ -108,7 +80,10 @@ function Game() {
   };
   function displayInfo() {
     text("score: " + score, width - 70, 30);
-    text("Label: " + label, width - 70, 50);
+    
+    textSize(32);
+ 		textAlign(CENTER);
+		text("Command Mario", width/2, height/2);
     
   }
   function collectCoins(mario, collectedCoin) {
@@ -135,25 +110,9 @@ function Game() {
       }
     }
   }
-  /*Implementation of sound or body mode in function marioMove()
-if(this.sceneArgs==="sound"){
-
-}else{
-
-}
-*/
   function marioMove() {
     // While receibe user input, Mario jumps
     if (choice=== "sound") {
-      
-    } else if (choice === "body"&& label==="jump"&& mario.position.y>100) {
-      mario.velocity.x = 4;
-      JUMP = 2
-      mario.changeAnimation("move");
-      mario.animation.rewind();
-      mario.position.y -= JUMP;
-      mario.velocity.y = -JUMP;
-    } else {
       if (keyWentDown(" ")) {
       mario.changeAnimation("move");
       mario.animation.rewind();
@@ -234,25 +193,5 @@ if(this.sceneArgs==="sound"){
     MariolastX = mario.position.x;
   }
   
-  
-  /**/
-  function classifyVideo() {
-    flippedVideo = ml5.flipImage(video);
-    classifier.classify(flippedVideo, gotResult);
-    flippedVideo.remove();
-  }
-
-  // When we get a result
-  function gotResult(error, results) {
-    // If there is an error
-    if (error) {
-      console.error(error);
-      return;
-    }
-    // The results are in an array ordered by confidence.
-    console.log(results[0]);
-    label = results[0].label;
-    // Classifiy again!
-    setTimeout(classifyVideo, 1200);
-  }
 }
+
