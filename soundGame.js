@@ -57,9 +57,9 @@ function soundGame() {
     camera.position.y = mario.position.y;
     useQuadTree(false);
     
-    //
+    /*
     myRec.onResult = showResult;
- 		myRec.start();
+ 		myRec.start();*/
   };
 
   this.draw = function() {
