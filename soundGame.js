@@ -11,11 +11,7 @@ function soundGame() {
   let MariolastX, GRAVITY, JUMP;
   let platform,ledges,mario,ledgeImg,longledgeImg,bgImg,gameIsOver,coins,score,spriteToBeKilled;
   
-  //Sound commands variables
-  
-  var myRec = new p5.SpeechRec('en-US', parseResult);
- myRec.continuous = true
- myRec.intrimResults = true
+ 
 var marioJumpText = "Move mario"
   this.enter = function() {
     score = 0;
@@ -67,8 +63,16 @@ var marioJumpText = "Move mario"
     myRec.onResult = showResult;
  		myRec.start();*/
     
-    //Sound commands Setup
-    myRec.start();
+     // Sound commands variables
+  
+//   var myRec = new p5.SpeechRec('en-US', parseResult);
+//  myRec.continuous = true
+//  myRec.intrimResults = true
+    
+    // Sound commands Setup
+    
+    // myRec.start();
+    
   };
 
   this.draw = function() {
@@ -86,11 +90,36 @@ var marioJumpText = "Move mario"
       camera.on(); // scrolling and zooming for scenes extending beyond the canvas
       drawSprites();
       logLastMarioX();
+      // parseResult();
     } else {
       this.sceneManager.showScene(Gameover);
       resetGame();
     }
   };
+  
+  function parseResult() {
+    
+    // recognition system will often append words into phrases.
+		// so hack here is to only use the last word:
+		var mostrecentword = myRec.resultString.split(' ').pop();
+		if(mostrecentword.indexOf("jump")!==-1) {
+      text(myRec.resultString, width/2, height/2-50); 
+      //Insert Mario Commands here
+     
+    }
+		
+    else if(mostrecentword.indexOf("double")!==-1) { 
+      
+       text(myRec.resultString, width/2, height/2+50); 
+      //Insert Mario Commands Here
+      
+    }
+    else if(mostrecentword.indexOf("triple")!==-1){
+      text(myRec.resultString, width/2, height/2+100)
+    }
+    console.log(mostrecentword);
+  }
+  
   function displayInfo() {
     text("score: " + score, width - 70, 30);
     push();
