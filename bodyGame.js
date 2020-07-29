@@ -138,7 +138,7 @@ if(this.sceneArgs==="sound"){
   function marioMove() {
     // While receibe user input, Mario jumps
    if (label==="jump"&& mario.position.y>100) {
-      mario.velocity.x = 4;
+      mario.velocity.x = 3;
       JUMP = 2
       mario.changeAnimation("move");
       mario.animation.rewind();
@@ -155,7 +155,7 @@ if(this.sceneArgs==="sound"){
   }
   function spawnLedges() {
     //spawn ledges and coins
-    if (frameCount % 90 === 0 && mario.position.x > MariolastX) {
+    if (frameCount % 120 === 0 && mario.position.x > MariolastX) {
       // if Mario stuck at the ledge side, don't create new ledge
       let longledge = createSprite(
         mario.position.x + width - 10,
