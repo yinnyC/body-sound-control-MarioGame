@@ -19,7 +19,7 @@ function bodyGame() {
   // To store the classification
   let label = "";
   this.setup = function(){
-    classifier = ml5.imageClassifier(imageModelURL + "model.json");
+    
     
     
   }
@@ -28,7 +28,9 @@ function bodyGame() {
     MariolastX = 0;
     gameIsOver = false;
     GRAVITY = 1;
-    JUMP = 10;
+    JUMP = 15;
+    
+    classifier = ml5.imageClassifier(imageModelURL + "model.json");
     // Load Images
     bgImg = loadImage("https://cdn.glitch.com/075b311a-0371-463a-a6ba-c4f6c09e32cb%2Fbg.png?v=1595800295790");
     longledgeImg = loadImage("https://cdn.glitch.com/075b311a-0371-463a-a6ba-c4f6c09e32cb%2Flongledge.png?v=1595801236364");
@@ -232,6 +234,6 @@ function bodyGame() {
     console.log(results[0]);
     label = results[0].label;
     // Classifiy again!
-    setTimeout(classifyVideo, 1200);
+    setTimeout(classifyVideo, 1000);
   }
 }
