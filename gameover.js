@@ -6,12 +6,13 @@
  */
 
 function Gameover() {
-  let bgX,loseImg,winImage,again,choice; 
+  let bgX,loseImg,winImage,again,choice,fireWorkImg; 
   this.enter = function(){
     bgX = 0
     choice = ""
     loseImg = loadImage("https://cdn.glitch.com/075b311a-0371-463a-a6ba-c4f6c09e32cb%2Fover.png?v=1596002455442")
     winImage = loadImage("https://cdn.glitch.com/075b311a-0371-463a-a6ba-c4f6c09e32cb%2FWin.png?v=1596002455545")
+    fireWorkImg = loadImage("https://cdn.glitch.com/075b311a-0371-463a-a6ba-c4f6c09e32cb%2F531854_001e1.gif?v=1596004203476")
     again = new Clickable();
     again.locate(width / 2 - 50, 450);
     again.text = "Play Again";
@@ -28,8 +29,9 @@ function Gameover() {
     background(210, 90, 100);
     this.showBackground();
     this.moveBackground();
-    if(this.sceneArgs>100){
+    if(this.sceneArgs>10){
       image(winImage, 70, 100, 350, 200);
+      image(fireWorkImg,70,100,350,200)
     }else{
       image(loseImg, 70, 100, 350, 200);
     }
