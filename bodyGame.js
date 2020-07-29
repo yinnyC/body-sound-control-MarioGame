@@ -1,6 +1,6 @@
 // Name any p5.js functions we use in `global` so Glitch can recognize them.
 /* global
- *    useQuadTree,removeSprites,removeSprite,updateSprites,camera,Group,keyWentDown,drawSprites,createSprite,Clickable,drawIntroScreen,SceneManager,loadImage,ESCAPE,textSize,image,VIDEO,createCapture,ml5,HSB, background, color, collideRectRect, colorMode, createCanvas, fill, frameRate, keyCode, height,
+ *    textAlign,CENTER,push,pop,useQuadTree,removeSprites,removeSprite,updateSprites,camera,Group,keyWentDown,drawSprites,createSprite,Clickable,drawIntroScreen,SceneManager,loadImage,ESCAPE,textSize,image,VIDEO,createCapture,ml5,HSB, background, color, collideRectRect, colorMode, createCanvas, fill, frameRate, keyCode, height,
  *    loop, noFill, noLoop, noStroke, random, rect, round, stroke, sqrt, text, width
  *    frameCount,UP_ARROW, DOWN_ARROW, LEFT_ARROW, RIGHT_ARROW,Gameover
  */
@@ -88,31 +88,40 @@ function bodyGame() {
       spawnLedges();
       camera.position.x = mario.position.x;
       camera.off();
-      image(flippedVideo, 0, 0);
+      
       image(bgImg, -mario.position.x % 1024, 200);
-      displayInfo();
+      displayInfo();image(flippedVideo, 0, 0);
+      image(flippedVideo, 0, 0);
       camera.on(); // scrolling and zooming for scenes extending beyond the canvas
       drawSprites();
       logLastMarioX();
     } else {
-      this.sceneManager.showScene(Gameover);
+      this.sceneManager.showScene(Gameover,score);
       resetGame();
     }
   };
   function displayInfo() {
     text("score: " + score, width - 70, 30);
-    text("Label: " + label, width - 70, 50);
+    noStroke()
+    push();
+    fill(0)
+    rect(0,0,120,110)
+    fill(255)
+    textAlign(CENTER)
+    text(label,60,103);
+    pop();
     
   }
   function collectCoins(mario, collectedCoin) {
     console.log("coin collected");
     score += 1;
-
     collectedCoin.remove();
   }
   function checkGameState() {
-    // Check if Mario is out of window
-    if (mario.position.y > height + 50) {
+    if (mario.position.y > height + 50) {// if Mario is out of window,lose
+      gameIsOver = true;
+    }
+    if(score>=100){ // if Mario scores more than 100, win
       gameIsOver = true;
     }
   }
