@@ -4,7 +4,11 @@
  *    loop, noFill, noLoop, noStroke, random, rect, round, stroke, sqrt, text, width
  *    frameCount,UP_ARROW, DOWN_ARROW, LEFT_ARROW, RIGHT_ARROW,Gameover
  */
-
+// 		textSize(32);
+// 		textAlign(CENTER);
+// 		text("Command Mario", width/2, height/2);
+// 		myRec.onResult = showResult;
+// 		myRec.start();
 function Game() {
   let MariolastX, GRAVITY, JUMP;
   let platform,
