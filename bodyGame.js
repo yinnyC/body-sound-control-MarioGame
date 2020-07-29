@@ -7,30 +7,31 @@
 
 function bodyGame() {
   let MariolastX, GRAVITY, JUMP,gameIsOver,score;
-  let spriteToBeKilled,platform,ledges,mario,ledgeImg,longledgeImg,bgImg,coins;
+  let spriteToBeKilled,platform,ledges,mario,ledgeImg,longledgeImg,bgImg,coins,scoreImg;
   let coinSound,jumpSound;
   
-  /**** Set up teachable machine stuff ****/
+  /****Set up teachable machine stuff****/
   let classifier; // Classifier Variable
   // Model URL
-  let imageModelURL = "https://teachablemachine.withgoogle.com/models/GEQao0cv0/";
-  let video; // Video
+  let imageModelURL ="https://teachablemachine.withgoogle.com/models/GEQao0cv0/";
+  // Video
+  let video;
   let flippedVideo;
   // To store the classification
   let label = "";
   let lastLabel = "";
-  /***************************************/
   this.enter = function() {
     score = 0;
     MariolastX = 0;
     gameIsOver = false;
     GRAVITY = 1;
     JUMP = 15;
-    classifier = ml5.imageClassifier(imageModelURL + "model.json");
     
+    classifier = ml5.imageClassifier(imageModelURL + "model.json");
     // Load Images
     bgImg = loadImage("https://cdn.glitch.com/075b311a-0371-463a-a6ba-c4f6c09e32cb%2Fbg.png?v=1595800295790");
     longledgeImg = loadImage("https://cdn.glitch.com/075b311a-0371-463a-a6ba-c4f6c09e32cb%2Flongledge.png?v=1595801236364");
+    scoreImg = loadImage("https://cdn.glitch.com/075b311a-0371-463a-a6ba-c4f6c09e32cb%2Fcoins_01.png?v=1595864834355")
     
     // Load Sound
     coinSound = loadSound("https://cdn.glitch.com/075b311a-0371-463a-a6ba-c4f6c09e32cb%2FCoin.mp3?v=1596004574113")
@@ -39,12 +40,17 @@ function bodyGame() {
     mario = createSprite(width / 2 - 70, 300);
     mario.scale = 2.2;
     mario.addAnimation("normal","https://cdn.glitch.com/075b311a-0371-463a-a6ba-c4f6c09e32cb%2FRunning-mario_01.png?v=1595741137506","https://cdn.glitch.com/075b311a-0371-463a-a6ba-c4f6c09e32cb%2FRunning-mario_02.png?v=1595799759140","https://cdn.glitch.com/075b311a-0371-463a-a6ba-c4f6c09e32cb%2FRunning-mario_03.png?v=1595799765213","https://cdn.glitch.com/075b311a-0371-463a-a6ba-c4f6c09e32cb%2FStanding-mario.png?v=1595741033822");
-    mario.addAnimation("move","https://cdn.glitch.com/075b311a-0371-463a-a6ba-c4f6c09e32cb%2FStanding-mario.png?v=1595741033822","https://cdn.glitch.com/075b311a-0371-463a-a6ba-c4f6c09e32cb%2FRunning-mario_01.png?v=1595741137506","https://cdn.glitch.com/075b311a-0371-463a-a6ba-c4f6c09e32cb%2FJumping-mario.png?v=1595741095055","https://cdn.glitch.com/075b311a-0371-463a-a6ba-c4f6c09e32cb%2FStanding-mario.png?v=1595741033822");
+    mario.addAnimation("move","https://cdn.glitch.com/075b311a-0371-463a-a6ba-c4f6c09e32cb%2FStanding-mario.png?v=1595741033822","https://cdn.glitch.com/075b311a-0371-463a-a6ba-c4f6c09e32cb%2FRunning-mario_01.png?v=1595741137506",
+      "https://cdn.glitch.com/075b311a-0371-463a-a6ba-c4f6c09e32cb%2FJumping-mario.png?v=1595741095055",
+      "https://cdn.glitch.com/075b311a-0371-463a-a6ba-c4f6c09e32cb%2FStanding-mario.png?v=1595741033822"
+    );
 
     // Create the first Ledge for mario to stand
     platform = createSprite(260, 570);
-    platform.addAnimation("normal","https://cdn.glitch.com/075b311a-0371-463a-a6ba-c4f6c09e32cb%2Fstartledge.png?v=1595801238081");
-    
+    platform.addAnimation(
+      "normal",
+      "https://cdn.glitch.com/075b311a-0371-463a-a6ba-c4f6c09e32cb%2Fstartledge.png?v=1595801238081"
+    );
     // Create Groups for coins, ledges
     ledges = new Group();
     coins = new Group();
@@ -58,7 +64,6 @@ function bodyGame() {
     video.size(120, 90);
     video.hide() 
     flippedVideo = ml5.flipImage(video);
-    
     // Start classifying
     classifyVideo();
   };
@@ -73,9 +78,9 @@ function bodyGame() {
       spawnLedges();
       camera.position.x = mario.position.x;
       camera.off();
+      
       image(bgImg, -mario.position.x % 1024, 200);
-      this.displayInfo();
-      image(flippedVideo, 0, 0);
+      displayInfo();image(flippedVideo, 0, 0);
       image(flippedVideo, 0, 0);
       camera.on(); // scrolling and zooming for scenes extending beyond the canvas
       drawSprites();
@@ -86,11 +91,11 @@ function bodyGame() {
     }
   };
   
-  this.displayInfo= function() {
+  function displayInfo() {
     textFont("VT323");
     textSize(25);
     text("x " + score, width - 60, 42);
-    image(this.sceneManager.coin1Img,width-80,28)
+    image(scoreImg,width-80,28)
     noStroke()
     push();
     fill(0)
@@ -198,8 +203,6 @@ function bodyGame() {
     video.stop()
     camera.position.x = width / 2;
     score = 0;
-    label = "";
-    lastLabel = "";
     updateSprites(false);
     console.log(ledges.size());
     ledges.removeSprites();

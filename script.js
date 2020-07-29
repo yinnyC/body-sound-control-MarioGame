@@ -1,59 +1,35 @@
 // Name any p5.js functions we use in `global` so Glitch can recognize them.
 /* global
- *    soundFormats,Gameover,textAlign,CENTER,textFont,Instruction,bodyGame,soundGame,removeSprite,updateSprites,camera,Group,keyWentDown,drawSprites,createSprite,Clickable,drawIntroScreen,SceneManager,loadImage,ESCAPE,textSize,image,VIDEO,createCapture,ml5,HSB, background, color, collideRectRect, colorMode, createCanvas, fill, frameRate, keyCode, height,
- *    loadSound,loop, noFill, noLoop, noStroke, random, rect, round, stroke, sqrt, text, width
+ *    Gameover,textAlign,CENTER,textFont,Instruction,bodyGame,soundGame,removeSprite,updateSprites,camera,Group,keyWentDown,drawSprites,createSprite,Clickable,drawIntroScreen,SceneManager,loadImage,ESCAPE,textSize,image,VIDEO,createCapture,ml5,HSB, background, color, collideRectRect, colorMode, createCanvas, fill, frameRate, keyCode, height,
+ *    loop, noFill, noLoop, noStroke, random, rect, round, stroke, sqrt, text, width
  *    frameCount,UP_ARROW, DOWN_ARROW, LEFT_ARROW, RIGHT_ARROW,Game
  */
 
-// Variables for Intro
 let foregroundImg, backgroundImg, groundImg, title;
-let soundMode, bodyMode,howToPlay; // Buttons
+let soundMode, bodyMode,howToPlay;
+let startGround, ground, endGroud;
 let introSong
-// Variables for Game
-let coin1Img,coin2Img,coin3Img,coin4Img,marioJumpImg,marioRun1Img,marioRun2Img,marioRun3Img,marioRun4Img;
-
 function preload() {
   // set the global sound format
   soundFormats('mp3')
-  // load background Images for Intro Scene
+  // load background Images
   foregroundImg = loadImage("https://cdn.glitch.com/075b311a-0371-463a-a6ba-c4f6c09e32cb%2Fsky_2.png?v=1595568118809");
   backgroundImg = loadImage("https://cdn.glitch.com/075b311a-0371-463a-a6ba-c4f6c09e32cb%2Fsky.png?v=1595568225904");
   groundImg = loadImage("https://cdn.glitch.com/075b311a-0371-463a-a6ba-c4f6c09e32cb%2Ftop_ground.png?v=1595568970498");
   title = loadImage("https://cdn.glitch.com/075b311a-0371-463a-a6ba-c4f6c09e32cb%2FSuper.png?v=1595626658046");
-  // Load Materials for bodyGame and soundGame scene 
-  coin1Img = loadImage("https://cdn.glitch.com/075b311a-0371-463a-a6ba-c4f6c09e32cb%2Fcoins_01.png?v=1595864834355")
-  coin2Img = loadImage("https://cdn.glitch.com/075b311a-0371-463a-a6ba-c4f6c09e32cb%2Fcoins_02.png?v=1595864834664")
-  coin3Img = loadImage("https://cdn.glitch.com/075b311a-0371-463a-a6ba-c4f6c09e32cb%2Fcoins_03.png?v=1595864834265")
-  coin4Img = loadImage("https://cdn.glitch.com/075b311a-0371-463a-a6ba-c4f6c09e32cb%2Fcoins_04.png?v=1595864834678")
-  marioJumpImg = loadImage("https://cdn.glitch.com/075b311a-0371-463a-a6ba-c4f6c09e32cb%2FJumping-mario.png?v=1595741095055")
-  marioRun1Img = loadImage("https://cdn.glitch.com/075b311a-0371-463a-a6ba-c4f6c09e32cb%2FRunning-mario_01.png?v=1595741137506");
-  marioRun2Img = loadImage("https://cdn.glitch.com/075b311a-0371-463a-a6ba-c4f6c09e32cb%2FRunning-mario_02.png?v=1595799759140");
-  marioRun3Img = loadImage("https://cdn.glitch.com/075b311a-0371-463a-a6ba-c4f6c09e32cb%2FRunning-mario_03.png?v=1595799765213");
-  marioRun4Img = loadImage("https://cdn.glitch.com/075b311a-0371-463a-a6ba-c4f6c09e32cb%2FStanding-mario.png?v=1595741033822");
+  startGround = loadImage("https://cdn.glitch.com/075b311a-0371-463a-a6ba-c4f6c09e32cb%2Fstarting.png?v=1595721097175");
 }
 function setup() {
   createCanvas(500, 600);
   colorMode(HSB, 360, 100, 100);
   // set up the screen manager
   var mgr = new SceneManager();
-  // For Intro Scene
   mgr.fImage = foregroundImg;
   mgr.bImage = backgroundImg;
   mgr.gImage = groundImg;
   mgr.title = title;
-  // For Game Scene
-  mgr.coin1Img = coin1Img;
-  mgr.coin2Img = coin2Img;
-  mgr.coin3Img = coin3Img;
-  mgr.coin4Img = coin4Img;
-  mgr.marioJumpImg = marioJumpImg;
-  mgr.marioRun1Img = marioRun1Img
-  mgr.marioRun2Img = marioRun2Img
-  mgr.marioRun3Img = marioRun3Img
-  mgr.marioRun4Img = marioRun4Img
   mgr.wire();
   mgr.showScene(Intro);
-  
 }
   
 function Intro() {
