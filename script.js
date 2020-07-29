@@ -31,7 +31,7 @@ function setup() {
   mgr.wire();
   mgr.showScene(Intro);
 }
-
+  
 function Intro() {
   let bgX = 0; // To scroll the background
   let choice = "";
@@ -75,6 +75,7 @@ function Intro() {
     };
     ///This is the intro song :)
     introSong = loadSound('https://cdn.glitch.com/075b311a-0371-463a-a6ba-c4f6c09e32cb%2F1%20-%20Title%20Bgm.mp3?v=1596018063130')
+    //introSong.play();
   };
 
   this.draw = function() {
@@ -84,7 +85,6 @@ function Intro() {
     howToPlay.draw();
     soundMode.draw();
     bodyMode.draw();
-    
   };
   this.mousePressed = function() {
     // Switch to Game scene when user click any of the buttons
