@@ -1,6 +1,6 @@
 // Name any p5.js functions we use in `global` so Glitch can recognize them.
 /* global
- *    instruction,bodyGame,soundGame,removeSprite,updateSprites,camera,Group,keyWentDown,drawSprites,createSprite,Clickable,drawIntroScreen,SceneManager,loadImage,ESCAPE,textSize,image,VIDEO,createCapture,ml5,HSB, background, color, collideRectRect, colorMode, createCanvas, fill, frameRate, keyCode, height,
+ *    Instruction,bodyGame,soundGame,removeSprite,updateSprites,camera,Group,keyWentDown,drawSprites,createSprite,Clickable,drawIntroScreen,SceneManager,loadImage,ESCAPE,textSize,image,VIDEO,createCapture,ml5,HSB, background, color, collideRectRect, colorMode, createCanvas, fill, frameRate, keyCode, height,
  *    loop, noFill, noLoop, noStroke, random, rect, round, stroke, sqrt, text, width
  *    frameCount,UP_ARROW, DOWN_ARROW, LEFT_ARROW, RIGHT_ARROW,Game
  */
@@ -27,7 +27,7 @@ function setup() {
   mgr.gImage = groundImg;
   mgr.title = title;
   mgr.wire();
-  mgr.showScene(Instruction);
+  mgr.showScene(Intro);
 }
 
 function Intro() {
@@ -89,7 +89,7 @@ function Intro() {
     } else if (choice === "body") {
       this.sceneManager.showScene(bodyGame);
     }else if(choice ==="HowToPlay"){
-      this.sceneManager.showScene(instruction);
+      this.sceneManager.showScene(Instruction);
     }
   };
   this.showBackground = function() {

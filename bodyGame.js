@@ -18,9 +18,12 @@ function bodyGame() {
   let flippedVideo;
   // To store the classification
   let label = "";
-  
-  this.enter = function() {
+  this.setup = function(){
     classifier = ml5.imageClassifier(imageModelURL + "model.json");
+    
+    
+  }
+  this.enter = function() {
     score = 0;
     MariolastX = 0;
     gameIsOver = false;
@@ -57,8 +60,7 @@ function bodyGame() {
 
     video = createCapture(VIDEO);
     video.size(120, 90);
-    video.hide()
-    
+    video.hide() 
     flippedVideo = ml5.flipImage(video);
     // Start classifying
     classifyVideo();

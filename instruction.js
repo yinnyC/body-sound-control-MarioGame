@@ -13,7 +13,7 @@ function Instruction() {
     demoNothing = loadImage("https://cdn.glitch.com/075b311a-0371-463a-a6ba-c4f6c09e32cb%2FIMG_8147.JPG?v=1595994325897")
     demoJump = loadImage("https://cdn.glitch.com/075b311a-0371-463a-a6ba-c4f6c09e32cb%2FIMG_8148.JPG?v=1595994325171")
     back = new Clickable();
-    back.locate(width / 2 - 50, 490);
+    back.locate(width / 2 - 50, 520);
     back.text = "Back";
     back.onHover = function() {
       this.color = "#808080";
@@ -51,7 +51,7 @@ function Instruction() {
     rectMode(CENTER);
     noStroke();
     fill('rgba(255,255,255, 0.85)')
-    rect(width/2,height/2-33,400,420,8,8,8,8);
+    rect(width/2,height/2-20,400,450,8,8,8,8);
     textFont("Rubik Mono One");
     textSize(30);
     textAlign(CENTER);
@@ -68,11 +68,12 @@ function Instruction() {
     textSize(10);
     fill(0)
     text("You can control Mario with voice,\njust say: \"Jump! \"",width/2,205);
-    text("You can control Mario \nwith Body Gestures",width/2,300);
+    text("You can control Mario \nwith Body Gestures",width/2,295);
+    text("Try to collect 100 coins!",width/2,475);
     text("Do Nothing",183,445);
     text("Jump",308,445);
-    image(demoNothing,135,330,100,100);
-    image(demoJump,260,330,100,100);
+    image(demoNothing,135,320,100,100);
+    image(demoJump,260,320,100,100);
     pop();
   }
   
