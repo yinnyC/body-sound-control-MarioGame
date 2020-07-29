@@ -63,6 +63,7 @@ function bodyGame() {
     camera.position.y = mario.position.y;  // Make Camera follow Mario
     useQuadTree(false);                    // Turn off the 'optimizing collision detection',so it won't skip any coin without checking it
 
+    // 
     video = createCapture(VIDEO);
     video.size(120, 90);
     video.hide() 
