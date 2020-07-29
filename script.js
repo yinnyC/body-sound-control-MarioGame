@@ -20,14 +20,16 @@ function preload() {
   backgroundImg = loadImage("https://cdn.glitch.com/075b311a-0371-463a-a6ba-c4f6c09e32cb%2Fsky.png?v=1595568225904");
   groundImg = loadImage("https://cdn.glitch.com/075b311a-0371-463a-a6ba-c4f6c09e32cb%2Ftop_ground.png?v=1595568970498");
   title = loadImage("https://cdn.glitch.com/075b311a-0371-463a-a6ba-c4f6c09e32cb%2FSuper.png?v=1595626658046");
-  // Load Materials for bodyGame and soundGame scene
-  
+  // Load Materials for bodyGame and soundGame scene 
   coin1Img = loadImage("https://cdn.glitch.com/075b311a-0371-463a-a6ba-c4f6c09e32cb%2Fcoins_01.png?v=1595864834355")
   coin2Img = loadImage("https://cdn.glitch.com/075b311a-0371-463a-a6ba-c4f6c09e32cb%2Fcoins_02.png?v=1595864834664")
   coin3Img = loadImage("https://cdn.glitch.com/075b311a-0371-463a-a6ba-c4f6c09e32cb%2Fcoins_03.png?v=1595864834265")
   coin4Img = loadImage("https://cdn.glitch.com/075b311a-0371-463a-a6ba-c4f6c09e32cb%2Fcoins_04.png?v=1595864834678")
   marioJumpImg = loadImage("https://cdn.glitch.com/075b311a-0371-463a-a6ba-c4f6c09e32cb%2FJumping-mario.png?v=1595741095055")
-
+  marioRun1Img = loadImage("https://cdn.glitch.com/075b311a-0371-463a-a6ba-c4f6c09e32cb%2FRunning-mario_01.png?v=1595741137506");
+  marioRun2Img = loadImage("https://cdn.glitch.com/075b311a-0371-463a-a6ba-c4f6c09e32cb%2FRunning-mario_02.png?v=1595799759140");
+  marioRun3Img = loadImage("https://cdn.glitch.com/075b311a-0371-463a-a6ba-c4f6c09e32cb%2FRunning-mario_03.png?v=1595799765213");
+  marioRun4Img = loadImage("https://cdn.glitch.com/075b311a-0371-463a-a6ba-c4f6c09e32cb%2FStanding-mario.png?v=1595741033822");
 }
 function setup() {
   createCanvas(500, 600);
@@ -41,6 +43,14 @@ function setup() {
   mgr.title = title;
   // For Game Scene
   mgr.coin1Img = coin1Img;
+  mgr.coin2Img = coin2Img;
+  mgr.coin3Img = coin3Img;
+  mgr.coin4Img = coin4Img;
+  mgr.marioJumpImg = marioJumpImg;
+  mgr.marioRun1Img = marioRun1Img
+  mgr.marioRun2Img = marioRun2Img
+  mgr.marioRun3Img = marioRun3Img
+  mgr.marioRun4Img = marioRun4Img
   mgr.wire();
   mgr.showScene(Intro);
   

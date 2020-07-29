@@ -7,7 +7,7 @@
 
 function bodyGame() {
   let MariolastX, GRAVITY, JUMP,gameIsOver,score;
-  let spriteToBeKilled,platform,ledges,mario,ledgeImg,longledgeImg,bgImg,coins,scoreImg;
+  let spriteToBeKilled,platform,ledges,mario,ledgeImg,longledgeImg,bgImg,coins;
   let coinSound,jumpSound;
   
   /****Set up teachable machine stuff****/
@@ -30,7 +30,6 @@ function bodyGame() {
     // Load Images
     bgImg = loadImage("https://cdn.glitch.com/075b311a-0371-463a-a6ba-c4f6c09e32cb%2Fbg.png?v=1595800295790");
     longledgeImg = loadImage("https://cdn.glitch.com/075b311a-0371-463a-a6ba-c4f6c09e32cb%2Flongledge.png?v=1595801236364");
-    scoreImg = loadImage("https://cdn.glitch.com/075b311a-0371-463a-a6ba-c4f6c09e32cb%2Fcoins_01.png?v=1595864834355")
     
     // Load Sound
     coinSound = loadSound("https://cdn.glitch.com/075b311a-0371-463a-a6ba-c4f6c09e32cb%2FCoin.mp3?v=1596004574113")
@@ -39,17 +38,11 @@ function bodyGame() {
     mario = createSprite(width / 2 - 70, 300);
     mario.scale = 2.2;
     mario.addAnimation("normal","https://cdn.glitch.com/075b311a-0371-463a-a6ba-c4f6c09e32cb%2FRunning-mario_01.png?v=1595741137506","https://cdn.glitch.com/075b311a-0371-463a-a6ba-c4f6c09e32cb%2FRunning-mario_02.png?v=1595799759140","https://cdn.glitch.com/075b311a-0371-463a-a6ba-c4f6c09e32cb%2FRunning-mario_03.png?v=1595799765213","https://cdn.glitch.com/075b311a-0371-463a-a6ba-c4f6c09e32cb%2FStanding-mario.png?v=1595741033822");
-    mario.addAnimation("move","https://cdn.glitch.com/075b311a-0371-463a-a6ba-c4f6c09e32cb%2FStanding-mario.png?v=1595741033822","https://cdn.glitch.com/075b311a-0371-463a-a6ba-c4f6c09e32cb%2FRunning-mario_01.png?v=1595741137506",
-      "https://cdn.glitch.com/075b311a-0371-463a-a6ba-c4f6c09e32cb%2FJumping-mario.png?v=1595741095055",
-      "https://cdn.glitch.com/075b311a-0371-463a-a6ba-c4f6c09e32cb%2FStanding-mario.png?v=1595741033822"
-    );
+    mario.addAnimation("move",this.sceneManager.marioJumpImg);
 
     // Create the first Ledge for mario to stand
     platform = createSprite(260, 570);
-    platform.addAnimation(
-      "normal",
-      "https://cdn.glitch.com/075b311a-0371-463a-a6ba-c4f6c09e32cb%2Fstartledge.png?v=1595801238081"
-    );
+    platform.addAnimation("normal","https://cdn.glitch.com/075b311a-0371-463a-a6ba-c4f6c09e32cb%2Fstartledge.png?v=1595801238081");
     // Create Groups for coins, ledges
     ledges = new Group();
     coins = new Group();
