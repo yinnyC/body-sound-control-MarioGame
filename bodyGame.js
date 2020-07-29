@@ -50,7 +50,7 @@ function bodyGame() {
     coins = new Group();
     spriteToBeKilled = new Group();
   
-    mario.velocity.x = 1;                  // Mario will move forward at the speed of 4
+    mario.velocity.x = 2;                  // Mario will move forward at the speed of 4
     camera.position.y = mario.position.y;  // Make Camera follow Mario
     useQuadTree(false);                    // Turn off the 'optimizing collision detection',so it won't skip any coin without checking it
 
@@ -195,6 +195,7 @@ if(this.sceneArgs==="sound"){
     }
   }
   function resetGame() {
+    video.stop()
     camera.position.x = width / 2;
     score = 0;
     updateSprites(false);

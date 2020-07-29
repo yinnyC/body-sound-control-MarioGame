@@ -15,6 +15,8 @@ function Gameover() {
     this.showBackground();
     this.moveBackground();
     text("Game Over",width/2-20, height/2)
+    text(this.sceneArgs,width/2-20, height/2+20)
+    text(this.sceneArgs>10,width/2-20, height/2+40)
   }
     this.mousePressed = function() {
       this.sceneManager.showScene(Intro);
