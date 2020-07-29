@@ -5,7 +5,7 @@
  *    frameCount,UP_ARROW, DOWN_ARROW, LEFT_ARROW, RIGHT_ARROW,Intro
  */
 
-function instruction() {
+function Instruction() {
   let bgX,demoNothing,demoJump,back,choice; 
   this.enter = function(){
     choice = ""
@@ -22,8 +22,7 @@ function instruction() {
     back.onOutside = function() {
       this.color = "#FFFFFF";
       choice = "";
-    };
-    
+    };    
   }
   this.draw = function() {
     background(210, 90, 100);
@@ -59,16 +58,16 @@ function instruction() {
     fill(0)
     text("How To Play", width/2,120);
     fill('red')
-    rect(width/2,175,120,30,20,20,20,20);
+    rect(width/2,165,120,30,20,20,20,20);
     fill('blue')
-    rect(width/2,260,120,30,20,20,20,20);
+    rect(width/2,250,120,30,20,20,20,20);
     textSize(12);
     fill(255)
-    text("Sound Mode",width/2,180);
-    text("Body Mode", width/2,265);
+    text("Sound Mode",width/2,170);
+    text("Body Mode", width/2,255);
     textSize(10);
     fill(0)
-    text("You can control Mario with voice,\njust say: \"Jump! \"",width/2,215);
+    text("You can control Mario with voice,\njust say: \"Jump! \"",width/2,205);
     text("You can control Mario \nwith Body Gestures",width/2,300);
     text("Do Nothing",183,445);
     text("Jump",308,445);

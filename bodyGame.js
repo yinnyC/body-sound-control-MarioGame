@@ -1,13 +1,13 @@
 // Name any p5.js functions we use in `global` so Glitch can recognize them.
 /* global
- *    textAlign,CENTER,push,pop,useQuadTree,removeSprites,removeSprite,updateSprites,camera,Group,keyWentDown,drawSprites,createSprite,Clickable,drawIntroScreen,SceneManager,loadImage,ESCAPE,textSize,image,VIDEO,createCapture,ml5,HSB, background, color, collideRectRect, colorMode, createCanvas, fill, frameRate, keyCode, height,
+ *    textFont,textAlign,CENTER,push,pop,useQuadTree,removeSprites,removeSprite,updateSprites,camera,Group,keyWentDown,drawSprites,createSprite,Clickable,drawIntroScreen,SceneManager,loadImage,ESCAPE,textSize,image,VIDEO,createCapture,ml5,HSB, background, color, collideRectRect, colorMode, createCanvas, fill, frameRate, keyCode, height,
  *    loop, noFill, noLoop, noStroke, random, rect, round, stroke, sqrt, text, width
  *    frameCount,UP_ARROW, DOWN_ARROW, LEFT_ARROW, RIGHT_ARROW,Gameover
  */
 
 function bodyGame() {
   let MariolastX, GRAVITY, JUMP;
-  let platform,ledges,mario,ledgeImg,longledgeImg,bgImg,gameIsOver,coins,score,spriteToBeKilled;
+  let platform,ledges,mario,ledgeImg,longledgeImg,bgImg,gameIsOver,coins,score,spriteToBeKilled,scoreImg;
   
   /****Set up teachable machine stuff****/
   let classifier; // Classifier Variable
@@ -29,6 +29,7 @@ function bodyGame() {
     // Load Images
     bgImg = loadImage("https://cdn.glitch.com/075b311a-0371-463a-a6ba-c4f6c09e32cb%2Fbg.png?v=1595800295790");
     longledgeImg = loadImage("https://cdn.glitch.com/075b311a-0371-463a-a6ba-c4f6c09e32cb%2Flongledge.png?v=1595801236364");
+    scoreImg = loadImage("https://cdn.glitch.com/075b311a-0371-463a-a6ba-c4f6c09e32cb%2Fcoins_01.png?v=1595864834355")
 
     // Create Mario
     mario = createSprite(width / 2 - 70, 300);
@@ -86,13 +87,17 @@ function bodyGame() {
     }
   };
   function displayInfo() {
-    text("score: " + score, width - 70, 30);
+    textFont("VT323");
+    textSize(25);
+    text("x " + score, width - 60, 42);
+    image(scoreImg,width-80,28)
     noStroke()
     push();
     fill(0)
     rect(0,0,120,110)
     fill(255)
     textAlign(CENTER)
+    textSize(13);
     text(label,60,103);
     pop();
     
@@ -122,13 +127,6 @@ function bodyGame() {
       }
     }
   }
-  /*Implementation of sound or body mode in function marioMove()
-if(this.sceneArgs==="sound"){
-
-}else{
-
-}
-*/
   function marioMove() {
     // While receibe user input, Mario jumps
    if (label==="jump"&& mario.position.y>100) {

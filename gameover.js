@@ -14,6 +14,7 @@ function Gameover() {
     background(210, 90, 100);
     this.showBackground();
     this.moveBackground();
+    if(this.sceneArgs>100)
     text("Game Over",width/2-20, height/2)
     text(this.sceneArgs,width/2-20, height/2+20)
     text(this.sceneArgs>10,width/2-20, height/2+40)
