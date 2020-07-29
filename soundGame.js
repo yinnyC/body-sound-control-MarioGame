@@ -1,14 +1,13 @@
 // Name any p5.js functions we use in `global` so Glitch can recognize them.
 /* global
- *    useQuadTree,removeSprites,removeSprite,updateSprites,camera,Group,keyWentDown,drawSprites,createSprite,Clickable,drawIntroScreen,SceneManager,loadImage,ESCAPE,textSize,image,VIDEO,createCapture,ml5,HSB, background, color, collideRectRect, colorMode, createCanvas, fill, frameRate, keyCode, height,
+ *    push,textAlign,CENTER,pop,useQuadTree,removeSprites,removeSprite,updateSprites,camera,Group,keyWentDown,drawSprites,createSprite,Clickable,drawIntroScreen,SceneManager,loadImage,ESCAPE,textSize,image,VIDEO,createCapture,ml5,HSB, background, color, collideRectRect, colorMode, createCanvas, fill, frameRate, keyCode, height,
  *    loop, noFill, noLoop, noStroke, random, rect, round, stroke, sqrt, text, width
  *    frameCount,UP_ARROW, DOWN_ARROW, LEFT_ARROW, RIGHT_ARROW,Gameover
  */
  		
-// 		myRec.onResult = showResult;
-// 		myRec.start();
+		
 
-function Game() {
+function soundGame() {
   let MariolastX, GRAVITY, JUMP;
   let platform,ledges,mario,ledgeImg,longledgeImg,bgImg,gameIsOver,coins,score,spriteToBeKilled;
   
@@ -17,6 +16,7 @@ function Game() {
     MariolastX = 0;
     gameIsOver = false;
     GRAVITY = 1;
+    //How high mario jump
     JUMP = 10;
     // Load Images
     bgImg = loadImage("https://cdn.glitch.com/075b311a-0371-463a-a6ba-c4f6c09e32cb%2Fbg.png?v=1595800295790");
@@ -53,9 +53,13 @@ function Game() {
     spriteToBeKilled = new Group();
 
     // Mario will move forward at the speed of 4
-    mario.velocity.x = 1;
+    mario.velocity.x = 4;
     camera.position.y = mario.position.y;
     useQuadTree(false);
+    
+    //
+    myRec.onResult = showResult;
+ 		myRec.start();
   };
 
   this.draw = function() {
@@ -80,11 +84,11 @@ function Game() {
   };
   function displayInfo() {
     text("score: " + score, width - 70, 30);
-    
+    push();
     textSize(32);
  		textAlign(CENTER);
 		text("Command Mario", width/2, height/2);
-    
+    pop();
   }
   function collectCoins(mario, collectedCoin) {
     console.log("coin collected");
@@ -112,13 +116,12 @@ function Game() {
   }
   function marioMove() {
     // While receibe user input, Mario jumps
-    if (choice=== "sound") {
       if (keyWentDown(" ")) {
       mario.changeAnimation("move");
       mario.animation.rewind();
       mario.position.y -= JUMP;
       mario.velocity.y = -JUMP;
-      }
+      
     }
   }
   function spawnLedges() {
