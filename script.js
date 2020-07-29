@@ -8,8 +8,10 @@
 let foregroundImg, backgroundImg, groundImg, title;
 let soundMode, bodyMode,howToPlay;
 let startGround, ground, endGroud;
-
+let introSong
 function preload() {
+  // set the global sound format
+  soundFormats('mp3')
   // load background Images
   foregroundImg = loadImage("https://cdn.glitch.com/075b311a-0371-463a-a6ba-c4f6c09e32cb%2Fsky_2.png?v=1595568118809");
   backgroundImg = loadImage("https://cdn.glitch.com/075b311a-0371-463a-a6ba-c4f6c09e32cb%2Fsky.png?v=1595568225904");
@@ -71,6 +73,8 @@ function Intro() {
       this.color = "#FFFFFF";
       choice = "";
     };
+    ///This is the intro song :)
+    introSong = loadSound('https://cdn.glitch.com/075b311a-0371-463a-a6ba-c4f6c09e32cb%2F1%20-%20Title%20Bgm.mp3?v=1596018063130')
   };
 
   this.draw = function() {
@@ -80,6 +84,7 @@ function Intro() {
     howToPlay.draw();
     soundMode.draw();
     bodyMode.draw();
+    
   };
   this.mousePressed = function() {
     // Switch to Game scene when user click any of the buttons
