@@ -11,7 +11,7 @@ let soundMode, bodyMode,howToPlay; // Buttons
 let introSong
 // Variables for Game
 let coin1Img,coin2Img,coin3Img,coin4Img,marioJumpImg,marioRun1Img,marioRun2Img,marioRun3Img,marioRun4Img;
-//let imageModelURL ="https://teachablemachine.withgoogle.com/models/GEQao0cv0/";
+
 function preload() {
   // set the global sound format
   soundFormats('mp3')

@@ -13,7 +13,7 @@ function bodyGame() {
   /**** Set up teachable machine stuff ****/
   let classifier; // Classifier Variable
   // Model URL
-  let imageModelURL ="https://teachablemachine.withgoogle.com/models/GEQao0cv0/";
+  let imageModelURL = "https://teachablemachine.withgoogle.com/models/GEQao0cv0/";
   let video; // Video
   let flippedVideo;
   // To store the classification
@@ -27,6 +27,7 @@ function bodyGame() {
     GRAVITY = 1;
     JUMP = 15;
     classifier = ml5.imageClassifier(imageModelURL + "model.json");
+    
     // Load Images
     bgImg = loadImage("https://cdn.glitch.com/075b311a-0371-463a-a6ba-c4f6c09e32cb%2Fbg.png?v=1595800295790");
     longledgeImg = loadImage("https://cdn.glitch.com/075b311a-0371-463a-a6ba-c4f6c09e32cb%2Flongledge.png?v=1595801236364");
@@ -43,6 +44,7 @@ function bodyGame() {
     // Create the first Ledge for mario to stand
     platform = createSprite(260, 570);
     platform.addAnimation("normal","https://cdn.glitch.com/075b311a-0371-463a-a6ba-c4f6c09e32cb%2Fstartledge.png?v=1595801238081");
+    
     // Create Groups for coins, ledges
     ledges = new Group();
     coins = new Group();
@@ -56,6 +58,7 @@ function bodyGame() {
     video.size(120, 90);
     video.hide() 
     flippedVideo = ml5.flipImage(video);
+    
     // Start classifying
     classifyVideo();
   };
@@ -70,7 +73,6 @@ function bodyGame() {
       spawnLedges();
       camera.position.x = mario.position.x;
       camera.off();
-      
       image(bgImg, -mario.position.x % 1024, 200);
       this.displayInfo();
       image(flippedVideo, 0, 0);
