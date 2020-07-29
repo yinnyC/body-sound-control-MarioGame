@@ -6,26 +6,16 @@
  */
 
 let foregroundImg, backgroundImg, groundImg, title;
-let soundMode, bodyMode;
+let soundMode, bodyMode,howToPlay;
 let startGround, ground, endGroud;
 
 function preload() {
   // load background Images
-  foregroundImg = loadImage(
-    "https://cdn.glitch.com/075b311a-0371-463a-a6ba-c4f6c09e32cb%2Fsky_2.png?v=1595568118809"
-  );
-  backgroundImg = loadImage(
-    "https://cdn.glitch.com/075b311a-0371-463a-a6ba-c4f6c09e32cb%2Fsky.png?v=1595568225904"
-  );
-  groundImg = loadImage(
-    "https://cdn.glitch.com/075b311a-0371-463a-a6ba-c4f6c09e32cb%2Ftop_ground.png?v=1595568970498"
-  );
-  title = loadImage(
-    "https://cdn.glitch.com/075b311a-0371-463a-a6ba-c4f6c09e32cb%2FSuper.png?v=1595626658046"
-  );
-  startGround = loadImage(
-    "https://cdn.glitch.com/075b311a-0371-463a-a6ba-c4f6c09e32cb%2Fstarting.png?v=1595721097175"
-  );
+  foregroundImg = loadImage("https://cdn.glitch.com/075b311a-0371-463a-a6ba-c4f6c09e32cb%2Fsky_2.png?v=1595568118809");
+  backgroundImg = loadImage("https://cdn.glitch.com/075b311a-0371-463a-a6ba-c4f6c09e32cb%2Fsky.png?v=1595568225904");
+  groundImg = loadImage("https://cdn.glitch.com/075b311a-0371-463a-a6ba-c4f6c09e32cb%2Ftop_ground.png?v=1595568970498");
+  title = loadImage("https://cdn.glitch.com/075b311a-0371-463a-a6ba-c4f6c09e32cb%2FSuper.png?v=1595626658046");
+  startGround = loadImage("https://cdn.glitch.com/075b311a-0371-463a-a6ba-c4f6c09e32cb%2Fstarting.png?v=1595721097175");
 }
 function setup() {
   createCanvas(500, 600);
@@ -44,9 +34,17 @@ function Intro() {
   let bgX = 0; // To scroll the background
   let choice = "";
   this.setup = function() {
+    // set up clickable - Button Howtoplay
+    howToPlay = new Clickable();
+    howToPlay.locate(width / 2 - 50, 330);
+    howToPlay.text = "How To Play";
+    howToPlay.onHover = function() {
+      this.color = "#808080";
+      choice = "HowTo";
+    };
     // set up clickable - Button soundMode
     soundMode = new Clickable();
-    soundMode.locate(width / 2 - 50, 350);
+    soundMode.locate(width / 2 - 50, 390);
     soundMode.text = "Sound Mode";
     soundMode.onHover = function() {
       this.color = "#808080";
@@ -58,7 +56,7 @@ function Intro() {
     };
     // set up clickable - Button bodyMode
     bodyMode = new Clickable();
-    bodyMode.locate(width / 2 - 50, 420);
+    bodyMode.locate(width / 2 - 50, 450);
     bodyMode.text = "Body Mode";
 
     bodyMode.onHover = function() {
@@ -75,6 +73,7 @@ function Intro() {
     background(210, 90, 100);
     this.showBackground();
     this.moveBackground();
+    howToPlay.draw();
     soundMode.draw();
     bodyMode.draw();
   };
