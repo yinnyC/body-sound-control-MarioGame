@@ -27,7 +27,7 @@ function setup() {
   mgr.gImage = groundImg;
   mgr.title = title;
   mgr.wire();
-  mgr.showScene(Intro);
+  mgr.showScene(instruction);
 }
 
 function Intro() {
