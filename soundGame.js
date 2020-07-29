@@ -2,7 +2,7 @@
 /* global
  *    push,textAlign,CENTER,pop,useQuadTree,removeSprites,removeSprite,updateSprites,camera,Group,keyWentDown,drawSprites,createSprite,Clickable,drawIntroScreen,SceneManager,loadImage,ESCAPE,textSize,image,VIDEO,createCapture,ml5,HSB, background, color, collideRectRect, colorMode, createCanvas, fill, frameRate, keyCode, height,
  *    loop, noFill, noLoop, noStroke, random, rect, round, stroke, sqrt, text, width
- *    frameCount,UP_ARROW, DOWN_ARROW, LEFT_ARROW, RIGHT_ARROW,Gameover
+ *    p5,frameCount,UP_ARROW, DOWN_ARROW, LEFT_ARROW, RIGHT_ARROW,Gameover
  */
  		
 		
@@ -11,6 +11,12 @@ function soundGame() {
   let MariolastX, GRAVITY, JUMP;
   let platform,ledges,mario,ledgeImg,longledgeImg,bgImg,gameIsOver,coins,score,spriteToBeKilled;
   
+  //Sound commands variables
+  
+  var myRec = new p5.SpeechRec('en-US', parseResult);
+ myRec.continuous = true
+ myRec.intrimResults = true
+var marioJumpText = "Move mario"
   this.enter = function() {
     score = 0;
     MariolastX = 0;
@@ -60,6 +66,9 @@ function soundGame() {
     /*
     myRec.onResult = showResult;
  		myRec.start();*/
+    
+    //Sound commands Setup
+    myRec.start();
   };
 
   this.draw = function() {
