@@ -11,12 +11,12 @@ function instruction() {
     bgX = 0
   }
   this.draw = function() {
-    background(0, 90, 100);
+    background(210, 90, 100);
     this.showBackground();
     this.moveBackground();
-    text("Game Over",width/2-20, height/2)
-    text(this.sceneArgs,width/2-20, height/2+20)
-    text(this.sceneArgs>10,width/2-20, height/2+40)
+    noStroke();
+    rect(50,60,400,470,8,8,8,8);
+    
   }
     this.mousePressed = function() {
       this.sceneManager.showScene(Intro);
