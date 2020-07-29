@@ -11,32 +11,11 @@ function soundGame() {
   let MariolastX, GRAVITY, JUMP;
   let platform,ledges,mario,ledgeImg,longledgeImg,bgImg,gameIsOver,coins,score,spriteToBeKilled;
   
-//   function parseResult() {
-    
-//     // recognition system will often append words into phrases.
-// 		// so hack here is to only use the last word:
-// 		var mostrecentword = myRec.resultString.split(' ').pop();
-// 		if(mostrecentword.indexOf("jump")!==-1) {
-//       text(myRec.resultString, width/2, height/2-50); 
-//       //Insert Mario Commands here
-     
-//     }
-		
-//     else if(mostrecentword.indexOf("double")!==-1) { 
-      
-//        text(myRec.resultString, width/2, height/2+50); 
-//       //Insert Mario Commands Here
-      
-//     }
-//     else if(mostrecentword.indexOf("triple")!==-1){
-//       text(myRec.resultString, width/2, height/2+100)
-//     }
-//     console.log(mostrecentword);
-//   }
   
-//   var myRec = new p5.SpeechRec('en-US', parseResult);
-//   myRec.continuous = true
-//   myRec.intrimResults = true
+  
+  var myRec = new p5.SpeechRec('en-US', parseResult);
+  myRec.continuous = true
+  myRec.intrimResults = true
  
 
   this.enter = function() {
@@ -85,14 +64,12 @@ function soundGame() {
     camera.position.y = mario.position.y;
     useQuadTree(false);
     
-    /*
-    myRec.onResult = showResult;
- 		myRec.start();*/
+    
     
     
     // Sound commands Setup
     
-    // myRec.start();
+    myRec.start();
     
   };
 
@@ -111,7 +88,7 @@ function soundGame() {
       camera.on(); // scrolling and zooming for scenes extending beyond the canvas
       drawSprites();
       logLastMarioX();
-      // parseResult();
+      parseResult();
     } else {
       this.sceneManager.showScene(Gameover);
       resetGame();
