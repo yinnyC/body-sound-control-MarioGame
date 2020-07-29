@@ -6,11 +6,23 @@
  */
 
 function instruction() {
-  let bgX,demoNothing,demoJump; 
+  let bgX,demoNothing,demoJump,back,choice; 
   this.enter = function(){
+    choice = ""
     bgX = 0
     demoNothing = loadImage("https://cdn.glitch.com/075b311a-0371-463a-a6ba-c4f6c09e32cb%2FIMG_8147.JPG?v=1595994325897")
     demoJump = loadImage("https://cdn.glitch.com/075b311a-0371-463a-a6ba-c4f6c09e32cb%2FIMG_8148.JPG?v=1595994325171")
+    back = new Clickable();
+    back.locate(width / 2 - 50, 490);
+    back.text = "Back";
+    back.onHover = function() {
+      this.color = "#808080";
+      choice ="back"
+    };
+    back.onOutside = function() {
+      this.color = "#FFFFFF";
+      choice = "";
+    };
     
   }
   this.draw = function() {
@@ -18,9 +30,12 @@ function instruction() {
     this.showBackground();
     this.moveBackground();
     this.info();
+    back.draw();
   }
     this.mousePressed = function() {
-      this.sceneManager.showScene(Intro);
+      if(choice==="back"){
+        this.sceneManager.showScene(Intro);
+      } 
   };
    this.showBackground = function() {
     image(this.sceneManager.fImage, bgX, 227);
@@ -33,12 +48,15 @@ function instruction() {
     bgX %=1024
   };
   this.info=function(){
+    push();
     rectMode(CENTER);
     noStroke();
+    fill('rgba(255,255,255, 0.85)')
     rect(width/2,height/2-33,400,420,8,8,8,8);
     textFont("Rubik Mono One");
     textSize(30);
     textAlign(CENTER);
+    fill(0)
     text("How To Play", width/2,120);
     fill('red')
     rect(width/2,175,120,30,20,20,20,20);
@@ -51,11 +69,12 @@ function instruction() {
     textSize(10);
     fill(0)
     text("You can control Mario with voice,\njust say: \"Jump! \"",width/2,215);
-    text("You can control Mario with Body Gestures",width/2,300);
-    text("Do Nothing",183,440);
-    text("Jump",308,440);
-    image(demoNothing,135,325,100,100);
-    image(demoJump,260,325,100,100);
+    text("You can control Mario \nwith Body Gestures",width/2,300);
+    text("Do Nothing",183,445);
+    text("Jump",308,445);
+    image(demoNothing,135,330,100,100);
+    image(demoJump,260,330,100,100);
+    pop();
   }
   
 }

@@ -27,7 +27,7 @@ function setup() {
   mgr.gImage = groundImg;
   mgr.title = title;
   mgr.wire();
-  mgr.showScene(instruction);
+  mgr.showScene(Intro);
 }
 
 function Intro() {
@@ -41,6 +41,10 @@ function Intro() {
     howToPlay.onHover = function() {
       this.color = "#808080";
       choice = "HowToPlay";
+    };
+    howToPlay.onOutside = function() {
+      this.color = "#FFFFFF";
+      choice = "";
     };
     // set up clickable - Button soundMode
     soundMode = new Clickable();

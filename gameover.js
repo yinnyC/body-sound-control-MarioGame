@@ -11,7 +11,7 @@ function Gameover() {
     bgX = 0
   }
   this.draw = function() {
-    background(0, 90, 100);
+    background(210, 90, 100);
     this.showBackground();
     this.moveBackground();
     text("Game Over",width/2-20, height/2)
