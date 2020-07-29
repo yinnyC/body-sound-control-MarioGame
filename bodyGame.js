@@ -203,6 +203,8 @@ function bodyGame() {
     video.stop()
     camera.position.x = width / 2;
     score = 0;
+    label = "";
+    lastLabel = "";
     updateSprites(false);
     console.log(ledges.size());
     ledges.removeSprites();
