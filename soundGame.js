@@ -10,9 +10,11 @@
 function soundGame() {
   let MariolastX, GRAVITY, JUMP;
   let platform,ledges,mario,ledgeImg,longledgeImg,bgImg,gameIsOver,coins,score,spriteToBeKilled;
-  
+  var myRec = new p5.SpeechRec('en-US', parseResult);
+  myRec.continuous = true
+  myRec.intrimResults = true
  
-var marioJumpText = "Move mario"
+
   this.enter = function() {
     score = 0;
     MariolastX = 0;
