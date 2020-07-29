@@ -11,6 +11,7 @@ function instruction() {
     bgX = 0
     demoNothing = loadImage("https://cdn.glitch.com/075b311a-0371-463a-a6ba-c4f6c09e32cb%2FIMG_8147.JPG?v=1595994325897")
     demoJump = loadImage("https://cdn.glitch.com/075b311a-0371-463a-a6ba-c4f6c09e32cb%2FIMG_8148.JPG?v=1595994325171")
+    
   }
   this.draw = function() {
     background(210, 90, 100);
@@ -34,7 +35,7 @@ function instruction() {
   this.info=function(){
     rectMode(CENTER);
     noStroke();
-    rect(width/2,height/2,400,470,8,8,8,8);
+    rect(width/2,height/2-33,400,420,8,8,8,8);
     textFont("Rubik Mono One");
     textSize(30);
     textAlign(CENTER);
@@ -50,7 +51,11 @@ function instruction() {
     textSize(10);
     fill(0)
     text("You can control Mario with voice,\njust say: \"Jump! \"",width/2,215);
-    
+    text("You can control Mario with Body Gestures",width/2,300);
+    text("Do Nothing",183,440);
+    text("Jump",308,440);
+    image(demoNothing,135,325,100,100);
+    image(demoJump,260,325,100,100);
   }
   
 }
