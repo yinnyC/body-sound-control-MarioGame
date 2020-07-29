@@ -1,23 +1,27 @@
 // Name any p5.js functions we use in `global` so Glitch can recognize them.
 /* global
- *    Gameover,textAlign,CENTER,textFont,Instruction,bodyGame,soundGame,removeSprite,updateSprites,camera,Group,keyWentDown,drawSprites,createSprite,Clickable,drawIntroScreen,SceneManager,loadImage,ESCAPE,textSize,image,VIDEO,createCapture,ml5,HSB, background, color, collideRectRect, colorMode, createCanvas, fill, frameRate, keyCode, height,
- *    loop, noFill, noLoop, noStroke, random, rect, round, stroke, sqrt, text, width
+ *    soundFormats,Gameover,textAlign,CENTER,textFont,Instruction,bodyGame,soundGame,removeSprite,updateSprites,camera,Group,keyWentDown,drawSprites,createSprite,Clickable,drawIntroScreen,SceneManager,loadImage,ESCAPE,textSize,image,VIDEO,createCapture,ml5,HSB, background, color, collideRectRect, colorMode, createCanvas, fill, frameRate, keyCode, height,
+ *    loadSound,loop, noFill, noLoop, noStroke, random, rect, round, stroke, sqrt, text, width
  *    frameCount,UP_ARROW, DOWN_ARROW, LEFT_ARROW, RIGHT_ARROW,Game
  */
 
+// Variables for Intro
 let foregroundImg, backgroundImg, groundImg, title;
-let soundMode, bodyMode,howToPlay;
-let startGround, ground, endGroud;
+let soundMode, bodyMode,howToPlay; // Buttons
 let introSong
+// Variables for Intro
+
 function preload() {
   // set the global sound format
   soundFormats('mp3')
-  // load background Images
+  // load background Images for Intro Scene
   foregroundImg = loadImage("https://cdn.glitch.com/075b311a-0371-463a-a6ba-c4f6c09e32cb%2Fsky_2.png?v=1595568118809");
   backgroundImg = loadImage("https://cdn.glitch.com/075b311a-0371-463a-a6ba-c4f6c09e32cb%2Fsky.png?v=1595568225904");
   groundImg = loadImage("https://cdn.glitch.com/075b311a-0371-463a-a6ba-c4f6c09e32cb%2Ftop_ground.png?v=1595568970498");
   title = loadImage("https://cdn.glitch.com/075b311a-0371-463a-a6ba-c4f6c09e32cb%2FSuper.png?v=1595626658046");
-  startGround = loadImage("https://cdn.glitch.com/075b311a-0371-463a-a6ba-c4f6c09e32cb%2Fstarting.png?v=1595721097175");
+  // Load Materials for bodyGame and soundGame scene
+  
+  
 }
 function setup() {
   createCanvas(500, 600);
