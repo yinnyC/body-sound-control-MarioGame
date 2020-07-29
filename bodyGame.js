@@ -6,9 +6,9 @@
  */
 
 function bodyGame() {
-  let MariolastX, GRAVITY, JUMP;
-  let platform,ledges,mario,ledgeImg,longledgeImg,bgImg,gameIsOver,coins,score,spriteToBeKilled,scoreImg;
-  let coinSound;
+  let MariolastX, GRAVITY, JUMP,gameIsOver,score;
+  let spriteToBeKilled,platform,ledges,mario,ledgeImg,longledgeImg,bgImg,coins,scoreImg;
+  let coinSound,jumpSound;
   
   /****Set up teachable machine stuff****/
   let classifier; // Classifier Variable
@@ -19,11 +19,7 @@ function bodyGame() {
   let flippedVideo;
   // To store the classification
   let label = "";
-  this.setup = function(){
-    
-    
-    
-  }
+  let lastLabel = "";
   this.enter = function() {
     score = 0;
     MariolastX = 0;
@@ -39,7 +35,7 @@ function bodyGame() {
     
     // Load Sound
     coinSound = loadSound("https://cdn.glitch.com/075b311a-0371-463a-a6ba-c4f6c09e32cb%2FCoin.mp3?v=1596004574113")
-
+    jumpSound = loadSound("https://cdn.glitch.com/075b311a-0371-463a-a6ba-c4f6c09e32cb%2FJump.mp3?v=1596005029268")
     // Create Mario
     mario = createSprite(width / 2 - 70, 300);
     mario.scale = 2.2;
@@ -88,12 +84,13 @@ function bodyGame() {
       image(flippedVideo, 0, 0);
       camera.on(); // scrolling and zooming for scenes extending beyond the canvas
       drawSprites();
-      logLastMarioX();
+      checkLastSate();
     } else {
       this.sceneManager.showScene(Gameover,score);
       resetGame();
     }
   };
+  
   function displayInfo() {
     textFont("VT323");
     textSize(25);
@@ -108,7 +105,6 @@ function bodyGame() {
     textSize(13);
     text(label,60,103);
     pop();
-    
   }
   function collectCoins(mario, collectedCoin) {
     coinSound.play()
@@ -138,6 +134,9 @@ function bodyGame() {
   function marioMove() {
     // While receibe user input, Mario jumps
    if (label==="jump"&& mario.position.y>100) {
+     if(lastLabel!="jump"){
+       jumpSound.play()
+     }
       mario.velocity.x = 3;
       JUMP = 2
       mario.changeAnimation("move");
@@ -215,9 +214,10 @@ function bodyGame() {
       spriteToBeKilled[i].remove();
     }
   }
-  function logLastMarioX() {
-    // Record last Mario,to check if Mario stuck at the ledge side
-    MariolastX = mario.position.x;
+  function checkLastSate() {
+    // Record previous state
+    MariolastX = mario.position.x; // check if Mario stuck at the ledge side
+    lastLabel = label
   }
   
   /**************Classifying functions for Teachable Machine*********************/
