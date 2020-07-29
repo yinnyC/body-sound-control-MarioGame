@@ -5,10 +5,9 @@
  *    frameCount,UP_ARROW, DOWN_ARROW, LEFT_ARROW, RIGHT_ARROW,Gameover
  */
 
-function Game() {
+function bodyGame() {
   let MariolastX, GRAVITY, JUMP;
   let platform,ledges,mario,ledgeImg,longledgeImg,bgImg,gameIsOver,coins,score,spriteToBeKilled;
-  let choice;
   
   /****Set up teachable machine stuff****/
   let classifier; // Classifier Variable
@@ -22,7 +21,6 @@ function Game() {
   
   this.enter = function() {
     classifier = ml5.imageClassifier(imageModelURL + "model.json");
-    choice = this.sceneArgs;
     score = 0;
     MariolastX = 0;
     gameIsOver = false;
@@ -92,7 +90,6 @@ function Game() {
       camera.off();
       image(flippedVideo, 0, 0);
       image(bgImg, -mario.position.x % 1024, 200);
-      text("Choice: " + choice, width - 70, 70);
       displayInfo();
       camera.on(); // scrolling and zooming for scenes extending beyond the canvas
       drawSprites();
@@ -140,9 +137,7 @@ if(this.sceneArgs==="sound"){
 */
   function marioMove() {
     // While receibe user input, Mario jumps
-    if (choice=== "sound") {
-      
-    } else if (choice === "body"&& label==="jump"&& mario.position.y>100) {
+   if (label==="jump"&& mario.position.y>100) {
       mario.velocity.x = 4;
       JUMP = 2
       mario.changeAnimation("move");
