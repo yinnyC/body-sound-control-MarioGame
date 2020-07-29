@@ -8,7 +8,7 @@
 function bodyGame() {
   let MariolastX, GRAVITY, JUMP,gameIsOver,score;
   let spriteToBeKilled,platform,ledges,mario,ledgeImg,longledgeImg,bgImg,coins,scoreImg;
-  let coinSound,jumpSound;
+  let coinGameSound,jumpGameSound;
   
   /****Set up teachable machine stuff****/
   let classifier; // Classifier Variable
@@ -26,7 +26,6 @@ function bodyGame() {
     gameIsOver = false;
     GRAVITY = 1;
     JUMP = 15;
-    
     classifier = ml5.imageClassifier(imageModelURL + "model.json");
     // Load Images
     bgImg = loadImage("https://cdn.glitch.com/075b311a-0371-463a-a6ba-c4f6c09e32cb%2Fbg.png?v=1595800295790");
@@ -34,8 +33,8 @@ function bodyGame() {
     scoreImg = loadImage("https://cdn.glitch.com/075b311a-0371-463a-a6ba-c4f6c09e32cb%2Fcoins_01.png?v=1595864834355")
     
     // Load Sound
-    coinSound = loadSound("https://cdn.glitch.com/075b311a-0371-463a-a6ba-c4f6c09e32cb%2FCoin.mp3?v=1596004574113")
-    jumpSound = loadSound("https://cdn.glitch.com/075b311a-0371-463a-a6ba-c4f6c09e32cb%2FJump.mp3?v=1596005029268")
+    coinGameSound = this.sceneManager.coinSound;
+    jumpGameSound = this.sceneManager.jumpSound;
     // Create Mario
     mario = createSprite(width / 2 - 70, 300);
     mario.scale = 2.2;
@@ -107,7 +106,7 @@ function bodyGame() {
     pop();
   }
   function collectCoins(mario, collectedCoin) {
-    coinSound.play()
+    coinGameSound.play()
     score += 1;
     collectedCoin.remove();
   }
@@ -135,7 +134,7 @@ function bodyGame() {
     // While receibe user input, Mario jumps
    if (label==="jump"&& mario.position.y>100) {
      if(lastLabel!="jump"){
-       jumpSound.play()
+       jumpGameSound.play()
      }
       mario.velocity.x = 3;
       JUMP = 2
