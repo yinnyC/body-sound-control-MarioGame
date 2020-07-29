@@ -79,7 +79,8 @@ function bodyGame() {
       camera.off();
       
       image(bgImg, -mario.position.x % 1024, 200);
-      displayInfo();image(flippedVideo, 0, 0);
+      this.displayInfo();
+      image(flippedVideo, 0, 0);
       image(flippedVideo, 0, 0);
       camera.on(); // scrolling and zooming for scenes extending beyond the canvas
       drawSprites();
@@ -90,11 +91,11 @@ function bodyGame() {
     }
   };
   
-  function displayInfo() {
+  this.displayInfo= function() {
     textFont("VT323");
     textSize(25);
     text("x " + score, width - 60, 42);
-    image(scoreImg,width-80,28)
+    image(this.sceneManager.coin1Img,width-80,28)
     noStroke()
     push();
     fill(0)

@@ -10,8 +10,8 @@ let foregroundImg, backgroundImg, groundImg, title;
 let soundMode, bodyMode,howToPlay; // Buttons
 let introSong
 // Variables for Game
-let classifier,coin1Img,coin2Img,coin3Img,coin4Img,marioJumpImg,marioRun1Img,marioRun2Img,marioRun3Img,marioRun4Img;
-
+let coin1Img,coin2Img,coin3Img,coin4Img,marioJumpImg,marioRun1Img,marioRun2Img,marioRun3Img,marioRun4Img;
+//let imageModelURL ="https://teachablemachine.withgoogle.com/models/GEQao0cv0/";
 function preload() {
   // set the global sound format
   soundFormats('mp3')
@@ -21,20 +21,26 @@ function preload() {
   groundImg = loadImage("https://cdn.glitch.com/075b311a-0371-463a-a6ba-c4f6c09e32cb%2Ftop_ground.png?v=1595568970498");
   title = loadImage("https://cdn.glitch.com/075b311a-0371-463a-a6ba-c4f6c09e32cb%2FSuper.png?v=1595626658046");
   // Load Materials for bodyGame and soundGame scene
-  classifier = ml5.imageClassifier("https://teachablemachine.withgoogle.com/models/GEQao0cv0/" + "model.json");
-  coin1Img 
   
+  coin1Img = loadImage("https://cdn.glitch.com/075b311a-0371-463a-a6ba-c4f6c09e32cb%2Fcoins_01.png?v=1595864834355")
+  coin2Img = loadImage("https://cdn.glitch.com/075b311a-0371-463a-a6ba-c4f6c09e32cb%2Fcoins_02.png?v=1595864834664")
+  coin3Img = loadImage("https://cdn.glitch.com/075b311a-0371-463a-a6ba-c4f6c09e32cb%2Fcoins_03.png?v=1595864834265")
+  coin4Img = loadImage("https://cdn.glitch.com/075b311a-0371-463a-a6ba-c4f6c09e32cb%2Fcoins_04.png?v=1595864834678")
+  marioJumpImg = loadImage("https://cdn.glitch.com/075b311a-0371-463a-a6ba-c4f6c09e32cb%2FJumping-mario.png?v=1595741095055")
+
 }
 function setup() {
   createCanvas(500, 600);
   colorMode(HSB, 360, 100, 100);
   // set up the screen manager
   var mgr = new SceneManager();
+  // For Intro Scene
   mgr.fImage = foregroundImg;
   mgr.bImage = backgroundImg;
   mgr.gImage = groundImg;
   mgr.title = title;
-  mgr.classifier = classifier;
+  // For Game Scene
+  mgr.coin1Img = coin1Img;
   mgr.wire();
   mgr.showScene(Intro);
   
