@@ -40,7 +40,7 @@ function Intro() {
     howToPlay.text = "How To Play";
     howToPlay.onHover = function() {
       this.color = "#808080";
-      choice = "HowTo";
+      choice = "HowToPlay";
     };
     // set up clickable - Button soundMode
     soundMode = new Clickable();
@@ -79,11 +79,13 @@ function Intro() {
   };
   this.mousePressed = function() {
     // Switch to Game scene when user click any of the buttons
-        if (choice === "sound") {
+    if (choice === "sound") {
       // Make sure user's is on the buttons
       this.sceneManager.showScene(soundGame);
     } else if (choice === "body") {
       this.sceneManager.showScene(bodyGame);
+    }else if(choice ==="HowToPlay"){
+      //this.sceneManager.showScene(howToPlay);
     }
   };
   this.showBackground = function() {
