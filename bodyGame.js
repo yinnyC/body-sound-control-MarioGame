@@ -10,16 +10,16 @@ function bodyGame() {
   let spriteToBeKilled,platform,ledges,mario,ledgeImg,longledgeImg,bgImg,coins;
   let coinSound,jumpSound;
   
-  /****Set up teachable machine stuff****/
+  /**** Set up teachable machine stuff ****/
   let classifier; // Classifier Variable
   // Model URL
   let imageModelURL ="https://teachablemachine.withgoogle.com/models/GEQao0cv0/";
-  // Video
-  let video;
+  let video; // Video
   let flippedVideo;
   // To store the classification
   let label = "";
   let lastLabel = "";
+  /***************************************/
   this.enter = function() {
     score = 0;
     MariolastX = 0;
@@ -38,7 +38,7 @@ function bodyGame() {
     mario = createSprite(width / 2 - 70, 300);
     mario.scale = 2.2;
     mario.addAnimation("normal","https://cdn.glitch.com/075b311a-0371-463a-a6ba-c4f6c09e32cb%2FRunning-mario_01.png?v=1595741137506","https://cdn.glitch.com/075b311a-0371-463a-a6ba-c4f6c09e32cb%2FRunning-mario_02.png?v=1595799759140","https://cdn.glitch.com/075b311a-0371-463a-a6ba-c4f6c09e32cb%2FRunning-mario_03.png?v=1595799765213","https://cdn.glitch.com/075b311a-0371-463a-a6ba-c4f6c09e32cb%2FStanding-mario.png?v=1595741033822");
-    mario.addAnimation("move",this.sceneManager.marioJumpImg);
+    mario.addAnimation("move","https://cdn.glitch.com/075b311a-0371-463a-a6ba-c4f6c09e32cb%2FStanding-mario.png?v=1595741033822","https://cdn.glitch.com/075b311a-0371-463a-a6ba-c4f6c09e32cb%2FRunning-mario_01.png?v=1595741137506","https://cdn.glitch.com/075b311a-0371-463a-a6ba-c4f6c09e32cb%2FJumping-mario.png?v=1595741095055","https://cdn.glitch.com/075b311a-0371-463a-a6ba-c4f6c09e32cb%2FStanding-mario.png?v=1595741033822");
 
     // Create the first Ledge for mario to stand
     platform = createSprite(260, 570);
