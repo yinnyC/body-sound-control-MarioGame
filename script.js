@@ -8,6 +8,7 @@
 let foregroundImg, backgroundImg, groundImg, title;
 let introSong,coinSound,jumpSound
 let gameBackgroungImg,gameLedgeImage,gameCoin1Img,gameCoin2Img,gameCoin3Img,gameCoin4Img;
+let gameMarioJumpImg,gameMarioRun1Img,gameMarioRun2Img,gameMarioRun3Img,gameMarioRun4Img;
 function preload() {
   // set the global sound format
   soundFormats('mp3')
@@ -24,8 +25,13 @@ function preload() {
   gameLedgeImage = loadImage("https://cdn.glitch.com/075b311a-0371-463a-a6ba-c4f6c09e32cb%2Flongledge.png?v=1595801236364");
   gameCoin1Img = loadImage("https://cdn.glitch.com/075b311a-0371-463a-a6ba-c4f6c09e32cb%2Fcoins_01.png?v=1595864834355");
   gameCoin2Img = loadImage("https://cdn.glitch.com/075b311a-0371-463a-a6ba-c4f6c09e32cb%2Fcoins_02.png?v=1595864834664");
-  gameCoin3Img = loadImage("https://cdn.glitch.com/075b311a-0371-463a-a6ba-c4f6c09e32cb%2Fcoins_03.png?v=1595864834265")
-  gameCoin4Img = loadImage("https://cdn.glitch.com/075b311a-0371-463a-a6ba-c4f6c09e32cb%2Fcoins_04.png?v=1595864834678")
+  gameCoin3Img = loadImage("https://cdn.glitch.com/075b311a-0371-463a-a6ba-c4f6c09e32cb%2Fcoins_03.png?v=1595864834265");
+  gameCoin4Img = loadImage("https://cdn.glitch.com/075b311a-0371-463a-a6ba-c4f6c09e32cb%2Fcoins_04.png?v=1595864834678");
+  gameMarioJumpImg= loadImage("https://cdn.glitch.com/075b311a-0371-463a-a6ba-c4f6c09e32cb%2FJumping-mario.png?v=1595741095055");
+  gameMarioRun1Img = loadImage("https://cdn.glitch.com/075b311a-0371-463a-a6ba-c4f6c09e32cb%2FRunning-mario_01.png?v=1595741137506");
+  gameMarioRun2Img = loadImage("https://cdn.glitch.com/075b311a-0371-463a-a6ba-c4f6c09e32cb%2FRunning-mario_02.png?v=1595799759140");
+  gameMarioRun3Img = loadImage("https://cdn.glitch.com/075b311a-0371-463a-a6ba-c4f6c09e32cb%2FRunning-mario_03.png?v=1595799765213");
+  gameMarioRun4Img = loadImage("https://cdn.glitch.com/075b311a-0371-463a-a6ba-c4f6c09e32cb%2FStanding-mario.png?v=1595741033822");
 }
 function setup() {
   createCanvas(500, 600);
@@ -41,9 +47,14 @@ function setup() {
   mgr.gameBackgroungImg = gameBackgroungImg;
   mgr.gameLedgeImage = gameLedgeImage;
   mgr.gameCoin1Img = gameCoin1Img;
-  mgr.gameCoin2Img = gameCoinImg;
-  mgr.gameCoin3Img = gameCoin1Img;
-  mgr.gameCoin4Img = gameCoin1Img;
+  mgr.gameCoin2Img = gameCoin2Img;
+  mgr.gameCoin3Img = gameCoin3Img;
+  mgr.gameCoin4Img = gameCoin4Img;
+  mgr.gameMarioJumpImg = gameMarioJumpImg;
+  mgr.gameMarioRun1Img = gameMarioRun1Img;
+  mgr.gameMarioRun2Img = gameMarioRun2Img;
+  mgr.gameMarioRun3Img = gameMarioRun3Img;
+  mgr.gameMarioRun4Img = gameMarioRun4Img;
   mgr.wire();
   mgr.showScene(Intro);
 }

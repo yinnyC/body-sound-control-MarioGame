@@ -7,8 +7,10 @@
 
 function bodyGame() {
   let MariolastX, GRAVITY, JUMP, gameIsOver, score;
-  let spriteToBeKilled,platform,ledges,mario,ledgeImg,longledgeImg,bgImg,coins,scoreImg;
+  let spriteToBeKilled,platform,ledges,mario,ledgeImg,longledgeImg,bgImg,coins;
+  let coin1Img,coin2Img,coin3Img,coin4Img;
   let coinGameSound, jumpGameSound;
+  
   /****Set up teachable machine stuff****/
   let classifier; // Classifier Variable
   // Model URL
@@ -31,11 +33,12 @@ function bodyGame() {
     JUMP = 15;
 
     // Load Images
-    bgImg = this.sceneManager.gameBackgroungImg
-    longledgeImg = this.sceneManager.gameLedgeImage
-    scoreImg = loadImage(
-      "https://cdn.glitch.com/075b311a-0371-463a-a6ba-c4f6c09e32cb%2Fcoins_01.png?v=1595864834355"
-    );
+    bgImg = this.sceneManager.gameBackgroungImg;
+    longledgeImg = this.sceneManager.gameLedgeImage;
+    coin1Img = this.sceneManager.gameCoin1Img;
+    coin2Img = this.sceneManager.gameCoin2Img;
+    coin3Img = this.sceneManager.gameCoin3Img;
+    coin4Img = this.sceneManager.gameCoin4Img;
 
     // Load Sound
     coinGameSound = this.sceneManager.coinSound;
@@ -44,13 +47,7 @@ function bodyGame() {
     // Create Mario
     mario = createSprite(width / 2 - 70, 300);
     mario.scale = 2.2;
-    mario.addAnimation(
-      "normal",
-      "https://cdn.glitch.com/075b311a-0371-463a-a6ba-c4f6c09e32cb%2FRunning-mario_01.png?v=1595741137506",
-      "https://cdn.glitch.com/075b311a-0371-463a-a6ba-c4f6c09e32cb%2FRunning-mario_02.png?v=1595799759140",
-      "https://cdn.glitch.com/075b311a-0371-463a-a6ba-c4f6c09e32cb%2FRunning-mario_03.png?v=1595799765213",
-      "https://cdn.glitch.com/075b311a-0371-463a-a6ba-c4f6c09e32cb%2FStanding-mario.png?v=1595741033822"
-    );
+    mario.addAnimation("normal", this.sceneManager.gameMarioRun1Img,this.sceneManager.gameMarioRun2Img,this.sceneManager.gameMarioRun3Img,this.sceneManager.gameMarioRun1Img);
     mario.addAnimation(
       "move",
       "https://cdn.glitch.com/075b311a-0371-463a-a6ba-c4f6c09e32cb%2FStanding-mario.png?v=1595741033822",
@@ -101,26 +98,29 @@ function bodyGame() {
         drawSprites();
         checkLastSate();
       } else {
-        camera.off();
-        push();
-        image(bgImg, -mario.position.x % 1024, 200);
-        textFont("VT323");
-        textSize(25);
-        textAlign(CENTER);
-        text("Loading...", width / 2, height / 2);
-        pop();
+        loadingPage();
       }
     } else {
       this.sceneManager.showScene(Gameover, score);
       resetGame();
     }
   };
+  function loadingPage(){
+    camera.off();
+    push();
+    image(bgImg, -mario.position.x % 1024, 200);
+    textFont("VT323");
+    textSize(25);
+    textAlign(CENTER);
+    text("Loading...", width / 2, height / 2);
+    pop();
+  }
 
   function displayInfo() {
     textFont("VT323");
     textSize(25);
     text("x " + score, width - 60, 42);
-    image(scoreImg, width - 80, 28);
+    image(coin1Img, width - 80, 28);
     noStroke();
     push();
     fill(0);
@@ -196,13 +196,7 @@ function bodyGame() {
           longledge.position.x + 170 + i * 20,
           longledge.position.y - 200 - i * 20
         );
-        coin.addAnimation(
-          "normal",
-          "https://cdn.glitch.com/075b311a-0371-463a-a6ba-c4f6c09e32cb%2Fcoins_01.png?v=1595864834355",
-          "https://cdn.glitch.com/075b311a-0371-463a-a6ba-c4f6c09e32cb%2Fcoins_02.png?v=1595864834664",
-          "https://cdn.glitch.com/075b311a-0371-463a-a6ba-c4f6c09e32cb%2Fcoins_03.png?v=1595864834265",
-          "https://cdn.glitch.com/075b311a-0371-463a-a6ba-c4f6c09e32cb%2Fcoins_04.png?v=1595864834678"
-        );
+        coin.addAnimation("normal",coin1Img,coin2Img,coin3Img,coin4Img);
         coins.add(coin);
         spriteToBeKilled.add(coin);
       }
