@@ -63,12 +63,11 @@ function soundGame() {
     camera.position.y = mario.position.y; // Make Camera follow Mario
     useQuadTree(false); // Turn off the 'optimizing collision detection',so it won't skip any coin without checking it
 
-    // Takein video data for the classification
+    // Take in video data for the classification
     video = createCapture(VIDEO);
     video.size(120, 90);
     video.hide();
     flippedVideo = ml5.flipImage(video);
-    
     classifyVideo(); // Start classifying
   };
 
@@ -97,6 +96,8 @@ function soundGame() {
       resetGame();
     }
   };
+  
+  /********************************Functions For**********************************************/
   function loadingPage(){
     camera.off();
     push();
