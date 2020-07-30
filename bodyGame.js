@@ -21,6 +21,7 @@ function bodyGame() {
   let label = "";
   let lastLabel = "";
    /*************************************/
+  
   this.enter = function() {
     classifier = ml5.imageClassifier(imageModelURL + "model.json");
     
