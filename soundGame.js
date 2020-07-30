@@ -146,7 +146,7 @@ function soundGame() {
     mostrecentword = myRec.resultString.split(' ').pop();
     // While receibe user input, Mario jumps
     
-     if(mostrecentword.indexOf("jump")!==-1) {
+     if(mostrecentword.indexOf("single")!==-1) {
       jumpGameSound.play();
       text(myRec.resultString, width/2, height/2-50);
       console.log(mostrecentword);
@@ -171,8 +171,8 @@ function soundGame() {
       //Mario Commands
       mario.changeAnimation("move");
       mario.animation.rewind();
-      mario.position.y -= JUMP*10;
-      mario.velocity.y = -JUMP*10;
+      mario.position.y -= JUMP*5;
+      mario.velocity.y = -JUMP*5;
     }
     
     // if (/*conditions*/) {

@@ -67,7 +67,7 @@ function Instruction() {
     text("Body Mode", width/2,255);
     textSize(10);
     fill(0)
-    text("You can control Mario with voice,\njust say: \"Jump\",\"double\" or \"triple\"",width/2,205);
+    text("You can control Mario with voice,\njust say: \"single\",\"double\" or \"triple\"",width/2,205);
     text("You can control Mario \nwith Body Gestures",width/2,295);
     text("Try to collect 100 coins!",width/2,475);
     text("Do Nothing",183,445);
