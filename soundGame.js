@@ -27,7 +27,7 @@ function soundGame() {
     GRAVITY = 1;
     JUMP = 15;
     
-    frameRate(20);
+    frameRate(40);
     
     // Load Images
     bgImg = this.sceneManager.gameBackgroungImg;
@@ -56,7 +56,7 @@ function soundGame() {
     coins = new Group();
     spriteToBeKilled = new Group();
 
-    mario.velocity.x = 2; // Mario will move forward at the speed of 4
+    mario.velocity.x = 3; // Mario will move forward at the speed of 4
     camera.position.y = mario.position.y; // Make Camera follow Mario
     useQuadTree(false); // Turn off the 'optimizing collision detection',so it won't skip any coin without checking it
 
@@ -155,16 +155,16 @@ function soundGame() {
       mario.animation.rewind();
       mario.position.y -= JUMP;
       mario.velocity.y = -JUMP;
-    } else if(mostrecentword.indexOf("big")!==-1) {
+    } else if(mostrecentword.indexOf("double")!==-1) {
       jumpGameSound.play();
       text(myRec.resultString, width/2, height/2-50);
       console.log(mostrecentword);
       //Mario Commands
       mario.changeAnimation("move");
       mario.animation.rewind();
-      mario.position.y -= JUMP;
-      mario.velocity.y = -JUMP;
-    } else if(mostrecentword.indexOf("mega")!==-1) {
+      mario.position.y -= JUMP*2;
+      mario.velocity.y = -JUMP*2;
+    } else if(mostrecentword.indexOf("triple")!==-1) {
       jumpGameSound.play();
       text(myRec.resultString, width/2, height/2-50);
       console.log(mostrecentword);
@@ -172,7 +172,7 @@ function soundGame() {
       mario.changeAnimation("move");
       mario.animation.rewind();
       mario.position.y -= JUMP*10;
-      mario.velocity.y = -JUMP;
+      mario.velocity.y = -JUMP*10;
     }
     
     // if (/*conditions*/) {
