@@ -11,21 +11,12 @@ function soundGame() {
   let coin1Img,coin2Img,coin3Img,coin4Img;
   let coinGameSound, jumpGameSound;
   
-  /****Set up teachable machine stuff****/
-  let classifier; // Classifier Variable
-  // Model URL
-  //let imageModelURL ="https://teachablemachine.withgoogle.com/models/GEQao0cv0/";
-  // Video
-  let video;
-  let flippedVideo;
-  // To store the classification
-  let label = "";
-  let lastLabel = "";
-  /*************************************/
+  var myRec = new p5.SpeechRec('en-US', marioMove);
+  myRec.continuous = true
+  myRec.intrimResults = true
+  
   
   this.enter = function() {
-    classifier = this.sceneManager.gameClassifier
-
     score = 0;
     MariolastX = 0;
     gameIsOver = false;
@@ -63,12 +54,6 @@ function soundGame() {
     camera.position.y = mario.position.y; // Make Camera follow Mario
     useQuadTree(false); // Turn off the 'optimizing collision detection',so it won't skip any coin without checking it
 
-    // Take in video data for the classification
-    video = createCapture(VIDEO);
-    video.size(120, 90);
-    video.hide();
-    flippedVideo = ml5.flipImage(video);
-    classifyVideo(); // Start classifying
   };
 
   this.draw = function() {
@@ -84,7 +69,6 @@ function soundGame() {
         camera.off();
         image(bgImg, -mario.position.x % 1024, 200);
         displayInfo();
-        image(flippedVideo, 0, 0);
         camera.on(); // scrolling and zooming for scenes extending beyond the canvas
         drawSprites();
         checkLastSate();
@@ -114,16 +98,9 @@ function soundGame() {
     textSize(25);
     text("x " + score, width - 60, 42);
     image(coin1Img, width - 80, 28);
-    noStroke();
-    push();
-    fill(0);
-    rect(0, 0, 120, 110);
-    fill(255);
-    textAlign(CENTER);
-    textSize(13);
-    text(label, 60, 103);
-    pop();
   }
+  
+  
   function collectCoins(mario, collectedCoin) {
     coinGameSound.play();
     score += 1;
@@ -154,8 +131,8 @@ function soundGame() {
   }
   function marioMove() {
     // While receibe user input, Mario jumps
-    if (label === "jump" && mario.position.y > 100) {
-      if (lastLabel != "jump") {
+    if (/*conditions*/) {
+      if (lastLabel != "jump") {  // Make sure the jump sound be played for only once 
         jumpGameSound.play();
       }
       mario.velocity.x = 3;
@@ -230,27 +207,5 @@ function soundGame() {
     MariolastX = mario.position.x; // check if Mario stuck at the ledge side
     lastLabel = label;
   }
-
-  /**************Classifying functions for Teachable Machine*********************/
-  function classifyVideo() {
-    flippedVideo = ml5.flipImage(video);
-    classifier.classify(flippedVideo, gotResult);
-    flippedVideo.remove();
-  }
-
-  // When we get a result
-  function gotResult(error, results) {
-    // If there is an error
-    if (error) {
-      console.error(error);
-      return;
-    }
-    // The results are in an array ordered by confidence.
-    console.log(results[0]);
-    label = results[0].label;
-    // Classifiy again!
-    setTimeout(classifyVideo, 1000);
-  }
 }
-
 
