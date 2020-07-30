@@ -44,7 +44,7 @@ function preload() {
   // Materials for GameOver Scene
   gameoverLoseImg = loadImage("https://cdn.glitch.com/075b311a-0371-463a-a6ba-c4f6c09e32cb%2Fover.png?v=1596002455442");
   gameoverWinImg = loadImage("https://cdn.glitch.com/075b311a-0371-463a-a6ba-c4f6c09e32cb%2FWin.png?v=1596002455545");
-  
+  gameoverFireworkImg = loadImage("https://cdn.glitch.com/075b311a-0371-463a-a6ba-c4f6c09e32cb%2F531854_001e1.gif?v=1596004203476")
 }
 function setup() {
   createCanvas(500, 600);
@@ -76,6 +76,10 @@ function setup() {
   // for Instruction scene
   mgr.demoNothingImg = demoNothingImg;
   mgr.demoJumpImg = demoJumpImg;
+  // for gameover scene
+  mgr.gameoverLoseImg = gameoverLoseImg;
+  mgr.gameoverWinImg = gameoverWinImg;
+  mgr.gameoverFireworkImg = gameoverFireworkImg;
   mgr.wire();
   mgr.showScene(Intro);
   

@@ -10,9 +10,9 @@ function Gameover() {
   this.enter = function(){
     bgX = 0
     choice = ""
-    loseImg = loadImage("")
-    winImage = loadImage("https://cdn.glitch.com/075b311a-0371-463a-a6ba-c4f6c09e32cb%2FWin.png?v=1596002455545")
-    fireWorkImg = loadImage("https://cdn.glitch.com/075b311a-0371-463a-a6ba-c4f6c09e32cb%2F531854_001e1.gif?v=1596004203476")
+    loseImg = this.sceneManager.gameoverLoseImg;
+    winImage = this.sceneManager.gameoverWinImg;
+    fireWorkImg = this.sceneManager.gameoverFireworkImg;
     again = new Clickable();
     again.locate(width / 2 - 50, 450);
     again.text = "Play Again";
