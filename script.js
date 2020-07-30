@@ -7,17 +7,19 @@
 
 let foregroundImg, backgroundImg, groundImg, title;
 let introSong,coinSound,jumpSound
-let gameBackgroungImg,gameLedgeImage,gameCoin1Img,gameCoin2Img,gameCoin3Img,gameCoin4Img;
-let gameMarioJumpImg,gameMarioRun1Img,gameMarioRun2Img,gameMarioRun3Img,gameMarioRun4Img;
+let gameBackgroungImg,gameLedgeImage,gameCoin1Img,gameCoin2Img,gameCoin3Img,gameCoin4Img,gameClassifier;
+let gameMarioJumpImg,gameMarioRun1Img,gameMarioRun2Img,gameMarioRun3Img,gameMarioRun4Img,gamePlatformImg;
+let imageModelURL ="https://teachablemachine.withgoogle.com/models/GEQao0cv0/";
+let demoNothingImg,demoJumpImg;
 function preload() {
   // set the global sound format
   soundFormats('mp3')
-  // Materials for Intro
+  // Materials for Intro scene
   foregroundImg = loadImage("https://cdn.glitch.com/075b311a-0371-463a-a6ba-c4f6c09e32cb%2Fsky_2.png?v=1595568118809");
   backgroundImg = loadImage("https://cdn.glitch.com/075b311a-0371-463a-a6ba-c4f6c09e32cb%2Fsky.png?v=1595568225904");
   groundImg = loadImage("https://cdn.glitch.com/075b311a-0371-463a-a6ba-c4f6c09e32cb%2Ftop_ground.png?v=1595568970498");
   title = loadImage("https://cdn.glitch.com/075b311a-0371-463a-a6ba-c4f6c09e32cb%2FSuper.png?v=1595626658046");
-  // Materials for Game
+  // Materials for Game scene
   // jingle/music
   coinSound = loadSound("https://cdn.glitch.com/075b311a-0371-463a-a6ba-c4f6c09e32cb%2FCoin.mp3?v=1596004574113");
   jumpSound = loadSound("https://cdn.glitch.com/075b311a-0371-463a-a6ba-c4f6c09e32cb%2FJump.mp3?v=1596005029268");
@@ -32,16 +34,23 @@ function preload() {
   gameMarioRun2Img = loadImage("https://cdn.glitch.com/075b311a-0371-463a-a6ba-c4f6c09e32cb%2FRunning-mario_02.png?v=1595799759140");
   gameMarioRun3Img = loadImage("https://cdn.glitch.com/075b311a-0371-463a-a6ba-c4f6c09e32cb%2FRunning-mario_03.png?v=1595799765213");
   gameMarioRun4Img = loadImage("https://cdn.glitch.com/075b311a-0371-463a-a6ba-c4f6c09e32cb%2FStanding-mario.png?v=1595741033822");
+  gamePlatformImg = loadImage("https://cdn.glitch.com/075b311a-0371-463a-a6ba-c4f6c09e32cb%2Fstartledge.png?v=1595801238081");
+  gameClassifier = ml5.imageClassifier(imageModelURL + "model.json");
+  // Materials for Instruction scene
+  demoNothingImg = loadImage("https://cdn.glitch.com/075b311a-0371-463a-a6ba-c4f6c09e32cb%2FIMG_8147.JPG?v=1595994325897");
+  demoJumpImg = loadImage("https://cdn.glitch.com/075b311a-0371-463a-a6ba-c4f6c09e32cb%2FIMG_8148.JPG?v=1595994325171"); 
 }
 function setup() {
   createCanvas(500, 600);
   colorMode(HSB, 360, 100, 100);
   // set up the screen manager
+  // for Intro scene
   var mgr = new SceneManager();
   mgr.fImage = foregroundImg;
   mgr.bImage = backgroundImg;
   mgr.gImage = groundImg;
   mgr.title = title;
+  // for game scene
   mgr.coinSound = coinSound;
   mgr.jumpSound = jumpSound;
   mgr.gameBackgroungImg = gameBackgroungImg;
@@ -55,6 +64,9 @@ function setup() {
   mgr.gameMarioRun2Img = gameMarioRun2Img;
   mgr.gameMarioRun3Img = gameMarioRun3Img;
   mgr.gameMarioRun4Img = gameMarioRun4Img;
+  mgr.gamePlatformImg = gamePlatformImg;
+  mgr.gameClassifier = gameClassifier;
+  // for scene
   mgr.wire();
   mgr.showScene(Intro);
 }

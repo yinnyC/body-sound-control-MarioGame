@@ -10,8 +10,8 @@ function Instruction() {
   this.enter = function(){
     choice = ""
     bgX = 0
-    demoNothing = loadImage("https://cdn.glitch.com/075b311a-0371-463a-a6ba-c4f6c09e32cb%2FIMG_8147.JPG?v=1595994325897")
-    demoJump = loadImage("https://cdn.glitch.com/075b311a-0371-463a-a6ba-c4f6c09e32cb%2FIMG_8148.JPG?v=1595994325171")
+    demoNothing = loadImage()
+    demoJump = loadImage()
     back = new Clickable();
     back.locate(width / 2 - 50, 520);
     back.text = "Back";

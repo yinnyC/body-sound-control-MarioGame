@@ -14,7 +14,7 @@ function bodyGame() {
   /****Set up teachable machine stuff****/
   let classifier; // Classifier Variable
   // Model URL
-  let imageModelURL ="https://teachablemachine.withgoogle.com/models/GEQao0cv0/";
+  //let imageModelURL ="https://teachablemachine.withgoogle.com/models/GEQao0cv0/";
   // Video
   let video;
   let flippedVideo;
@@ -24,7 +24,7 @@ function bodyGame() {
   /*************************************/
 
   this.enter = function() {
-    classifier = ml5.imageClassifier(imageModelURL + "model.json");
+    classifier = this.sceneManager.gameClassifier
 
     score = 0;
     MariolastX = 0;
@@ -47,21 +47,13 @@ function bodyGame() {
     // Create Mario
     mario = createSprite(width / 2 - 70, 300);
     mario.scale = 2.2;
-    mario.addAnimation("normal", this.sceneManager.gameMarioRun1Img,this.sceneManager.gameMarioRun2Img,this.sceneManager.gameMarioRun3Img,this.sceneManager.gameMarioRun1Img);
-    mario.addAnimation(
-      "move",
-      "https://cdn.glitch.com/075b311a-0371-463a-a6ba-c4f6c09e32cb%2FStanding-mario.png?v=1595741033822",
-      "https://cdn.glitch.com/075b311a-0371-463a-a6ba-c4f6c09e32cb%2FRunning-mario_01.png?v=1595741137506",
-      "https://cdn.glitch.com/075b311a-0371-463a-a6ba-c4f6c09e32cb%2FJumping-mario.png?v=1595741095055",
-      "https://cdn.glitch.com/075b311a-0371-463a-a6ba-c4f6c09e32cb%2FStanding-mario.png?v=1595741033822"
-    );
+    mario.addAnimation("normal", this.sceneManager.gameMarioRun1Img,this.sceneManager.gameMarioRun2Img,this.sceneManager.gameMarioRun3Img,this.sceneManager.gameMarioRun4Img);
+    mario.addAnimation("move", this.sceneManager.gameMarioJumpImg);
 
     // Create the first Ledge for mario to stand
     platform = createSprite(260, 570);
     platform.addAnimation(
-      "normal",
-      "https://cdn.glitch.com/075b311a-0371-463a-a6ba-c4f6c09e32cb%2Fstartledge.png?v=1595801238081"
-    );
+      "normal",this.sceneManager.gamePlatformImg);
     // Create Groups for coins, ledges
     ledges = new Group();
     coins = new Group();
@@ -205,13 +197,7 @@ function bodyGame() {
           longledge.position.x + 230 + i * 20,
           longledge.position.y - 260 + i * 20
         );
-        coin.addAnimation(
-          "normal",
-          "https://cdn.glitch.com/075b311a-0371-463a-a6ba-c4f6c09e32cb%2Fcoins_01.png?v=1595864834355",
-          "https://cdn.glitch.com/075b311a-0371-463a-a6ba-c4f6c09e32cb%2Fcoins_02.png?v=1595864834664",
-          "https://cdn.glitch.com/075b311a-0371-463a-a6ba-c4f6c09e32cb%2Fcoins_03.png?v=1595864834265",
-          "https://cdn.glitch.com/075b311a-0371-463a-a6ba-c4f6c09e32cb%2Fcoins_04.png?v=1595864834678"
-        );
+        coin.addAnimation("normal",coin1Img,coin2Img,coin3Img,coin4Img);
         coins.add(coin);
       }
     }
