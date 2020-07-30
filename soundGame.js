@@ -12,12 +12,13 @@ function soundGame() {
   let coinGameSound, jumpGameSound;
   //let mostrecentword
   
-  var myRec = new p5.SpeechRec('en-US', marioMove);
-  myRec.continuous = true
-  myRec.intrimResults = true
+  let myRec
   
   
   this.enter = function() {
+    myRec = new p5.SpeechRec('en-US', marioMove);
+    myRec.continuous = true;
+    myRec.intrimResults = true;
     // Initialize values
     //mostrecentword = "";
     score = 0;
@@ -154,7 +155,25 @@ function soundGame() {
       mario.animation.rewind();
       mario.position.y -= JUMP;
       mario.velocity.y = -JUMP;
-       
+    } else if(mostrecentword.indexOf("big")!==-1) {
+      jumpGameSound.play();
+      text(myRec.resultString, width/2, height/2-50);
+      console.log(mostrecentword);
+      //Mario Commands
+      mario.changeAnimation("move");
+      mario.animation.rewind();
+      mario.position.y -= JUMP;
+      mario.velocity.y = -JUMP;
+    } else if(mostrecentword.indexOf("mega")!==-1) {
+      jumpGameSound.play();
+      text(myRec.resultString, width/2, height/2-50);
+      console.log(mostrecentword);
+      //Mario Commands
+      mario.changeAnimation("move");
+      mario.animation.rewind();
+      mario.position.y -= JUMP*10;
+      mario.velocity.y = -JUMP;
+    }
     
     // if (/*conditions*/) {
     //   if (lastLabel != "jump") {  // Make sure the jump sound be played for only once 
@@ -166,7 +185,7 @@ function soundGame() {
     //   mario.animation.rewind();
     //   mario.position.y -= JUMP;
     //   mario.velocity.y = -JUMP;
-    } 
+    
   }
   
   function spawnLedges() {
