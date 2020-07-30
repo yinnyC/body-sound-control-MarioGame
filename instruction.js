@@ -10,8 +10,8 @@ function Instruction() {
   this.enter = function(){
     choice = ""
     bgX = 0
-    demoNothing = loadImage()
-    demoJump = loadImage()
+    demoNothing = this.sceneManager.demoNothingImg;
+    demoJump = this.sceneManager.demoJumpImg;
     back = new Clickable();
     back.locate(width / 2 - 50, 520);
     back.text = "Back";
@@ -67,7 +67,7 @@ function Instruction() {
     text("Body Mode", width/2,255);
     textSize(10);
     fill(0)
-    text("You can control Mario with voice,\njust say: \"Jump! \"",width/2,205);
+    text("You can control Mario with voice,\njust say: \"Jump\",\"double\" or \"triple\"",width/2,205);
     text("You can control Mario \nwith Body Gestures",width/2,295);
     text("Try to collect 100 coins!",width/2,475);
     text("Do Nothing",183,445);

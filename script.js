@@ -14,6 +14,7 @@ let demoNothingImg,demoJumpImg;
 function preload() {
   // set the global sound format
   soundFormats('mp3')
+  introSong = loadSound("https://cdn.glitch.com/075b311a-0371-463a-a6ba-c4f6c09e32cb%2F1%20-%20Title%20Bgm.mp3?v=1596018063130");
   // Materials for Intro scene
   foregroundImg = loadImage("https://cdn.glitch.com/075b311a-0371-463a-a6ba-c4f6c09e32cb%2Fsky_2.png?v=1595568118809");
   backgroundImg = loadImage("https://cdn.glitch.com/075b311a-0371-463a-a6ba-c4f6c09e32cb%2Fsky.png?v=1595568225904");
@@ -43,6 +44,7 @@ function preload() {
 function setup() {
   createCanvas(500, 600);
   colorMode(HSB, 360, 100, 100);
+  introSong.play();
   // set up the screen manager
   // for Intro scene
   var mgr = new SceneManager();
@@ -66,8 +68,11 @@ function setup() {
   mgr.gameMarioRun4Img = gameMarioRun4Img;
   mgr.gamePlatformImg = gamePlatformImg;
   mgr.gameClassifier = gameClassifier;
-  // for scene
+  // for Instruction scene
+  mgr.demoNothingImg = demoNothingImg;
+  mgr.demoJumpImg = demoJumpImg;
   mgr.wire();
   mgr.showScene(Intro);
+  
 }
   

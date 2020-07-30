@@ -47,11 +47,6 @@ function Intro() {
       this.color = "#FFFFFF";
       choice = "";
     };
-    ///This is the intro song :)
-    // introSong = loadSound(
-    //   "https://cdn.glitch.com/075b311a-0371-463a-a6ba-c4f6c09e32cb%2F1%20-%20Title%20Bgm.mp3?v=1596018063130"
-    // );
-    //introSong.play();
   };
 
   this.draw = function() {
