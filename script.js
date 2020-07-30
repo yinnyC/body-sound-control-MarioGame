@@ -47,9 +47,9 @@ function preload() {
   gameoverFireworkImg = loadImage("https://cdn.glitch.com/075b311a-0371-463a-a6ba-c4f6c09e32cb%2F531854_001e1.gif?v=1596004203476")
 }
 function setup() {
+  introSong.loop();
   createCanvas(500, 600);
   colorMode(HSB, 360, 100, 100);
-  introSong.loop();
   // set up the screen manager
   // for Intro scene
   var mgr = new SceneManager();
