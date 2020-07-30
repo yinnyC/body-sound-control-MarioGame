@@ -18,13 +18,16 @@ function soundGame() {
   
   
   this.enter = function() {
+    // Initialize values
     mostrecentword = "";
     score = 0;
     MariolastX = 0;
     gameIsOver = false;
     GRAVITY = 1;
     JUMP = 15;
-    frameRate(12);
+    
+    frameRate(20);
+    
     // Load Images
     bgImg = this.sceneManager.gameBackgroungImg;
     longledgeImg = this.sceneManager.gameLedgeImage;
@@ -61,7 +64,7 @@ function soundGame() {
   this.draw = function() {
     background(210, 90, 100);
     if (!gameIsOver) {
-      if (mostrecentword != "") {
+      // if (mostrecentword != "") {
         checkGameState();
         // marioMove();
         mario.overlap(coins, collectCoins);
@@ -74,16 +77,16 @@ function soundGame() {
         camera.on(); // scrolling and zooming for scenes extending beyond the canvas
         drawSprites();
         checkLastSate();
-      } else {
-        loadingPage();
-      }
+      // } else {
+      //   loadingPage();
+      //}
     } else {
       this.sceneManager.showScene(Gameover, score);
       resetGame();
     }
   };
   
-  /********************************Functions For**********************************************/
+  /**************Functions For Display Scene/Info***********************/
   function loadingPage(){
     camera.off();
     push();
@@ -102,6 +105,11 @@ function soundGame() {
     image(coin1Img, width - 80, 28);
   }
   
+  /**************Functions For Checking statements of objects***********************/
+  function checkLastSate() {
+    // Record previous state
+    MariolastX = mario.position.x; // check if Mario stuck at the ledge side
+  }
   
   function collectCoins(mario, collectedCoin) {
     coinGameSound.play();
@@ -210,9 +218,6 @@ function soundGame() {
     coins.removeSprites();
     spriteToBeKilled.removeSprites();
   }
-  function checkLastSate() {
-    // Record previous state
-    MariolastX = mario.position.x; // check if Mario stuck at the ledge side
-  }
+  
 }
 
