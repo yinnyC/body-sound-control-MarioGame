@@ -10,7 +10,7 @@ function soundGame() {
   let spriteToBeKilled,platform,ledges,mario,ledgeImg,longledgeImg,bgImg,coins;
   let coin1Img,coin2Img,coin3Img,coin4Img;
   let coinGameSound, jumpGameSound;
-  let mostrecentword
+  //let mostrecentword
   
   var myRec = new p5.SpeechRec('en-US', marioMove);
   myRec.continuous = true
@@ -19,7 +19,7 @@ function soundGame() {
   
   this.enter = function() {
     // Initialize values
-    mostrecentword = "";
+    //mostrecentword = "";
     score = 0;
     MariolastX = 0;
     gameIsOver = false;
@@ -59,6 +59,7 @@ function soundGame() {
     camera.position.y = mario.position.y; // Make Camera follow Mario
     useQuadTree(false); // Turn off the 'optimizing collision detection',so it won't skip any coin without checking it
 
+    myRec.start();
   };
 
   this.draw = function() {
