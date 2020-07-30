@@ -1,6 +1,6 @@
 // Name any p5.js functions we use in `global` so Glitch can recognize them.
 /* global
- *    loadSound,textFont,textAlign,CENTER,push,pop,useQuadTree,removeSprites,removeSprite,updateSprites,camera,Group,keyWentDown,drawSprites,createSprite,Clickable,drawIntroScreen,SceneManager,loadImage,ESCAPE,textSize,image,VIDEO,createCapture,ml5,HSB, background, color, collideRectRect, colorMode, createCanvas, fill, frameRate, keyCode, height,
+ *    p5,loadSound,textFont,textAlign,CENTER,push,pop,useQuadTree,removeSprites,removeSprite,updateSprites,camera,Group,keyWentDown,drawSprites,createSprite,Clickable,drawIntroScreen,SceneManager,loadImage,ESCAPE,textSize,image,VIDEO,createCapture,ml5,HSB, background, color, collideRectRect, colorMode, createCanvas, fill, frameRate, keyCode, height,
  *    loop, noFill, noLoop, noStroke, random, rect, round, stroke, sqrt, text, width
  *    frameCount,UP_ARROW, DOWN_ARROW, LEFT_ARROW, RIGHT_ARROW,Gameover
  */
@@ -10,6 +10,7 @@ function soundGame() {
   let spriteToBeKilled,platform,ledges,mario,ledgeImg,longledgeImg,bgImg,coins;
   let coin1Img,coin2Img,coin3Img,coin4Img;
   let coinGameSound, jumpGameSound;
+  let mostrecentword
   
   var myRec = new p5.SpeechRec('en-US', marioMove);
   myRec.continuous = true
@@ -17,12 +18,13 @@ function soundGame() {
   
   
   this.enter = function() {
+    mostrecentword = "";
     score = 0;
     MariolastX = 0;
     gameIsOver = false;
     GRAVITY = 1;
     JUMP = 15;
-
+    frameRate(12);
     // Load Images
     bgImg = this.sceneManager.gameBackgroungImg;
     longledgeImg = this.sceneManager.gameLedgeImage;
@@ -59,9 +61,9 @@ function soundGame() {
   this.draw = function() {
     background(210, 90, 100);
     if (!gameIsOver) {
-      if (label != "") {
+      if (mostrecentword != "") {
         checkGameState();
-        marioMove();
+        // marioMove();
         mario.overlap(coins, collectCoins);
         checkGravity();
         spawnLedges();
@@ -129,18 +131,32 @@ function soundGame() {
       }
     }
   }
+  
   function marioMove() {
+    mostrecentword = myRec.resultString.split(' ').pop();
     // While receibe user input, Mario jumps
-    if (/*conditions*/) {
-      if (lastLabel != "jump") {  // Make sure the jump sound be played for only once 
-        jumpGameSound.play();
-      }
-      mario.velocity.x = 3;
-      JUMP = 2;
+    
+     if(mostrecentword.indexOf("jump")!==-1) {
+      jumpGameSound.play();
+      text(myRec.resultString, width/2, height/2-50);
+      console.log(mostrecentword);
+      //Mario Commands
       mario.changeAnimation("move");
       mario.animation.rewind();
       mario.position.y -= JUMP;
       mario.velocity.y = -JUMP;
+       
+    
+    // if (/*conditions*/) {
+    //   if (lastLabel != "jump") {  // Make sure the jump sound be played for only once 
+    //     
+    //   }
+    //   mario.velocity.x = 3;
+    //   JUMP = 2;
+    //   mario.changeAnimation("move");
+    //   mario.animation.rewind();
+    //   mario.position.y -= JUMP;
+    //   mario.velocity.y = -JUMP;
     } 
   }
   
@@ -186,26 +202,17 @@ function soundGame() {
     }
   }
   function resetGame() {
-    video.stop();
     camera.position.x = width / 2;
     score = 0;
-    label = "";
-    lastLabel = "";
+    mostrecentword = "";
     updateSprites(false);
-    console.log(ledges.size());
     ledges.removeSprites();
-    console.log(ledges.size());
-    console.log(coins.size());
     coins.removeSprites();
-    console.log(coins.size());
-    for (let i = 0; i < spriteToBeKilled.length; i++) {
-      spriteToBeKilled[i].remove();
-    }
+    spriteToBeKilled.removeSprites();
   }
   function checkLastSate() {
     // Record previous state
     MariolastX = mario.position.x; // check if Mario stuck at the ledge side
-    lastLabel = label;
   }
 }
 
