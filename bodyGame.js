@@ -7,22 +7,12 @@
 
 function bodyGame() {
   let MariolastX, GRAVITY, JUMP, gameIsOver, score;
-  let spriteToBeKilled,
-    platform,
-    ledges,
-    mario,
-    ledgeImg,
-    longledgeImg,
-    bgImg,
-    coins,
-    scoreImg;
+  let spriteToBeKilled,platform,ledges,mario,ledgeImg,longledgeImg,bgImg,coins,scoreImg;
   let coinGameSound, jumpGameSound;
-
   /****Set up teachable machine stuff****/
   let classifier; // Classifier Variable
   // Model URL
-  let imageModelURL =
-    "https://teachablemachine.withgoogle.com/models/GEQao0cv0/";
+  let imageModelURL ="https://teachablemachine.withgoogle.com/models/GEQao0cv0/";
   // Video
   let video;
   let flippedVideo;
