@@ -25,7 +25,6 @@ function bodyGame() {
 
   this.enter = function() {
     classifier = this.sceneManager.gameClassifier
-
     score = 0;
     MariolastX = 0;
     gameIsOver = false;

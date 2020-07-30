@@ -22,7 +22,7 @@ function soundGame() {
   let label = "";
   let lastLabel = "";
   /*************************************/
-
+  
   this.enter = function() {
     classifier = this.sceneManager.gameClassifier
 
@@ -63,13 +63,13 @@ function soundGame() {
     camera.position.y = mario.position.y; // Make Camera follow Mario
     useQuadTree(false); // Turn off the 'optimizing collision detection',so it won't skip any coin without checking it
 
-    //
+    // Takein video data for the classification
     video = createCapture(VIDEO);
     video.size(120, 90);
     video.hide();
     flippedVideo = ml5.flipImage(video);
-    // Start classifying
-    classifyVideo();
+    
+    classifyVideo(); // Start classifying
   };
 
   this.draw = function() {
@@ -163,15 +163,9 @@ function soundGame() {
       mario.animation.rewind();
       mario.position.y -= JUMP;
       mario.velocity.y = -JUMP;
-    } else {
-      if (keyWentDown(" ")) {
-        mario.changeAnimation("move");
-        mario.animation.rewind();
-        mario.position.y -= JUMP;
-        mario.velocity.y = -JUMP;
-      }
-    }
+    } 
   }
+  
   function spawnLedges() {
     //spawn ledges and coins
     if (frameCount % 120 === 0 && mario.position.x > MariolastX) {
