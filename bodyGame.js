@@ -6,45 +6,69 @@
  */
 
 function bodyGame() {
-  let MariolastX, GRAVITY, JUMP,gameIsOver,score;
-  let spriteToBeKilled,platform,ledges,mario,ledgeImg,longledgeImg,bgImg,coins,scoreImg;
-  let coinGameSound,jumpGameSound;
-  
+  let MariolastX, GRAVITY, JUMP, gameIsOver, score;
+  let spriteToBeKilled,
+    platform,
+    ledges,
+    mario,
+    ledgeImg,
+    longledgeImg,
+    bgImg,
+    coins,
+    scoreImg;
+  let coinGameSound, jumpGameSound;
+
   /****Set up teachable machine stuff****/
   let classifier; // Classifier Variable
   // Model URL
-  let imageModelURL ="https://teachablemachine.withgoogle.com/models/GEQao0cv0/";
+  let imageModelURL =
+    "https://teachablemachine.withgoogle.com/models/GEQao0cv0/";
   // Video
   let video;
   let flippedVideo;
   // To store the classification
   let label = "";
   let lastLabel = "";
-   /*************************************/
-  
+  /*************************************/
+
   this.enter = function() {
     classifier = ml5.imageClassifier(imageModelURL + "model.json");
-    
+
     score = 0;
     MariolastX = 0;
     gameIsOver = false;
     GRAVITY = 1;
     JUMP = 15;
-    
+
     // Load Images
-    bgImg = loadImage("https://cdn.glitch.com/075b311a-0371-463a-a6ba-c4f6c09e32cb%2Fbg.png?v=1595800295790");
-    longledgeImg = loadImage("https://cdn.glitch.com/075b311a-0371-463a-a6ba-c4f6c09e32cb%2Flongledge.png?v=1595801236364");
-    scoreImg = loadImage("https://cdn.glitch.com/075b311a-0371-463a-a6ba-c4f6c09e32cb%2Fcoins_01.png?v=1595864834355")
-    
+    bgImg = loadImage(
+      "https://cdn.glitch.com/075b311a-0371-463a-a6ba-c4f6c09e32cb%2Fbg.png?v=1595800295790"
+    );
+    longledgeImg = loadImage(
+      "https://cdn.glitch.com/075b311a-0371-463a-a6ba-c4f6c09e32cb%2Flongledge.png?v=1595801236364"
+    );
+    scoreImg = loadImage(
+      "https://cdn.glitch.com/075b311a-0371-463a-a6ba-c4f6c09e32cb%2Fcoins_01.png?v=1595864834355"
+    );
+
     // Load Sound
     coinGameSound = this.sceneManager.coinSound;
     jumpGameSound = this.sceneManager.jumpSound;
-    
+
     // Create Mario
     mario = createSprite(width / 2 - 70, 300);
     mario.scale = 2.2;
-    mario.addAnimation("normal","https://cdn.glitch.com/075b311a-0371-463a-a6ba-c4f6c09e32cb%2FRunning-mario_01.png?v=1595741137506","https://cdn.glitch.com/075b311a-0371-463a-a6ba-c4f6c09e32cb%2FRunning-mario_02.png?v=1595799759140","https://cdn.glitch.com/075b311a-0371-463a-a6ba-c4f6c09e32cb%2FRunning-mario_03.png?v=1595799765213","https://cdn.glitch.com/075b311a-0371-463a-a6ba-c4f6c09e32cb%2FStanding-mario.png?v=1595741033822");
-    mario.addAnimation("move","https://cdn.glitch.com/075b311a-0371-463a-a6ba-c4f6c09e32cb%2FStanding-mario.png?v=1595741033822","https://cdn.glitch.com/075b311a-0371-463a-a6ba-c4f6c09e32cb%2FRunning-mario_01.png?v=1595741137506",
+    mario.addAnimation(
+      "normal",
+      "https://cdn.glitch.com/075b311a-0371-463a-a6ba-c4f6c09e32cb%2FRunning-mario_01.png?v=1595741137506",
+      "https://cdn.glitch.com/075b311a-0371-463a-a6ba-c4f6c09e32cb%2FRunning-mario_02.png?v=1595799759140",
+      "https://cdn.glitch.com/075b311a-0371-463a-a6ba-c4f6c09e32cb%2FRunning-mario_03.png?v=1595799765213",
+      "https://cdn.glitch.com/075b311a-0371-463a-a6ba-c4f6c09e32cb%2FStanding-mario.png?v=1595741033822"
+    );
+    mario.addAnimation(
+      "move",
+      "https://cdn.glitch.com/075b311a-0371-463a-a6ba-c4f6c09e32cb%2FStanding-mario.png?v=1595741033822",
+      "https://cdn.glitch.com/075b311a-0371-463a-a6ba-c4f6c09e32cb%2FRunning-mario_01.png?v=1595741137506",
       "https://cdn.glitch.com/075b311a-0371-463a-a6ba-c4f6c09e32cb%2FJumping-mario.png?v=1595741095055",
       "https://cdn.glitch.com/075b311a-0371-463a-a6ba-c4f6c09e32cb%2FStanding-mario.png?v=1595741033822"
     );
@@ -59,15 +83,15 @@ function bodyGame() {
     ledges = new Group();
     coins = new Group();
     spriteToBeKilled = new Group();
-  
-    mario.velocity.x = 2;                  // Mario will move forward at the speed of 4
-    camera.position.y = mario.position.y;  // Make Camera follow Mario
-    useQuadTree(false);                    // Turn off the 'optimizing collision detection',so it won't skip any coin without checking it
 
-    // 
+    mario.velocity.x = 2; // Mario will move forward at the speed of 4
+    camera.position.y = mario.position.y; // Make Camera follow Mario
+    useQuadTree(false); // Turn off the 'optimizing collision detection',so it won't skip any coin without checking it
+
+    //
     video = createCapture(VIDEO);
     video.size(120, 90);
-    video.hide() 
+    video.hide();
     flippedVideo = ml5.flipImage(video);
     // Start classifying
     classifyVideo();
@@ -76,51 +100,63 @@ function bodyGame() {
   this.draw = function() {
     background(210, 90, 100);
     if (!gameIsOver) {
-      checkGameState();
-      marioMove();
-      mario.overlap(coins, collectCoins);
-      checkGravity();
-      spawnLedges();
-      camera.position.x = mario.position.x;
-      camera.off();
-      
-      image(bgImg, -mario.position.x % 1024, 200);
-      displayInfo();image(flippedVideo, 0, 0);
-      image(flippedVideo, 0, 0);
-      camera.on(); // scrolling and zooming for scenes extending beyond the canvas
-      drawSprites();
-      checkLastSate();
+      if (label != "") {
+        checkGameState();
+        marioMove();
+        mario.overlap(coins, collectCoins);
+        checkGravity();
+        spawnLedges();
+        camera.position.x = mario.position.x;
+        camera.off();
+        image(bgImg, -mario.position.x % 1024, 200);
+        displayInfo();
+        image(flippedVideo, 0, 0);
+        camera.on(); // scrolling and zooming for scenes extending beyond the canvas
+        drawSprites();
+        checkLastSate();
+      } else {
+        camera.off();
+        push();
+        image(bgImg, -mario.position.x % 1024, 200);
+        textFont("VT323");
+        textSize(25);
+        textAlign(CENTER);
+        text("Loading...", width / 2, height / 2);
+        pop();
+      }
     } else {
-      this.sceneManager.showScene(Gameover,score);
+      this.sceneManager.showScene(Gameover, score);
       resetGame();
     }
   };
-  
+
   function displayInfo() {
     textFont("VT323");
     textSize(25);
     text("x " + score, width - 60, 42);
-    image(scoreImg,width-80,28)
-    noStroke()
+    image(scoreImg, width - 80, 28);
+    noStroke();
     push();
-    fill(0)
-    rect(0,0,120,110)
-    fill(255)
-    textAlign(CENTER)
+    fill(0);
+    rect(0, 0, 120, 110);
+    fill(255);
+    textAlign(CENTER);
     textSize(13);
-    text(label,60,103);
+    text(label, 60, 103);
     pop();
   }
   function collectCoins(mario, collectedCoin) {
-    coinGameSound.play()
+    coinGameSound.play();
     score += 1;
     collectedCoin.remove();
   }
   function checkGameState() {
-    if (mario.position.y > height + 50) {// if Mario is out of window,lose
+    if (mario.position.y > height + 50) {
+      // if Mario is out of window,lose
       gameIsOver = true;
     }
-    if(score>=100){ // if Mario scores more than 100, win
+    if (score >= 100) {
+      // if Mario scores more than 100, win
       gameIsOver = true;
     }
   }
@@ -128,7 +164,8 @@ function bodyGame() {
     // If Mario is on the platform or ledges, y value stays the same
     mario.velocity.y += GRAVITY;
     if (mario.collide(platform) || mario.collide(ledges)) {
-      if (mario.position.x > MariolastX) {// If Mario stuck at the side of the ledges, let him fall
+      if (mario.position.x > MariolastX) {
+        // If Mario stuck at the side of the ledges, let him fall
         mario.velocity.y = 0;
         mario.changeAnimation("normal");
       } else {
@@ -138,22 +175,22 @@ function bodyGame() {
   }
   function marioMove() {
     // While receibe user input, Mario jumps
-   if (label==="jump"&& mario.position.y>100) {
-     if(lastLabel!="jump"){
-       jumpGameSound.play()
-     }
+    if (label === "jump" && mario.position.y > 100) {
+      if (lastLabel != "jump") {
+        jumpGameSound.play();
+      }
       mario.velocity.x = 3;
-      JUMP = 2
+      JUMP = 2;
       mario.changeAnimation("move");
       mario.animation.rewind();
       mario.position.y -= JUMP;
       mario.velocity.y = -JUMP;
     } else {
       if (keyWentDown(" ")) {
-      mario.changeAnimation("move");
-      mario.animation.rewind();
-      mario.position.y -= JUMP;
-      mario.velocity.y = -JUMP;
+        mario.changeAnimation("move");
+        mario.animation.rewind();
+        mario.position.y -= JUMP;
+        mario.velocity.y = -JUMP;
       }
     }
   }
@@ -173,7 +210,13 @@ function bodyGame() {
           longledge.position.x + 170 + i * 20,
           longledge.position.y - 200 - i * 20
         );
-        coin.addAnimation("normal","https://cdn.glitch.com/075b311a-0371-463a-a6ba-c4f6c09e32cb%2Fcoins_01.png?v=1595864834355","https://cdn.glitch.com/075b311a-0371-463a-a6ba-c4f6c09e32cb%2Fcoins_02.png?v=1595864834664","https://cdn.glitch.com/075b311a-0371-463a-a6ba-c4f6c09e32cb%2Fcoins_03.png?v=1595864834265","https://cdn.glitch.com/075b311a-0371-463a-a6ba-c4f6c09e32cb%2Fcoins_04.png?v=1595864834678");
+        coin.addAnimation(
+          "normal",
+          "https://cdn.glitch.com/075b311a-0371-463a-a6ba-c4f6c09e32cb%2Fcoins_01.png?v=1595864834355",
+          "https://cdn.glitch.com/075b311a-0371-463a-a6ba-c4f6c09e32cb%2Fcoins_02.png?v=1595864834664",
+          "https://cdn.glitch.com/075b311a-0371-463a-a6ba-c4f6c09e32cb%2Fcoins_03.png?v=1595864834265",
+          "https://cdn.glitch.com/075b311a-0371-463a-a6ba-c4f6c09e32cb%2Fcoins_04.png?v=1595864834678"
+        );
         coins.add(coin);
         spriteToBeKilled.add(coin);
       }
@@ -205,7 +248,7 @@ function bodyGame() {
     }
   }
   function resetGame() {
-    video.stop()
+    video.stop();
     camera.position.x = width / 2;
     score = 0;
     label = "";
@@ -224,9 +267,9 @@ function bodyGame() {
   function checkLastSate() {
     // Record previous state
     MariolastX = mario.position.x; // check if Mario stuck at the ledge side
-    lastLabel = label
+    lastLabel = label;
   }
-  
+
   /**************Classifying functions for Teachable Machine*********************/
   function classifyVideo() {
     flippedVideo = ml5.flipImage(video);
