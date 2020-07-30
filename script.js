@@ -21,7 +21,6 @@ function preload() {
   coinSound = loadSound("https://cdn.glitch.com/075b311a-0371-463a-a6ba-c4f6c09e32cb%2FCoin.mp3?v=1596004574113");
   jumpSound = loadSound("https://cdn.glitch.com/075b311a-0371-463a-a6ba-c4f6c09e32cb%2FJump.mp3?v=1596005029268");
   
-  
 }
 function setup() {
   createCanvas(500, 600);
