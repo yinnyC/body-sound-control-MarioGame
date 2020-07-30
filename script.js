@@ -11,6 +11,7 @@ let gameBackgroungImg,gameLedgeImage,gameCoin1Img,gameCoin2Img,gameCoin3Img,game
 let gameMarioJumpImg,gameMarioRun1Img,gameMarioRun2Img,gameMarioRun3Img,gameMarioRun4Img,gamePlatformImg;
 let imageModelURL ="https://teachablemachine.withgoogle.com/models/GEQao0cv0/";
 let demoNothingImg,demoJumpImg;
+let gameoverLoseImg,gameoverWinImg,gameoverFireworkImg;
 function preload() {
   // set the global sound format
   soundFormats('mp3')
@@ -40,11 +41,15 @@ function preload() {
   // Materials for Instruction scene
   demoNothingImg = loadImage("https://cdn.glitch.com/075b311a-0371-463a-a6ba-c4f6c09e32cb%2FIMG_8147.JPG?v=1595994325897");
   demoJumpImg = loadImage("https://cdn.glitch.com/075b311a-0371-463a-a6ba-c4f6c09e32cb%2FIMG_8148.JPG?v=1595994325171"); 
+  // Materials for GameOver Scene
+  gameoverLoseImg = loadImage("https://cdn.glitch.com/075b311a-0371-463a-a6ba-c4f6c09e32cb%2Fover.png?v=1596002455442");
+  gameoverWinImg = loadImage("https://cdn.glitch.com/075b311a-0371-463a-a6ba-c4f6c09e32cb%2FWin.png?v=1596002455545");
+  
 }
 function setup() {
   createCanvas(500, 600);
   colorMode(HSB, 360, 100, 100);
-  introSong.play();
+  introSong.loop();
   // set up the screen manager
   // for Intro scene
   var mgr = new SceneManager();
