@@ -31,12 +31,8 @@ function bodyGame() {
     JUMP = 15;
 
     // Load Images
-    bgImg = loadImage(
-      "https://cdn.glitch.com/075b311a-0371-463a-a6ba-c4f6c09e32cb%2Fbg.png?v=1595800295790"
-    );
-    longledgeImg = loadImage(
-      "https://cdn.glitch.com/075b311a-0371-463a-a6ba-c4f6c09e32cb%2Flongledge.png?v=1595801236364"
-    );
+    bgImg = this.sceneManager.gameBackgroungImg
+    longledgeImg = this.sceneManager.gameLedgeImage
     scoreImg = loadImage(
       "https://cdn.glitch.com/075b311a-0371-463a-a6ba-c4f6c09e32cb%2Fcoins_01.png?v=1595864834355"
     );
