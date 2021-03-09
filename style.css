@@ -3,6 +3,9 @@
 body {
   font-family: helvetica, arial, sans-serif;
   margin: 2em;
+  display: flex;
+  justify-content: center;
+  background-color: rgb(240, 216, 184);
 }
 
 h1 {
